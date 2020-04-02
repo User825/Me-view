@@ -1,0 +1,133 @@
+@value tablet-viewport, mobile-viewport, mobile-s-viewport from "../../styles/breakpoints.css";
+
+.card {
+  position: relative;
+  display: flex;
+
+  width: 100%;
+  height: 100%;
+
+  overflow: hidden;
+
+  border-radius: 2px;
+  
+
+  transition:  
+  box-shadow var(--transition-props),
+  opacity var(--transition-props);
+}
+
+.default {
+  composes: card;
+
+  box-shadow: 0px 0px 6px var(--base-color);
+}
+
+.default:hover {
+  box-shadow: 0px 0px 12px var(--base-color);
+  opacity: 0.9;
+}
+
+.light {
+  composes: card;
+
+  box-shadow: 0px 0px 6px var(--contrast-color);
+}
+
+.light:hover {
+  box-shadow: 0px 0px 12px var(--contrast-color);
+  opacity: 0.9;
+}
+
+.container {
+  flex-shrink: 0;
+
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+}
+
+.poster {
+  display: block;
+  width: 100%;
+  height: 300px;
+
+  object-fit: cover;
+  object-position: center;
+  flex-shrink: 0;
+}
+
+.contentBox {
+  flex-grow: 1;
+
+  padding: 5px 0;
+
+  background-color: var(--contrast-color);
+}
+
+.title {
+  margin: 0 0 10px;
+
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1;
+  text-align: center;
+  color: var(--base-color);
+}
+
+.subtitle {
+  display: block;
+  margin: 0 0 10px;
+
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1px;
+  text-align: center;
+  color: var(--base-color-light);
+}
+
+.desc {
+  margin: 0;
+
+  font-size: 16px;
+  line-height: 18px;
+  color: var(--base-color);
+}
+
+.ratingBox {
+  position: absolute;
+  top: 0;
+  right: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  min-width: 40px;
+  min-height: 45px;
+  padding: 10px;
+
+  font-size: 14px;
+  line-height: 16px;
+  color: var(--contrast-color);
+
+  background-color: var(--accent-color);
+}
+
+@media tablet-viewport {
+  .poster {
+    height: 350px;
+  }
+}
+
+@media mobile-s-viewport {
+  .poster {
+    height: 150px;
+  }
+
+  .subtitle {
+    font-size: 12px;
+    line-height: 1px;
+  }
+}

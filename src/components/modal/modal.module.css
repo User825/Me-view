@@ -1,0 +1,137 @@
+@value tablet-viewport, mobile-viewport from "../../styles/breakpoints.css";
+
+.modal {
+  position: relative;
+
+  align-self: flex-start;
+
+  width: 90%;
+  max-width: var(--desktop-m-width);
+  min-width: 300px;  
+  margin: 0 auto;
+
+  background-color: var(--contrast-color);
+
+  box-sizing: border-box;
+}
+
+.modalTop {
+  composes: modal;
+
+  margin-top: 100px;
+}
+
+.modalCenter {
+  composes: modal;
+
+  margin: auto;
+}
+
+.modalBottom {
+  composes: modal;
+
+  margin: auto auto 0;
+}
+
+.overlay {
+  position: fixed;
+
+  display: flex;
+  
+  width: 100%;
+  min-height: 100%;
+  
+  inset: 0px;
+
+  overflow-y: auto;
+
+  background-color: var(--base-color);
+}
+
+.closeBtn {
+  --btn-size: 32px;
+  position: absolute;
+  top: calc(var(--btn-size) * -1);
+  right: 0;
+
+  align-self: flex-end;
+
+  width: var(--btn-size);
+  height: var(--btn-size);
+
+  font-size: 0;
+
+  cursor: pointer;
+
+  background-color: transparent;
+
+  border: none;
+  box-shadow: none;
+}
+
+.closeBtn::before,
+.closeBtn::after {
+  --line-width: calc(var(--btn-size) * 0.75);
+  --line-height: calc(var(--btn-size) / 10);
+
+  content: '';
+  width: var(--line-width);
+  height: var(--line-height);
+
+  position: absolute;
+  left: calc(50% - var(--line-width) / 2);
+  top: calc(50% - var(--line-height) / 2);
+
+  background-color: var(--contrast-color);
+
+  border-radius: var(--line-height);
+}
+
+.closeBtn::before {
+  transform: rotate(45deg);
+}
+
+.closeBtn::after {
+  transform: rotate(-45deg);
+}
+
+.closeBtn:focus::before,
+.closeBtn:focus::after,
+.closeBtn:hover::before,
+.closeBtn:hover::after {
+  background-color: var(--accent-color);
+}
+
+.container {
+  background-color: var(--base-color);
+}
+
+@media tablet-viewport {
+  .modal {
+    width:100%;
+  }
+
+  .modalTop {
+    margin-top: 40px;
+  }
+
+  .container {
+    padding-left: var(--lg-indent);
+    padding-right: var(--lg-indent);
+  }
+
+  .closeBtn {
+    right: var(--lg-indent);
+  }
+}
+
+@media mobile-viewport {
+  .modalTop {
+    margin-top: 45px;
+  }
+
+  .closeBtn {
+    --btn-size: 36px;
+  }
+}
+

@@ -1,0 +1,133 @@
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { Section } from "components/global/section/";
+import CardList from "components/cardList";
+import { Card, CardSkeleton } from "components/card/";
+import { Row, Col } from "components/global/layout";
+import { server } from "server/";
+import InfiniteScroll from "react-infinite-scroller";
+
+const START_PAGE = 1;
+
+function SkeletonResults({ quantity, text }) {
+  const skeletonList = [];
+  skeletonList.length = quantity;
+  skeletonList.fill({ text });
+
+  return skeletonList.map((skeleton, index) => {
+    return (
+      <Col
+        sm="4"
+        md="3"
+        lg="2"
+        gap="sm"
+        verticalGap="sm"
+        tagName="section"
+        key={index}
+      >
+        <CardSkeleton text={skeleton.text} />
+      </Col>
+    );
+  });
+}
+
+function MoviesResults({ movies }) {
+  return movies.map(movie => {
+    return (
+      <Col
+        sm="4"
+        md="3"
+        lg="2"
+        gap="sm"
+        verticalGap="sm"
+        tagName="div"
+        key={movie.id}
+      >
+        <Card
+          imgSrc={movie.imgSrc}
+          title={movie.title}
+          year={movie.year}
+          genres={movie.genres}
+          rating={movie.rating}
+        />
+      </Col>
+    );
+  });
+}
+
+class PopularMovies extends Component {
+  state = {
+    movies: [],
+    isLoading: true,
+    hasMorePage: true,
+    totalPages: 0,
+    isFetching: false
+  };
+
+  componentDidMount() {
+    this.getPopularMovies(START_PAGE);
+  }
+
+  getPopularMovies = page => {
+    server.getPopularMovies(page).then(response => {
+      const { movies, totalPages } = response;
+      this.setState({
+        movies: movies,
+        totalPages: totalPages,
+        isLoading: false
+      });
+    });
+  };
+
+  onLoad = page => {
+    if (page === this.state.totalPages) {
+      this.setState({hasMorePage: false})
+    }
+
+    this.setState({isFetching: true});
+
+    server.getPopularMovies(page).then(response => {
+      this.setState(state => {
+        const prevMovies = state.movies;
+
+        return {
+          movies: prevMovies.concat(response.movies),
+          isFetching: false
+        };
+      });
+    });
+  };
+
+  render() {
+    return (
+      <Section title="Популярные фильмы">
+        <>
+          {this.state.isLoading ? (
+            <CardList>
+              <SkeletonResults quantity={12} text="Загрузка" />
+            </CardList>
+          ) : (
+            <>
+              <InfiniteScroll
+                pageStart={START_PAGE}
+                loadMore={this.onLoad}
+                hasMore={true}
+              >
+                <CardList>
+                  <MoviesResults movies={this.state.movies} />
+                  {this.state.isFetching && (
+                    <SkeletonResults quantity={12} text="Загрузка" />
+                  )}
+                </CardList>
+              </InfiniteScroll>
+            </>
+          )}
+        </>
+      </Section>
+    );
+  }
+}
+
+PopularMovies.propTypes = {};
+
+export default PopularMovies;

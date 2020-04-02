@@ -1,0 +1,19 @@
+.container {
+  width: 100%;
+  padding: 10px 0;
+  
+}
+
+.container [class^='selectCustom__control'] {
+  cursor: pointer;
+}
+
+.container [class^='selectCustom__control']:hover {
+  border-color: var(--accent-color);
+}
+
+.container [class^='selectCustom__option'] {
+  cursor: pointer;
+}
+
+

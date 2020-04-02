@@ -1,0 +1,4 @@
+@value mobile-s-viewport: (max-width: 460px);
+@value mobile-viewport: (max-width: 768px);
+@value tablet-viewport: (max-width: 1024px);
+@value desktop-s-viewport: (max-width: 1440px);

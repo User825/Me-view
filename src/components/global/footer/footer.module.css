@@ -1,0 +1,79 @@
+@value tablet-viewport, mobile-viewport from "../../../styles/breakpoints.css";
+
+.footer {
+  position: relative;
+
+  padding: 15px 0;
+  width: 100%;
+
+  background-color: var(--base-color-light);
+}
+
+.inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  width: 100%;
+  max-width: var(--desktop-m-width);
+  min-width: var(--mobile-width);
+  margin: 0 auto;
+  padding-left: var(--lg-indent);
+  padding-right: var(--lg-indent);
+}
+
+.copyRight {
+  display: flex;
+  align-items: center;
+
+  margin: 0;
+
+  font-size: 18px;
+}
+
+.copyRightLink {
+  padding: 0 10px;
+  
+  color: var(--base-color);
+  text-decoration: underline;
+}
+
+.poweredBox {
+  display: flex;
+  align-items: center;
+
+  width: 100px;
+}
+
+.poweredBox,
+.copyRightLink {
+  transition: opacity var(--transition-props);
+}
+
+.poweredBox:hover,
+.poweredBox:focus,
+.copyRightLink:hover,
+.copyRightLink:focus {
+  opacity: 0.7;
+}
+
+.poweredBox:active,
+.copyRightLink:active {
+  opacity: 0.3;
+}
+
+@media tablet-viewport {
+  .footer {
+    padding: 10px 0;
+  }
+}
+
+@media mobile-viewport {
+  .copyRight {
+    font-size: 16px;
+  }
+
+  .poweredBox {
+    width: 70px;
+  }
+}

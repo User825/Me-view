@@ -1,0 +1,50 @@
+import React from "react";
+import PropTypes from "prop-types";
+import classNames from "classnames/bind";
+import styles from "./card.module.css";
+
+const classNamesModule = classNames.bind(styles);
+
+function Card({ imgSrc, title, desc, rating, year, genres, stylesType = 'default' }) {
+  const cardStyles = classNamesModule({
+    default: stylesType === 'default',
+    light: stylesType === 'light'
+  })
+
+  return (
+    <div className={cardStyles}>
+      <div className={styles.container}>
+        <img
+          className={styles.poster}
+          src={imgSrc ? imgSrc : `${process.env.PUBLIC_URL}/img/no-image.jpg`}
+          alt={`Poster for ${title} movie`}
+        />
+        <div className={styles.contentBox}>
+          <h3 className={styles.title}>{title}</h3>
+          <b className={styles.subtitle}>
+            {year && <span>{year}</span>}
+            {year && genres && <span>, </span>}
+            {genres && <span>{genres}</span>}
+          </b>
+          {desc && <p className={styles.desc}>{desc}</p>}
+        </div>
+      </div>
+      {rating && (
+        <div className={styles.ratingBox}>
+          <span>{rating}</span>
+        </div>
+      )}
+    </div>
+  );
+}
+
+Card.propTypes = {
+  imgSrc: PropTypes.string,
+  title: PropTypes.string.isRequired,
+  desc: PropTypes.string,
+  rating: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  year: PropTypes.string,
+  genre: PropTypes.string
+};
+
+export default Card;

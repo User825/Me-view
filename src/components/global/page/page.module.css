@@ -1,0 +1,21 @@
+.page {
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  
+  min-height: 100vh;
+  min-width: var(--mobile-width);
+
+  overflow-x: hidden;
+}
+
+.page__content {
+  flex: 1 0 auto;
+}
+
+.page__footer {
+  flex-shrink: 0;
+}
+

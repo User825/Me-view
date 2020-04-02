@@ -1,0 +1,23 @@
+@value tablet-viewport,  mobile-viewport from "../../styles/breakpoints.css";
+
+.desc {
+  display: block;
+  margin: 0;
+
+  font-size: 16px;
+  line-height: 20px;
+  color: var(--contrast-color);
+}
+
+.accent {
+  composes: desc;
+
+  color: var(--accent-color);
+}
+
+@media tablet-viewport {
+  .desc {
+    font-size: 14px;
+    line-height: 16px;
+  }
+}
