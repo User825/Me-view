@@ -35,6 +35,7 @@
 
 .overlay {
   position: fixed;
+  z-index: 999;
 
   display: flex;
   

@@ -17,7 +17,7 @@ function SkeletonResults({ quantity, text }) {
   return skeletonList.map((skeleton, index) => {
     return (
       <Col
-        sm="4"
+        sm="6"
         md="3"
         lg="2"
         gap="sm"
@@ -35,7 +35,7 @@ function MoviesResults({ movies }) {
   return movies.map(movie => {
     return (
       <Col
-        sm="4"
+        sm="6"
         md="3"
         lg="2"
         gap="sm"
@@ -74,17 +74,13 @@ class PopularMovies extends Component {
       this.setState({
         movies: movies,
         totalPages: totalPages,
-        isLoading: false
+        isLoading: false,
       });
     });
   };
 
   onLoad = page => {
-    if (page === this.state.totalPages) {
-      this.setState({hasMorePage: false})
-    }
-
-    this.setState({isFetching: true});
+    this.setState({isFetching: true, hasMorePage: false});
 
     server.getPopularMovies(page).then(response => {
       this.setState(state => {
@@ -92,7 +88,8 @@ class PopularMovies extends Component {
 
         return {
           movies: prevMovies.concat(response.movies),
-          isFetching: false
+          isFetching: false,
+          hasMorePage: page < response.totalPages,
         };
       });
     });
@@ -111,7 +108,8 @@ class PopularMovies extends Component {
               <InfiniteScroll
                 pageStart={START_PAGE}
                 loadMore={this.onLoad}
-                hasMore={true}
+                hasMore={this.state.hasMorePage}
+                threshold={300}
               >
                 <CardList>
                   <MoviesResults movies={this.state.movies} />

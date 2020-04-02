@@ -14,12 +14,12 @@ function Section({ title, isHiddenTitle, children }) {
 
   return (
     <Wrapper className={styles.wrapper} gap="lg">
-      <Container className={styles.container} tagName="section" gap="sm" verticalGap="lg" fluid>
-        <Row gap='sm'>
+      <Container className={styles.container} tagName="section" gap="sm" verticalGap="sm" fluid>
+        <Row gap='sm' verticalGap="sm">
           <h2 className={titleStyles}>{title}</h2>
         </Row>
        
-        <Row verticalGap="lg" fluid>{children}</Row>
+        <Row fluid>{children}</Row>
       </Container>
     </Wrapper>
   );

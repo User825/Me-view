@@ -36,6 +36,8 @@
   --transition-props: var(--transition-duration) var(--transition-timing-function);
 }
 
+
+
 /* Main rules */
 html {
   overflow-x: hidden;
