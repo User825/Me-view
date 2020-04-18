@@ -1,6 +1,6 @@
 .wrapper {
-  margin-top: 50px;
-  margin-bottom: 50px;
+  margin-top: calc(var(--md-indent) * 2);
+  margin-bottom: calc(var(--md-indent) * 2);
 }
 
 .container {

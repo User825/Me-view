@@ -30,6 +30,8 @@ function Modal({
       shouldCloseOnEsc={true}
       onRequestClose={onClose}
       className={modalClassName}
+      bodyOpenClassName='modal-open'
+      htmlOpenClassName='modal-open'
       overlayClassName={styles.overlay}
       contentLabel={contentLabel}
       shouldCloseOnOverlayClick={shouldCloseOnOverlayClick}

@@ -100,7 +100,6 @@
 
 .icon {
   flex: 0 0 auto;
-  align-self: flex-end;
 
   display: flex;
   justify-content: center;
@@ -116,6 +115,11 @@
   order: 1;
   margin-right: 0px;
   margin-left: 5px;
+}
+
+.centred {
+  width: 100%;
+  justify-content: center;
 }
 
 

@@ -16,12 +16,18 @@ function Button({
   type = "button",
   styleType = "default",
   isLink = false,
-  linkPath = "#!"
+  linkPath = "#!",
+  centred = false
 }) {
   const iconStyles = classNamesModule({
     icon: "icon",
     iconRight: iconRight
   });
+
+  const buttonStyles = classNamesModule({
+    [styleType]: styleType,
+    centred: centred,
+  })
 
   return (
     <>
@@ -41,7 +47,7 @@ function Button({
       ) : (
         <button
           style={{ width: width }}
-          className={styles[styleType]}
+          className={buttonStyles}
           type={type}
           disabled={disabled}
           onClick={handler}

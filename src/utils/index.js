@@ -1,6 +1,7 @@
 import debounce from './debounce'
 import createCountFormatter from './createCountFormatter'
-// import { changeColorsSchema, setDefaultColorSchema } from './changeColorSchema';
+import getCountriesLocaleName from './getCountriesLocaleName'
+import changeColorsSchema from './changeColorSchema';
 
 // export { db, changeColorsSchema, setDefaultColorSchema };
-export { debounce, createCountFormatter };
+export { debounce, createCountFormatter, getCountriesLocaleName, changeColorsSchema };

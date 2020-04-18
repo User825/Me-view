@@ -75,7 +75,16 @@
   color: var(--base-color);
 }
 
-.subtitle {
+.fixedTitle {
+  composes: title;
+
+  margin: 0;
+  height: 2em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.subtitle:not(:empty) {
   display: block;
   margin: 0;
 
@@ -114,9 +123,30 @@
   background-color: var(--accent-color);
 }
 
+.smallContainer {
+  composes: container;
+}
+
+.smallContainer .poster {
+  height: 150px;
+}
+
+.smallContainer .title {
+  font-size: 14px;
+}
+
+.childrenBox {
+  flex: 1 0 auto;
+  display: flex;
+}
+
 @media tablet-viewport {
   .poster {
     height: 350px;
+  }
+
+  .smallContainer .poster {
+    height: 100px;
   }
 
   .ratingBox {
@@ -128,6 +158,10 @@
 @media mobile-s-viewport {
   .poster {
     height: 250px;
+  }
+
+  .smallContainer .poster {
+    height: 150px;
   }
 
   .subtitle {

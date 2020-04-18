@@ -6,6 +6,8 @@ import { Card, CardSkeleton } from "components/card/";
 import { Row, Col } from "components/global/layout";
 import { server } from "server/";
 import InfiniteScroll from "react-infinite-scroller";
+import { Link } from "react-router-dom";
+import { paths } from "config/";
 
 const START_PAGE = 1;
 
@@ -43,13 +45,15 @@ function MoviesResults({ movies }) {
         tagName="div"
         key={movie.id}
       >
-        <Card
-          imgSrc={movie.imgSrc}
-          title={movie.title}
-          year={movie.year}
-          genres={movie.genres}
-          rating={movie.rating}
-        />
+        <Link to={`${paths.MOVIE}${movie.id}`}>
+          <Card
+            imgSrc={movie.imgSrc}
+            title={movie.title}
+            year={movie.year}
+            genres={movie.genres}
+            rating={movie.rating}
+          />
+        </Link>
       </Col>
     );
   });
@@ -74,13 +78,13 @@ class PopularMovies extends Component {
       this.setState({
         movies: movies,
         totalPages: totalPages,
-        isLoading: false,
+        isLoading: false
       });
     });
   };
 
   onLoad = page => {
-    this.setState({isFetching: true, hasMorePage: false});
+    this.setState({ isFetching: true, hasMorePage: false });
 
     server.getPopularMovies(page).then(response => {
       this.setState(state => {
@@ -89,7 +93,7 @@ class PopularMovies extends Component {
         return {
           movies: prevMovies.concat(response.movies),
           isFetching: false,
-          hasMorePage: page < response.totalPages,
+          hasMorePage: page < response.totalPages
         };
       });
     });

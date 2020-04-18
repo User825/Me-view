@@ -13,3 +13,18 @@
 .disabledButton {
   display: none;
 }
+
+.indent_sm {
+  margin-top: var(--sm-indent);
+  margin-bottom: var(--sm-indent);
+}
+
+.indent_md {
+  margin-top: var(--md-indent);
+  margin-bottom: var(--md-indent);
+}
+
+.indent_lg {
+  margin-top: var(--lg-indent);
+  margin-bottom: var(--lg-indent);
+}

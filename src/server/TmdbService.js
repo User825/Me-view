@@ -8,14 +8,33 @@ const RU_LANGUAGE = "&language=ru";
 const EN_LANGUAGE = "&language=en";
 const RU_REGION = "&region=RU";
 
+const getImgSrc = (src) => {
+  const noSrcPattern = /null/;
+
+  return noSrcPattern.test(src) ? null : src;
+}
+
 const getMovie = async movieId => {
   const response = await fetch(
     `${MOVIE_URL}${movieId}?${API_KEY}${RU_LANGUAGE}`
   );
   if (response.ok) {
-    let data = await response.json();
+    const data = await response.json();
+    const genres = data.genres.map(genre => genre.name).join(", ");
+    const productionCountries = data.production_countries.map(country => country.iso_3166_1);
+    const responseSrc = getImagesUrl(500, data.poster_path);
 
-    return await data;
+    return {
+        title: data.title,
+        posterSrc: getImgSrc(responseSrc),
+        desc: data.overview,
+        homepage: data.homepage,
+        rating: data.vote_average,
+        releaseDate: new Date(data.release_date),
+        productionCountries,
+        budget: data.budget,
+        genres
+    };
   } else {
     const error = new Error(
       `Could not fetch movieId: ${movieId}; received ${response.status}`
@@ -23,6 +42,62 @@ const getMovie = async movieId => {
     console.error(error);
   }
 };
+
+const getSimilarMovies = async (movieId, language) => {
+  const response = await fetch(
+    `${MOVIE_URL}${movieId}/similar?${API_KEY}${
+      language === "RU" ? RU_LANGUAGE : EN_LANGUAGE
+    }`
+  );
+  if (response.ok) {
+    const data = await response.json();
+    const movies = await data.results.map(movie => {
+      const noSrcPattern = /null/;
+      const responseSrc = getImagesUrl(500, movie.poster_path);
+      const imgSrc = noSrcPattern.test(responseSrc) ? null : responseSrc;
+      const releaseDate = movie.release_date
+        ? new Date(movie.release_date)
+        : null;
+      return {
+        id: movie.id,
+          title: movie.title,
+          imgSrc: imgSrc,
+          desc: movie.overview,
+          rating: movie.vote_average,
+          year: releaseDate ? String(releaseDate.getFullYear()) : "",
+      }
+    })
+    
+    return await {
+      movies,
+      totalPages: data.total_pages
+    };
+  } else {
+    const error = new Error(
+      `Could not fetch movieId: ${movieId}; received ${response.status}`
+    );
+    console.error(error);
+  }
+}
+
+const getBackdrop = async (movieId, language) => {
+  const response = await fetch(
+    `${MOVIE_URL}${movieId}/images?${API_KEY}${
+      language === "RU" ? RU_LANGUAGE : EN_LANGUAGE
+    }`
+  );
+  if (response.ok) {
+    const data = await response.json();
+    const backdrop = data.backdrops.length > 0 ? getImagesUrl('original', data.backdrops[0].file_path) : null;
+    
+    return backdrop;
+  } else {
+    const error = new Error(
+      `Could not fetch movieId: ${movieId}; received ${response.status}`
+    );
+    console.error(error);
+  }
+}
 
 const getTrailer = async (movieId, language) => {
   const response = await fetch(
@@ -189,7 +264,9 @@ const tmdbSevice = {
   getPopularMovies,
   getPlayedMoviesNow,
   getAllCountries,
-  getAllGenres
+  getAllGenres,
+  getBackdrop,
+  getSimilarMovies
 };
 
 export default tmdbSevice;

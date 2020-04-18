@@ -7,7 +7,6 @@
 
   padding: 20px 0;
   width: 100%;
-  min-height: 120px;
 
   background-color: var(--base-color);
 }
@@ -48,7 +47,6 @@
 
 @media mobile-viewport {
   .header {
-    min-height: 80px;
     padding: 20px 0;
   }
   

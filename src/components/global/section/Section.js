@@ -6,7 +6,7 @@ import styles from "./section.module.css";
 
 const classNamesModule = classNames.bind(styles);
 
-function Section({ title, isHiddenTitle, children }) {
+function Section({ title, isHiddenTitle = false, children }) {
   const titleStyles = classNamesModule({
     title: !isHiddenTitle,
     "visually-hidden": isHiddenTitle
@@ -15,10 +15,14 @@ function Section({ title, isHiddenTitle, children }) {
   return (
     <Wrapper className={styles.wrapper} gap="lg">
       <Container className={styles.container} tagName="section" gap="sm" verticalGap="sm" fluid>
-        <Row gap='sm' verticalGap="sm">
+        {title && !isHiddenTitle && (
+          <Row gap='sm' verticalGap="sm">
+            <h2 className={titleStyles}>{title}</h2>
+          </Row>
+        )}
+        {title && isHiddenTitle && (
           <h2 className={titleStyles}>{title}</h2>
-        </Row>
-       
+        )}
         <Row fluid>{children}</Row>
       </Container>
     </Wrapper>
@@ -27,7 +31,8 @@ function Section({ title, isHiddenTitle, children }) {
 
 Section.propTypes = {
   children: PropTypes.node.isRequired,
-  title: PropTypes.string.isRequired
+  title: PropTypes.string,
+  isHiddenTitle: PropTypes.bool
 };
 
 export default Section;

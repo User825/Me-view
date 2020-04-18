@@ -40,7 +40,7 @@ class Header extends Component {
           shouldCloseOnOverlayClick={false}
           contentLabel="search-panel"
         >
-          <SearchPanel />
+          <SearchPanel closeModal={this.closeSearchModal}/>
         </Modal>
       </HeaderBox>
     );

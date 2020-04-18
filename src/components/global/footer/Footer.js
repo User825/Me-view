@@ -11,7 +11,7 @@ function Footer() {
     <div className={styles.footer}>
       <div className={styles.inner}>
         <p className={styles.copyRight}>
-          © 2019 by
+          © 2019-2020 by
           <a
             href="https://github.com/User825"
             className={styles.copyRightLink}

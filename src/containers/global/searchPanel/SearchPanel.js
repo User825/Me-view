@@ -122,6 +122,7 @@ class SearchPanel extends Component {
             resultsQuantity={this.state.totalResults}
             onLoad={this.onLoad}
             hasMore={this.state.hasMorePage}
+            onResultClick={this.props.closeModal}
           />
         )}
       </Container>

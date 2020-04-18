@@ -4,6 +4,8 @@ import { Section } from "components/global/section/";
 import Carousel from "components/carousel/";
 import { server } from "server/";
 import { CardAnnounce } from "components/card";
+import { Link } from "react-router-dom";
+import { paths } from "config/";
 
 const START_PAGE = 1;
 
@@ -17,10 +19,11 @@ const carouselParams = {
   centeredSlidesBounds: true,
   centerInsufficientSlides: true,
   watchOverflow: true,
+  simulateTouch: false,
   keyboard: {
     enabled: true,
-    onlyInViewport: true,
-  },
+    onlyInViewport: true
+  }
 };
 
 class NowPlayedMovies extends Component {
@@ -65,7 +68,7 @@ class NowPlayedMovies extends Component {
   };
 
   onReachEnd = () => {
-    console.log('reachEnd')
+    console.log("reachEnd");
     if (this.state.hasMorePage) {
       this.setState(state => {
         const prevPage = state.page;
@@ -82,15 +85,16 @@ class NowPlayedMovies extends Component {
       <Section title="Сейчас в кино">
         <Carousel params={carouselParams} onReachEnd={this.onReachEnd}>
           {this.state.movies.map(movie => (
-            <CardAnnounce
-              title={movie.title}
-              desc={movie.desc}
-              urlSrcMobile={movie.urlSrcMobile}
-              urlSrcDesktop={movie.urlSrcDesktop}
-              date={movie.date}
-              rating={movie.rating}
-              key={movie.id}
-            />
+            <Link to={`${paths.MOVIE}${movie.id}`} key={movie.id}>
+              <CardAnnounce
+                title={movie.title}
+                desc={movie.desc}
+                urlSrcMobile={movie.urlSrcMobile}
+                urlSrcDesktop={movie.urlSrcDesktop}
+                date={movie.date}
+                rating={movie.rating}
+              />
+            </Link>
           ))}
         </Carousel>
       </Section>

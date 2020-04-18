@@ -1,25 +1,32 @@
-import React from "react";
-import { Card, CardSkeleton } from "components/card/";
-import PropTypes from "prop-types";
-import { createCountFormatter } from "utils/";
-import CardList from "components/cardList";
-import { Row, Col } from "components/global/layout";
-import Button from "components/global/button";
+import React from 'react';
+import { Card, CardSkeleton } from 'components/card/';
+import PropTypes from 'prop-types';
+import { createCountFormatter } from 'utils/';
+import CardList from 'components/cardList';
+import { Row, Col } from 'components/global/layout';
+import Button from 'components/global/button';
+import { Next } from 'components/icons/';
+import { paths } from 'config/';
+import { Link } from 'react-router-dom';
 
-const getDescText = resultsQuantity => {
+const getDescText = (resultsQuantity) => {
   const searchEndCount = createCountFormatter(resultsQuantity, {
-    one: "",
-    two: "о",
-    few: "о"
+    one: '',
+    two: 'о',
+    few: 'о',
   });
   const resultsEndCount = createCountFormatter(resultsQuantity, {
-    one: "",
-    two: "а",
-    few: "ов"
+    one: '',
+    two: 'а',
+    few: 'ов',
   });
 
   return `Найден${searchEndCount} ${resultsQuantity} фильм${resultsEndCount}`;
 };
+
+function NextIcon() {
+  return <Next size={20} />;
+}
 
 function SkeletonResults({ quantity, text }) {
   const skeletonList = [];
@@ -29,7 +36,7 @@ function SkeletonResults({ quantity, text }) {
   return skeletonList.map((skeleton, index) => {
     return (
       <Col
-        sm="4"
+        sm="6"
         md="3"
         lg="2"
         gap="sm"
@@ -43,11 +50,11 @@ function SkeletonResults({ quantity, text }) {
   });
 }
 
-function MoviesResults({ movies }) {
-  return movies.map(movie => {
+function MoviesResults({ movies, onClickHandler }) {
+  return movies.map((movie) => {
     return (
       <Col
-        sm="4"
+        sm="6"
         md="3"
         lg="2"
         gap="sm"
@@ -55,14 +62,21 @@ function MoviesResults({ movies }) {
         tagName="div"
         key={movie.id}
       >
-        <Card
-          stylesType="light"
-          imgSrc={movie.imgSrc}
-          title={movie.title}
-          year={movie.year}
-          genres={movie.genres}
-          rating={movie.rating}
-        />
+        <Link
+          to={`${paths.MOVIE}${movie.id}`}
+          key={movie.id}
+          replace
+          onClick={onClickHandler}
+        >
+          <Card
+            stylesType="light"
+            imgSrc={movie.imgSrc}
+            title={movie.title}
+            year={movie.year}
+            genres={movie.genres}
+            rating={movie.rating}
+          />
+        </Link>
       </Col>
     );
   });
@@ -74,16 +88,17 @@ function SearchResults({
   isLoading,
   isFetching,
   hasMore,
-  onLoad
+  onLoad,
+  onResultClick,
 }) {
   let desc, descStyle;
 
   if (resultsQuantity > 0) {
     desc = getDescText(resultsQuantity);
-    descStyle = "base";
+    descStyle = 'base';
   } else {
-    desc = "Ничего не найдено";
-    descStyle = "accent";
+    desc = 'Ничего не найдено';
+    descStyle = 'accent';
   }
 
   return (
@@ -95,19 +110,23 @@ function SearchResults({
       ) : (
         <>
           <CardList desc={desc} descStyle={descStyle}>
-            <MoviesResults movies={movies} />
+            <MoviesResults movies={movies} onClickHandler={onResultClick} />
             {isFetching && <SkeletonResults quantity={12} text="Загрузка" />}
+            {hasMore && (
+              <Col sm="4" md="3" lg="2" gap="sm" verticalGap="sm" tagName="div">
+                <Card stylesType="light" onlyContainer>
+                  <Button
+                    text="Загрузить еще"
+                    handler={onLoad}
+                    iconRight
+                    iconComponent={NextIcon}
+                    width="100%"
+                    styleType="primary"
+                  />
+                </Card>
+              </Col>
+            )}
           </CardList>
-          {hasMore && (
-            <Row
-              fluid
-              verticalGap="lg"
-              gap="lg"
-              lg={{ center: true, middle: true }}
-            >
-              <Button text="Загрузить еще" handler={onLoad} />
-            </Row>
-          )}
         </>
       )}
     </>
@@ -120,7 +139,7 @@ SearchResults.propTypes = {
   isLoading: PropTypes.bool.isRequired,
   isFetching: PropTypes.bool.isRequired,
   hasMore: PropTypes.bool.isRequired,
-  onLoad: PropTypes.func.isRequired
+  onLoad: PropTypes.func.isRequired,
 };
 
 export default SearchResults;
