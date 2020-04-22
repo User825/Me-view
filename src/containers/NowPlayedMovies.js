@@ -1,17 +1,18 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
+import { server } from "server/";
+import { paths } from "config/";
+
 import { Section } from "components/global/section/";
 import Carousel from "components/carousel/";
-import { server } from "server/";
 import { CardAnnounce } from "components/card";
 import { Link } from "react-router-dom";
-import { paths } from "config/";
+
 
 const START_PAGE = 1;
 
 const carouselParams = {
   slidesPerView: 1,
-  spaceBetween: 20,
+  spaceBetween: 0,
   centeredSlides: true,
   setWrapperSize: true,
   speed: 400,
@@ -68,7 +69,6 @@ class NowPlayedMovies extends Component {
   };
 
   onReachEnd = () => {
-    console.log("reachEnd");
     if (this.state.hasMorePage) {
       this.setState(state => {
         const prevPage = state.page;
@@ -82,7 +82,7 @@ class NowPlayedMovies extends Component {
 
   render() {
     return (
-      <Section title="Сейчас в кино">
+      <Section title="Сейчас в кино" isOneScreen isAnchor>
         <Carousel params={carouselParams} onReachEnd={this.onReachEnd}>
           {this.state.movies.map(movie => (
             <Link to={`${paths.MOVIE}${movie.id}`} key={movie.id}>

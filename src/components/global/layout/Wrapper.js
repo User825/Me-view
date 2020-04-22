@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames/bind";
+
 import styles from "./index.module.css";
 
 const classNamesModule = classNames.bind(styles);
@@ -17,7 +18,10 @@ function Wrapper({ children, className, gap, verticalGap, }) {
 }
 
 Wrapper.propTypes = {
-  children: PropTypes.node
+  className: PropTypes.string, 
+  gap: PropTypes.oneOf(['sm', 'lg', 'md']),
+  verticalGap: PropTypes.oneOf(['sm', 'lg', 'md']),
+  children: PropTypes.node,
 };
 
 export default Wrapper;

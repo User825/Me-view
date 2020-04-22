@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import Swiper from 'react-id-swiper';
-import 'swiper/css/swiper.css';
-import styles from './carousel.module.css';
 import classNames from 'classnames/bind';
+
+import styles from './carousel.module.css';
+import 'swiper/css/swiper.css';
+
+import Swiper from 'react-id-swiper';
 
 const classNamesModule = classNames.bind(styles);
 function Carousel({
@@ -13,7 +15,7 @@ function Carousel({
   isNavigation = true,
   isPagination = false,
   onReachEnd,
-  indent = 'none'
+  indent = 'none',
 }) {
   const [swiper, setSwiper] = useState('');
 
@@ -24,7 +26,7 @@ function Carousel({
   });
 
   const containerStyles = classNamesModule({
-    ['swiper-container']: true,
+    'swiper-container': true,
     rounded: isRoundedStyle,
     container: true,
     withPagination: isPagination,
@@ -33,7 +35,7 @@ function Carousel({
   const slideIndentStyles = classNamesModule({
     indent_sm: indent === 'sm',
     indent_md: indent === 'md',
-    indent_lg: indent === 'lg'
+    indent_lg: indent === 'lg',
   });
 
   const eventsParams = {
@@ -46,8 +48,8 @@ function Carousel({
 
   const navigationParams = isNavigation && {
     navigation: {
-      nextEl: `.swiper-button-next`,
-      prevEl: `.swiper-button-prev`,
+      nextEl: `.swiper-button-next.${styles.nextButton}`,
+      prevEl: `.swiper-button-prev.${styles.prevButton}`,
       disabledClass: `swiper-button-disabled ${styles.disabledButton}`,
     },
   };
@@ -87,6 +89,14 @@ function Carousel({
   );
 }
 
-Carousel.propTypes = {};
+Carousel.propTypes = {
+  params: PropTypes.object,
+  isRoundedStyle: PropTypes.bool,
+  isNavigation: PropTypes.bool,
+  isPagination: PropTypes.bool,
+  onReachEnd: PropTypes.func,
+  indent: PropTypes.oneOf(['lg', 'md', 'sm']),
+  children: PropTypes.node,
+};
 
 export default Carousel;

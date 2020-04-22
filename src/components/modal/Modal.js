@@ -1,12 +1,14 @@
-import React from "react";
-import PropTypes from "prop-types";
-import ReactModal from "react-modal";
-import classNames from "classnames/bind";
-import "./modalTransition.css";
-import styles from "./modal.module.css";
-const classNamesModule = classNames.bind(styles);
+import React from 'react';
+import PropTypes from 'prop-types';
+import classNames from 'classnames/bind';
 
-ReactModal.setAppElement("#root");
+import './modalTransition.css';
+import styles from './modal.module.css';
+
+import ReactModal from 'react-modal';
+
+const classNamesModule = classNames.bind(styles);
+ReactModal.setAppElement('#root');
 
 function Modal({
   children,
@@ -15,12 +17,12 @@ function Modal({
   contentLabel,
   shouldCloseOnOverlayClick = true,
   hasCloseButton = true,
-  position = "center"
+  position = 'center',
 }) {
   const modalClassName = classNamesModule({
-    modalTop: position === "top",
-    modalCenter: position === "center",
-    modalBottom: position === "bottom"
+    modalTop: position === 'top',
+    modalCenter: position === 'center',
+    modalBottom: position === 'bottom',
   });
 
   return (
@@ -30,8 +32,8 @@ function Modal({
       shouldCloseOnEsc={true}
       onRequestClose={onClose}
       className={modalClassName}
-      bodyOpenClassName='modal-open'
-      htmlOpenClassName='modal-open'
+      bodyOpenClassName="modal-open"
+      htmlOpenClassName="modal-open"
       overlayClassName={styles.overlay}
       contentLabel={contentLabel}
       shouldCloseOnOverlayClick={shouldCloseOnOverlayClick}
@@ -54,7 +56,7 @@ Modal.propTypes = {
   contentLabel: PropTypes.string.isRequired,
   shouldCloseOnOverlayClick: PropTypes.bool,
   hasCloseButton: PropTypes.bool,
-  position: PropTypes.oneOf(["top", "center", "bottom"])
+  position: PropTypes.oneOf(['top', 'center', 'bottom']),
 };
 
 export default Modal;

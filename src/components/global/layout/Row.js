@@ -1,12 +1,13 @@
-import React from "react";
-import PropTypes from "prop-types";
-import classNames from "classnames/bind";
-import styles from "./index.module.css";
+import React from 'react';
+import PropTypes from 'prop-types';
+import classNames from 'classnames/bind';
+
+import styles from './index.module.css';
 
 const classNamesModule = classNames.bind(styles);
 
 function Row({
-  tagName = "div",
+  tagName = 'div',
   lg = {},
   md = {},
   sm = {},
@@ -19,7 +20,7 @@ function Row({
   ...props
 }) {
   const rowStyles = classNamesModule({
-    row: "row",
+    row: 'row',
     [`gap_${gap}`]: gap,
     [`verticalGap_${verticalGap}`]: verticalGap,
     rowFluid: fluid,
@@ -48,7 +49,7 @@ function Row({
     rowBottomSm: sm.bottom,
     rowAroundSm: sm.around,
     rowBetweenSm: sm.between,
-    [className]: className
+    [className]: className,
   });
 
   return React.createElement(
@@ -68,7 +69,7 @@ Row.propTypes = {
     middle: PropTypes.bool,
     bottom: PropTypes.bool,
     around: PropTypes.bool,
-    between: PropTypes.bool
+    between: PropTypes.bool,
   }),
   md: PropTypes.shape({
     start: PropTypes.bool,
@@ -78,7 +79,7 @@ Row.propTypes = {
     middle: PropTypes.bool,
     bottom: PropTypes.bool,
     around: PropTypes.bool,
-    between: PropTypes.bool
+    between: PropTypes.bool,
   }),
   sm: PropTypes.shape({
     start: PropTypes.bool,
@@ -88,14 +89,14 @@ Row.propTypes = {
     middle: PropTypes.bool,
     bottom: PropTypes.bool,
     around: PropTypes.bool,
-    between: PropTypes.bool
+    between: PropTypes.bool,
   }),
   fluid: PropTypes.bool,
   reverse: PropTypes.bool,
   className: PropTypes.string,
   children: PropTypes.node,
-  gap: PropTypes.oneOf(["sm", "lg", "md"]),
-  verticalGap: PropTypes.oneOf(["sm", "lg", "md"])
+  gap: PropTypes.oneOf(['sm', 'lg', 'md']),
+  verticalGap: PropTypes.oneOf(['sm', 'lg', 'md']),
 };
 
 export default Row;

@@ -1,0 +1,59 @@
+.typography {
+  display: block;
+
+  margin: 0;
+  font-family: var(--base-font);
+  line-height: 1.25;
+}
+
+.size_lg {
+  font-size: var(--lg-text);
+}
+
+.size_md {
+  font-size: var(--md-text);
+}
+
+.size_sm {
+  font-size: var(--sm-text);
+}
+
+.size_xs {
+  font-size: var(--xs-text);
+}
+
+.bottomIndent_lg {
+  margin-bottom: var(--lg-indent);
+}
+
+.bottomIndent_md {
+  margin-bottom: var(--md-indent);
+}
+
+.bottomIndent_sm {
+  margin-bottom: var(--sm-indent);
+}
+
+.weight_regular {
+  font-weight: 400;
+}
+
+.weight_bold {
+  font-weight: 700;
+}
+
+.color_base {
+  color: var(--base-color);
+}
+
+.color_light {
+  color: var(--base-color-light);
+}
+
+.color_contrast {
+  color: var(--contrast-color);
+}
+
+.color_accent {
+  color: var(--accent-color);
+}

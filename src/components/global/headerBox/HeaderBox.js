@@ -1,11 +1,11 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
-import styles from "./headerBox.module.css";
+import styles from './headerBox.module.css';
 import paths from 'config/routerPaths';
 
-import Logo from "./Logo";
+import Logo from './Logo';
 
 const mainPath = paths.MAIN;
 function HeaderBox({ children }) {
@@ -25,7 +25,6 @@ function HeaderBox({ children }) {
 
 HeaderBox.propTypes = {
   children: PropTypes.node,
-  LinkComponent: PropTypes.oneOfType([PropTypes.node, PropTypes.func])
 };
 
 export default HeaderBox;

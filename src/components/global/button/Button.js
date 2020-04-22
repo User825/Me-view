@@ -1,8 +1,8 @@
-import React from "react";
-import PropTypes from "prop-types";
-import classNames from "classnames/bind";
+import React from 'react';
+import PropTypes from 'prop-types';
+import classNames from 'classnames/bind';
 
-import styles from "./button.module.css";
+import styles from './button.module.css';
 
 const classNamesModule = classNames.bind(styles);
 
@@ -12,22 +12,22 @@ function Button({
   iconRight = false,
   handler,
   disabled = false,
-  width = "auto",
-  type = "button",
-  styleType = "default",
+  width = 'auto',
+  type = 'button',
+  styleType = 'default',
   isLink = false,
-  linkPath = "#!",
-  centred = false
+  linkPath = '#!',
+  centred = false,
 }) {
   const iconStyles = classNamesModule({
-    icon: "icon",
-    iconRight: iconRight
+    icon: 'icon',
+    iconRight: iconRight,
   });
 
   const buttonStyles = classNamesModule({
     [styleType]: styleType,
     centred: centred,
-  })
+  });
 
   return (
     <>
@@ -63,16 +63,17 @@ function Button({
 }
 
 Button.propTypes = {
-  text: PropTypes.string.isRequired,
+  text: PropTypes.string,
   iconComponent: PropTypes.func,
   iconRight: PropTypes.bool,
   handler: PropTypes.func,
   disabled: PropTypes.bool,
   width: PropTypes.string,
-  type: PropTypes.oneOf(["button", "reset", "submit"]),
-  styleType: PropTypes.oneOf(["primary", "default", "invert"]),
+  type: PropTypes.oneOf(['button', 'reset', 'submit']),
+  styleType: PropTypes.oneOf(['primary', 'default', 'invert']),
   isLink: PropTypes.bool,
-  linkPath: PropTypes.string
+  linkPath: PropTypes.string,
+  centred: PropTypes.bool,
 };
 
 export default Button;

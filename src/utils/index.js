@@ -1,7 +1,13 @@
-import debounce from './debounce'
-import createCountFormatter from './createCountFormatter'
-import getCountriesLocaleName from './getCountriesLocaleName'
+import debounce from './debounce';
+import createCountFormatter from './createCountFormatter';
+import getCountriesLocaleName from './getCountriesLocaleName';
 import changeColorsSchema from './changeColorSchema';
+import setHeaderHeightSize from './setHeaderHeightSize';
 
-// export { db, changeColorsSchema, setDefaultColorSchema };
-export { debounce, createCountFormatter, getCountriesLocaleName, changeColorsSchema };
+export {
+  debounce,
+  createCountFormatter,
+  getCountriesLocaleName,
+  changeColorsSchema,
+  setHeaderHeightSize,
+};

@@ -1,9 +1,14 @@
 import React from 'react';
-import styles from "./logo.module.css";
 
-function Logo({ width = '', fill = 'inherit' }) {
+import styles from './logo.module.css';
+
+const LOGO_TEXT = 'Me view';
+
+function Logo() {
   return (
-    <h1 className={styles.logo}>Me view</h1>
+    <h1 className={styles.logo} text={LOGO_TEXT}>
+      {LOGO_TEXT}
+    </h1>
   );
 }
 

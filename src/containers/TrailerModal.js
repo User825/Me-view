@@ -20,6 +20,12 @@ function TrailerModal({ isOpen, onClose, site, id, title }) {
   );
 }
 
-TrailerModal.propTypes = {};
+TrailerModal.propTypes = {
+  isOpen: PropTypes.bool.isRequired,
+  onClose: PropTypes.func.isRequired,
+  site: PropTypes.oneOf(['YouTube', 'Vimeo']).isRequired,
+  id: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+};
 
 export default TrailerModal;

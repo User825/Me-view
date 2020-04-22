@@ -3,16 +3,14 @@ import PropTypes from 'prop-types';
 import { server } from 'server/';
 import Carousel from 'components/carousel/';
 import { paths } from 'config/';
-import { Card, CardSkeleton } from 'components/card/';
+import { Card } from 'components/card/';
 import { Link } from 'react-router-dom';
-import Preloader from 'components/preloader/';
 import { Row, Col } from 'components/global/layout';
+import Typography from 'components/global/typography';
 
 const carouselParams = {
-  slidesPerView: 10,
-  slidesPerGroup: 6,
   spaceBetween: 10,
-  speed: 400,
+  speed: 300,
   effect: 'slide',
   centeredSlidesBounds: true,
   centerInsufficientSlides: true,
@@ -21,6 +19,28 @@ const carouselParams = {
   keyboard: {
     enabled: true,
     onlyInViewport: true,
+  },
+  breakpoints: {
+    320: {
+      slidesPerView: 3,
+      slidesPerGroup: 1,
+    },
+    465: {
+      slidesPerView: 4,
+      slidesPerGroup: 1,
+    },
+    768: {
+      slidesPerView: 6,
+      slidesPerGroup: 2,
+    },
+    1024: {
+      slidesPerView: 8,
+      slidesPerGroup: 3,
+    },
+    1440: {
+      slidesPerView: 10,
+      slidesPerGroup: 3,
+    },
   },
 };
 
@@ -35,7 +55,7 @@ class SimilarMovies extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (this.props.id !== prevProps.movieId) {
+    if (this.props.movieId !== prevProps.movieId) {
       this.getSimilarMovies();
     }
   }
@@ -48,11 +68,16 @@ class SimilarMovies extends Component {
 
   render() {
     const { movies } = this.state;
+
     return (
       <>
         {movies.length > 0 && (
           <>
-            <h2>Похожие фильмы</h2>
+            <Row verticalGap="md">
+              <Typography tagName="h2" size="md">
+                Похожие фильмы
+              </Typography>
+            </Row>
             <Col lg="12">
               <Carousel params={carouselParams} indent="sm">
                 {movies.map((movie) => (
@@ -75,6 +100,8 @@ class SimilarMovies extends Component {
   }
 }
 
-SimilarMovies.propTypes = {};
+SimilarMovies.propTypes = {
+  movieId: PropTypes.string,
+};
 
 export default SimilarMovies;

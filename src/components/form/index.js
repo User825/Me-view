@@ -1,4 +1,4 @@
-import FieldInput from "./FieldInput";
-import Select from './Select'
+import FieldInput from './FieldInput';
+import Select from './Select';
 
 export { FieldInput, Select };

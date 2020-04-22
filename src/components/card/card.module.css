@@ -10,11 +10,9 @@
   overflow: hidden;
 
   border-radius: 2px;
-  
 
-  transition:  
-  box-shadow var(--transition-props),
-  opacity var(--transition-props);
+  transition: box-shadow var(--transition-props),
+    opacity var(--transition-props);
 }
 
 .default {
@@ -70,7 +68,7 @@
   margin: 0 0 var(--sm-indent);
 
   font-weight: 400;
-  font-size: 16px;
+  font-size: var(--sm-text);
   line-height: 1;
   color: var(--base-color);
 }
@@ -89,7 +87,7 @@
   margin: 0;
 
   font-weight: 400;
-  font-size: 14px;
+  font-size: var(--xs-text);
   line-height: 1;
   color: var(--base-color-light);
 }
@@ -116,8 +114,7 @@
   min-height: 45px;
   padding: 10px;
 
-  font-size: 14px;
-  line-height: 16px;
+  font-size: var(--xs-text);
   color: var(--contrast-color);
 
   background-color: var(--accent-color);
@@ -128,7 +125,7 @@
 }
 
 .smallContainer .poster {
-  height: 150px;
+  height: 200px;
 }
 
 .smallContainer .title {
@@ -143,10 +140,6 @@
 @media tablet-viewport {
   .poster {
     height: 350px;
-  }
-
-  .smallContainer .poster {
-    height: 100px;
   }
 
   .ratingBox {

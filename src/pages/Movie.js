@@ -1,13 +1,13 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { server } from 'server/';
-import Preloader from 'components/preloader/';
-import MovieSection from 'components/movieSection/';
 import { changeColorsSchema } from 'utils/';
+
+import MovieSection from 'components/movieSection/';
 import { Section } from 'components/global/section/';
+
 import SimilarMovies from 'containers/SimilarMovies';
 import TrailerModal from 'containers/TrailerModal';
-import { Row, Col } from 'components/global/layout';
 
 const getYoutubePosterSrc = (videoId) => {
   return `http://img.youtube.com/vi/${videoId}/0.jpg`;
@@ -26,7 +26,7 @@ const getTrailersDetails = (responseTrailers) => {
   });
 };
 
-class Movie extends Component {
+class Movie extends PureComponent {
   state = {
     movieData: null,
     trailersData: [],
@@ -62,13 +62,14 @@ class Movie extends Component {
     server.getTrailer(id, 'RU').then((response) => {
       if (response.results) {
         const trailers = getTrailersDetails(response.results);
+
         this.setState({ trailersData: trailers });
       } else {
         server.getTrailer(id, 'EN').then((responseEn) => {
           const trailers = responseEn.results
             ? getTrailersDetails(responseEn.results)
             : null;
-          console.log(trailers);
+
           this.setState({ trailersData: trailers });
         });
       }
@@ -85,7 +86,6 @@ class Movie extends Component {
 
   onTrailerClick = (evt, trailer) => {
     this.setState({ isModalOpen: true, activeTrailer: trailer });
-    console.log(trailer)
   };
 
   render() {
@@ -95,16 +95,22 @@ class Movie extends Component {
         {movieData && (
           <>
             <Section>
-              <MovieSection {...movieData} trailers={trailersData} onTrailerClick={this.onTrailerClick} />
+              <MovieSection
+                {...movieData}
+                trailers={trailersData}
+                onTrailerClick={this.onTrailerClick}
+              />
               {this.props.id && <SimilarMovies movieId={this.props.id} />}
             </Section>
-            <TrailerModal
-              isOpen={this.state.isModalOpen}
-              onClose={this.closeModal}
-              site={this.state.activeTrailer.site}
-              id={this.state.activeTrailer.id}
-              title={movieData.title}
-            />
+            {this.state.isModalOpen > 0 && (
+              <TrailerModal
+                isOpen={this.state.isModalOpen}
+                onClose={this.closeModal}
+                site={this.state.activeTrailer.site}
+                id={this.state.activeTrailer.id}
+                title={movieData.title}
+              />
+            )}
           </>
         )}
       </>
@@ -112,6 +118,8 @@ class Movie extends Component {
   }
 }
 
-Movie.propTypes = {};
+Movie.propTypes = {
+  id: PropTypes.string.isRequired,
+};
 
 export default Movie;

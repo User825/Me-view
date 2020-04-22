@@ -4,7 +4,6 @@ import SearchResults from "./SearchResults";
 import { server } from "server/";
 import { Container } from "components/global/layout";
 
-
 const START_PAGE_NUMBER = 1;
 
 class SearchPanel extends Component {
@@ -106,6 +105,7 @@ class SearchPanel extends Component {
       this.setPageCounter();
     }
   };
+  
   render() {
     return (
       <Container tagName="section" fluid>

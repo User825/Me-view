@@ -9,7 +9,7 @@
 
   min-height: 45px;
   padding: 10px 20px;
-  
+
   font-size: 20px;
   line-height: 24px;
   color: var(--base-color);
@@ -20,21 +20,16 @@
   border: 0;
   border-radius: 4px;
 
-  transition: 
-    background-color var(--transition-props),
-    color var(--transition-props),
-    box-shadow var(--transition-props),
-    fill var(--transition-props),
-    opacity var(--transition-props);
+  transition: background-color var(--transition-props),
+    color var(--transition-props), box-shadow var(--transition-props),
+    fill var(--transition-props), opacity var(--transition-props);
 }
-
-
 
 .primary {
   composes: button;
-  
+
   color: var(--contrast-color);
-  
+
   background-color: var(--accent-color);
   box-shadow: 0px 0px 15px var(--accent-color-dark);
 
@@ -122,18 +117,17 @@
   justify-content: center;
 }
 
-
 @media tablet-viewport {
   .button {
     min-height: 40px;
     padding: 10px 10px;
-    
+
     font-size: 18px;
     line-height: 22px;
   }
 }
 
-@media  mobile-viewport {
+@media mobile-viewport {
   .button {
     font-size: 14px;
     line-height: 17px;

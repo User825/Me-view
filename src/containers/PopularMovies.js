@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
+
 import { Section } from "components/global/section/";
 import CardList from "components/cardList";
 import { Card, CardSkeleton } from "components/card/";
-import { Row, Col } from "components/global/layout";
+import { Col } from "components/global/layout";
 import { server } from "server/";
 import InfiniteScroll from "react-infinite-scroller";
 import { Link } from "react-router-dom";
@@ -105,7 +105,7 @@ class PopularMovies extends Component {
         <>
           {this.state.isLoading ? (
             <CardList>
-              <SkeletonResults quantity={12} text="Загрузка" />
+              <SkeletonResults quantity={12} />
             </CardList>
           ) : (
             <>
@@ -118,7 +118,7 @@ class PopularMovies extends Component {
                 <CardList>
                   <MoviesResults movies={this.state.movies} />
                   {this.state.isFetching && (
-                    <SkeletonResults quantity={12} text="Загрузка" />
+                    <SkeletonResults quantity={12} />
                   )}
                 </CardList>
               </InfiniteScroll>

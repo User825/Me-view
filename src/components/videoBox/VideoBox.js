@@ -10,7 +10,13 @@ function VideoBox({ id, site, onReady }) {
   const getVideoPlayer = () => {
     switch (site) {
       case 'YouTube':
-        return <YouTube onReady={onReady} containerClassName={styles.videoBox} videoId={id} />;
+        return (
+          <YouTube
+            onReady={onReady}
+            containerClassName={styles.videoBox}
+            videoId={id}
+          />
+        );
 
       case 'Vimeo':
         return (

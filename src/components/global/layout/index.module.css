@@ -13,7 +13,7 @@
 
 .container {
   display: block;
-  
+
   margin-right: auto;
   margin-left: auto;
 
@@ -378,7 +378,7 @@
   }
 }
 
-@media  mobile-viewport {
+@media mobile-viewport {
   .rowStartSm {
     composes: row;
 

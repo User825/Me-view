@@ -1,10 +1,10 @@
-import React from "react";
+import React from 'react';
 
-import styles from "./footer.module.css";
+import styles from './footer.module.css';
 
-import TMDB from "./TMDB";
+import { TMDB } from 'components/icons';
 
-const TMBD_COLOR = "#081c24";
+const TMBD_COLOR = '#081c24';
 
 function Footer() {
   return (

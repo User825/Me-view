@@ -3,7 +3,9 @@
 }
 
 .container {
-  --swiper-theme-color: var(--accent-color);
+  width: 100%;
+  --swiper-theme-color: var(--base-color);
+  --swiper-navigation-size: calc(var(--lg-indent) * 3);
 }
 
 .withPagination {
@@ -27,4 +29,31 @@
 .indent_lg {
   margin-top: var(--lg-indent);
   margin-bottom: var(--lg-indent);
+}
+
+.nextButton,
+.prevButton {
+  position: absolute;
+  top: 0;
+  z-index: 1;
+
+  width: calc(var(--lg-indent) * 3);
+  height: 100%;
+  margin-top: 0;
+
+  outline: none;
+}
+
+.nextButton::after,
+.prevButton::after {
+  text-shadow: 0px 0px 5px var(--accent-color-dark),
+    0px 0px 15px var(--contrast-color), 0px 0px 3px var(--accent-color-light);
+}
+
+.nextButton {
+  right: 0;
+}
+
+.prevButton {
+  left: 0;
 }

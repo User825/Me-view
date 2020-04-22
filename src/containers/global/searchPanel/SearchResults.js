@@ -1,13 +1,16 @@
 import React from 'react';
-import { Card, CardSkeleton } from 'components/card/';
 import PropTypes from 'prop-types';
 import { createCountFormatter } from 'utils/';
+import { paths } from 'config/';
+
+import { Link } from 'react-router-dom';
+
+import { Card, CardSkeleton } from 'components/card/';
 import CardList from 'components/cardList';
-import { Row, Col } from 'components/global/layout';
+import { Col } from 'components/global/layout';
 import Button from 'components/global/button';
 import { Next } from 'components/icons/';
-import { paths } from 'config/';
-import { Link } from 'react-router-dom';
+
 
 const getDescText = (resultsQuantity) => {
   const searchEndCount = createCountFormatter(resultsQuantity, {
@@ -105,13 +108,13 @@ function SearchResults({
     <>
       {isLoading ? (
         <CardList>
-          <SkeletonResults quantity={12} text="Загрузка" />
+          <SkeletonResults quantity={12} />
         </CardList>
       ) : (
         <>
           <CardList desc={desc} descStyle={descStyle}>
             <MoviesResults movies={movies} onClickHandler={onResultClick} />
-            {isFetching && <SkeletonResults quantity={12} text="Загрузка" />}
+            {isFetching && <SkeletonResults quantity={12} />}
             {hasMore && (
               <Col sm="4" md="3" lg="2" gap="sm" verticalGap="sm" tagName="div">
                 <Card stylesType="light" onlyContainer>

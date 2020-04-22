@@ -6,7 +6,7 @@
   padding: 15px 0;
   width: 100%;
 
-  background-color: var(--base-color-light);
+  background-color: var(--accent-color-dark);
 }
 
 .inner {
@@ -33,7 +33,7 @@
 
 .copyRightLink {
   padding: 0 10px;
-  
+
   color: var(--base-color);
   text-decoration: underline;
 }

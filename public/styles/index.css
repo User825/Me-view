@@ -25,6 +25,13 @@
 
   /* Fonts */
   --base-font: 'Exo 2', 'Helvetica', 'Arial', sans-serif;
+  --lg-text: 36px;
+  --md-text: 28px;
+  --sm-text: 18px;
+  --xs-text: 14px;
+
+  /* Sizes */
+  --header-height: 85px;
 
   /* Background */
   --background-image: url('');
@@ -66,6 +73,7 @@ body {
 
   font-family: var(--base-font);
   font-style: normal;
+  line-height: 1.25;
   color: var(--base-color);
 
   background-color: var(--accent-color-light);
@@ -113,18 +121,27 @@ a {
   background: transparent;
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 1023px) {
   :root {
     --sm-indent: 8px;
     --md-indent: 14px;
     --lg-indent: 18px;
+
+    --lg-text: 32px;
+    --md-text: 22px;
+    --sm-text: 16px;
+    --xs-text: 12px;
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   :root {
     --sm-indent: 6px;
     --md-indent: 8px;
     --lg-indent: 12px;
+
+    --lg-text: 24px;
+    --md-text: 18px;
+    --sm-text: 14px;
   }
 }

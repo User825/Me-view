@@ -1,7 +1,8 @@
-import React from "react";
-import PropTypes from "prop-types";
-import ReactSelect from "react-select";
-import styles from "./select.module.css";
+import React from 'react';
+import PropTypes from 'prop-types';
+import ReactSelect from 'react-select';
+
+import styles from './select.module.css';
 
 function Select({ options, placeholder, onChange }) {
   return (
@@ -9,17 +10,17 @@ function Select({ options, placeholder, onChange }) {
       isMulti
       options={options}
       className={styles.container}
-      classNamePrefix={"selectCustom"}
+      classNamePrefix={'selectCustom'}
       placeholder={placeholder}
       onChange={onChange}
-      theme={theme => ({
+      theme={(theme) => ({
         ...theme,
         borderRadius: 6,
         colors: {
           ...theme.colors,
           primary25: '#B3E5FC',
           primary: '#03A9F4',
-          neutral0: '#F9F9FC'
+          neutral0: '#F9F9FC',
         },
       })}
     />
@@ -27,10 +28,12 @@ function Select({ options, placeholder, onChange }) {
 }
 
 Select.propTypes = {
-  options: PropTypes.arrayOf(PropTypes.shape({
-    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number,]),
-    label: PropTypes.oneOfType([PropTypes.string, PropTypes.number,])
-  }),),
+  options: PropTypes.arrayOf(
+    PropTypes.shape({
+      value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+      label: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    })
+  ),
   placeholder: PropTypes.string,
   onChange: PropTypes.func.isRequired,
 };

@@ -1,18 +1,104 @@
+@value tablet-viewport,  mobile-viewport from "../../../styles/breakpoints.css";
+
 .wrapper {
-  margin-top: calc(var(--md-indent) * 2);
-  margin-bottom: calc(var(--md-indent) * 2);
+  padding-top: calc(var(--md-indent) * 2);
+  padding-bottom: calc(var(--md-indent) * 2);
+}
+
+.oneScreen {
+  height: calc(100vh - var(--header-height));
+  min-height: 565px;
+  max-height: 1400px;
+}
+
+.withAnchor {
+  position: relative;
+
+  padding-bottom: calc(var(--md-indent) * 4);
 }
 
 .container {
+  display: flex;
+  flex-direction: column;
+
+  height: 100%;
+
   background-color: var(--contrast-color);
   border-radius: 6px;
+}
+
+.titleBox {
+  flex: 0 0 auto;
+}
+
+.contentBox {
+  flex: 1 0 auto;
 }
 
 .title {
   margin: 0;
 
-  font-weight: 700;
-  font-size: 24px;
-  line-height: 29px;
+  font-weight: 400;
+  font-size: var(--md-text);
+  line-height: 1.25;
   color: var(--base-color);
+}
+.anchorBtnBox {
+  position: absolute;
+  bottom: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+}
+
+.anchorBtn {
+  composes: slide-in-down-low from '../../../styles/animation.css';
+
+  padding: 10px;
+
+  background-color: transparent;
+  box-shadow: 0;
+  border: 0;
+  border-radius: 0;
+
+  animation-duration: 1.4s;
+  animation-timing-function: ease;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+
+  fill: var(--contrast-color);
+
+  transition: fill var(--transition-props);
+}
+
+.anchorBtn:hover,
+.anchorBtn:focus {
+  fill: var(--accent-color-light);
+}
+
+.anchor {
+  position: absolute;
+  bottom: calc(var(--md-indent) * -1.5);
+}
+
+@media mobile-viewport {
+  .oneScreen {
+    height: auto;
+    min-height: auto;
+  }
+
+  .withAnchor {
+    padding-bottom: calc(var(--md-indent) * 2);
+  }
+
+  .anchorBtn {
+    display: none;
+  }
+
+  .anchor {
+    display: none;
+  }
 }

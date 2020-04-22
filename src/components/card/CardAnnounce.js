@@ -1,6 +1,7 @@
-import React from "react";
-import PropTypes from "prop-types";
-import styles from "./cardAnnounce.module.css";
+import React from 'react';
+import PropTypes from 'prop-types';
+
+import styles from './cardAnnounce.module.css';
 
 const CardAnnounce = ({
   title,
@@ -8,13 +9,16 @@ const CardAnnounce = ({
   urlSrcMobile,
   urlSrcDesktop,
   date,
-  rating
+  rating,
 }) => {
   return (
     <div className={styles.card}>
       <div className={styles.poster}>
         <picture>
-          <source srcSet={urlSrcMobile} media="(max-width: 768px)" />
+          {
+            // * Not @2x small images from API
+            /* <source srcSet={urlSrcMobile} media="(max-width: 768px)" /> */
+          }
           <img
             className={styles.poster}
             src={urlSrcDesktop}
@@ -39,6 +43,13 @@ const CardAnnounce = ({
   );
 };
 
-CardAnnounce.propTypes = {};
+CardAnnounce.propTypes = {
+  title: PropTypes.string,
+  desc: PropTypes.string,
+  urlSrcMobile: PropTypes.string,
+  urlSrcDesktop: PropTypes.string,
+  date: PropTypes.string,
+  rating: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+};
 
 export default CardAnnounce;

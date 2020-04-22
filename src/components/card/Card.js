@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames/bind';
+
 import styles from './card.module.css';
 
 const classNamesModule = classNames.bind(styles);
@@ -15,8 +16,8 @@ function Card({
   stylesType = 'default',
   size = 'default',
   fixedTitleHeight = false,
-  children,
   onlyContainer = false,
+  children,
 }) {
   const cardStyles = classNamesModule({
     default: stylesType === 'default',
@@ -73,11 +74,16 @@ function Card({
 
 Card.propTypes = {
   imgSrc: PropTypes.string,
-  title: PropTypes.string.isRequired,
+  title: PropTypes.string,
   desc: PropTypes.string,
   rating: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   year: PropTypes.string,
-  genre: PropTypes.string,
+  genres: PropTypes.string,
+  styleType: PropTypes.oneOf(['light', 'default']),
+  size: PropTypes.oneOf(['small', 'default']),
+  fixedTitleHeight: PropTypes.bool,
+  onlyContainer: PropTypes.bool,
+  children: PropTypes.node,
 };
 
 export default Card;
