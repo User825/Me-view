@@ -1,0 +1,147 @@
+:root {
+  /* Colors */
+  --base-color: #212121;
+  --base-color-opacity: rgba(33, 33, 33, 0.3);
+  --base-color-light: #757575;
+  --contrast-color: #f9f9fc;
+  --contrast-color-dark: #bdbdbd;
+  --accent-color: #03a9f4;
+  --accent-color-dark: #0288d1;
+  --accent-color-light: #b3e5fc;
+
+  /* Sizes */
+  /*!Breakpoints for media query locate at src/breakpoints.css */
+
+  --mobile-width: 320px;
+  --mobile-m-width: 460px;
+  --tablet-width: 768px;
+  --desktop-width: 1024px;
+  --desktop-m-width: 1440px;
+
+  /* Indents */
+  --sm-indent: 12px;
+  --md-indent: 18px;
+  --lg-indent: 24px;
+
+  /* Fonts */
+  --base-font: 'Exo 2', 'Helvetica', 'Arial', sans-serif;
+  --lg-text: 36px;
+  --md-text: 28px;
+  --sm-text: 18px;
+  --xs-text: 14px;
+
+  /* Sizes */
+  --header-height: 85px;
+
+  /* Background */
+  --background-image: url('');
+  --background-pattern: url('../img/dark_mosaic_@2X.png');
+
+  /* Transition */
+  --transition-duration: 0.2s;
+  --transition-timing-function: ease;
+  --transition-props: var(--transition-duration)
+    var(--transition-timing-function);
+}
+
+/* Main rules */
+html {
+  overflow-x: hidden;
+  margin-right: calc(-1 * (100vw - 100%));
+
+  text-rendering: optimizeLegibility;
+  text-size-adjust: none;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -moz-tap-highlight-color: rgba(0, 0, 0, 0);
+  -ms-tap-highlight-color: rgba(0, 0, 0, 0);
+
+  -webkit-font-smoothing: antialiased;
+  -moz-font-smoothing: antialiased;
+  -ms-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+
+  box-sizing: border-box;
+
+  font-family: var(--base-font);
+  font-style: normal;
+  line-height: 1.25;
+  color: var(--base-color);
+
+  background-color: var(--accent-color-light);
+  background-image: var(--background-image), var(--background-pattern);
+  background-size: cover, auto;
+  background-attachment: fixed;
+  background-repeat: no-repeat, repeat;
+  background-blend-mode: hard-light;
+  background-position: center;
+
+  scroll-behavior: smooth;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+a {
+  text-decoration: none;
+}
+
+.visually-hidden {
+  position: absolute;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  border: 0;
+}
+
+.modal-open {
+  overflow: hidden;
+
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.modal-open::-webkit-scrollbar {
+  width: 0;
+  background: transparent;
+}
+
+@media (max-width: 1023px) {
+  :root {
+    --sm-indent: 8px;
+    --md-indent: 14px;
+    --lg-indent: 18px;
+
+    --lg-text: 32px;
+    --md-text: 22px;
+    --sm-text: 16px;
+    --xs-text: 12px;
+  }
+}
+
+@media (max-width: 767px) {
+  :root {
+    --sm-indent: 6px;
+    --md-indent: 8px;
+    --lg-indent: 12px;
+
+    --lg-text: 24px;
+    --md-text: 18px;
+    --sm-text: 14px;
+  }
+}
