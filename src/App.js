@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { Page, PageContent, PageFooter } from 'components/global/page';
 import MainPage from 'pages/MainPage';
 import Movie from 'pages/Movie';
+import Movie1 from 'pages/Movie_1';
 
 import { paths } from 'config/';
 
@@ -22,11 +23,17 @@ function App() {
                 path={paths.MOVIE}
                 render={(props) => (
                   <Movie
-                    id={props.match.params.id.replace(':id', '')}
+                    id={props.location.pathname.replace(paths.MOVIE, '')}
                     {...props}
                   />
                 )}
               />
+              <Route
+                path={paths.MOVIE_1}
+                component={Movie1}
+              >
+                
+              </Route>
             </Switch>
           </PageContent>
         </Router>

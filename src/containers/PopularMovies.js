@@ -1,13 +1,13 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 
-import { Section } from "components/global/section/";
-import CardList from "components/cardList";
-import { Card, CardSkeleton } from "components/card/";
-import { Col } from "components/global/layout";
-import { server } from "server/";
-import InfiniteScroll from "react-infinite-scroller";
-import { Link } from "react-router-dom";
-import { paths } from "config/";
+import { Section } from 'components/global/section/';
+import CardList from 'components/cardList';
+import { Card, CardSkeleton } from 'components/card/';
+import { Col } from 'components/global/layout';
+import { server } from 'server/';
+import InfiniteScroll from 'react-infinite-scroller';
+import { Link } from 'react-router-dom';
+import { paths } from 'config/';
 
 const START_PAGE = 1;
 
@@ -34,7 +34,7 @@ function SkeletonResults({ quantity, text }) {
 }
 
 function MoviesResults({ movies }) {
-  return movies.map(movie => {
+  return movies.map((movie) => {
     return (
       <Col
         sm="6"
@@ -45,7 +45,15 @@ function MoviesResults({ movies }) {
         tagName="div"
         key={movie.id}
       >
-        <Link to={`${paths.MOVIE}${movie.id}`}>
+        {/* <Link to={`${paths.MOVIE}${movie.id}`} replace> */}
+        <Link
+          to={{
+            pathname: paths.MOVIE_1,
+            search: `?${movie.id}`,
+            state: movie.id
+          }}
+          replace
+        >
           <Card
             imgSrc={movie.imgSrc}
             title={movie.title}
@@ -65,35 +73,35 @@ class PopularMovies extends Component {
     isLoading: true,
     hasMorePage: true,
     totalPages: 0,
-    isFetching: false
+    isFetching: false,
   };
 
   componentDidMount() {
     this.getPopularMovies(START_PAGE);
   }
 
-  getPopularMovies = page => {
-    server.getPopularMovies(page).then(response => {
+  getPopularMovies = (page) => {
+    server.getPopularMovies(page).then((response) => {
       const { movies, totalPages } = response;
       this.setState({
         movies: movies,
         totalPages: totalPages,
-        isLoading: false
+        isLoading: false,
       });
     });
   };
 
-  onLoad = page => {
+  onLoad = (page) => {
     this.setState({ isFetching: true, hasMorePage: false });
 
-    server.getPopularMovies(page).then(response => {
-      this.setState(state => {
+    server.getPopularMovies(page).then((response) => {
+      this.setState((state) => {
         const prevMovies = state.movies;
 
         return {
           movies: prevMovies.concat(response.movies),
           isFetching: false,
-          hasMorePage: page < response.totalPages
+          hasMorePage: page < response.totalPages,
         };
       });
     });
@@ -117,9 +125,7 @@ class PopularMovies extends Component {
               >
                 <CardList>
                   <MoviesResults movies={this.state.movies} />
-                  {this.state.isFetching && (
-                    <SkeletonResults quantity={12} />
-                  )}
+                  {this.state.isFetching && <SkeletonResults quantity={12} />}
                 </CardList>
               </InfiniteScroll>
             </>
