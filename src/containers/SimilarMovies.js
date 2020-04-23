@@ -54,12 +54,6 @@ class SimilarMovies extends Component {
     this.getSimilarMovies();
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    if (this.props.movieId !== prevProps.movieId) {
-      this.getSimilarMovies();
-    }
-  }
-
   getSimilarMovies = () => {
     server
       .getSimilarMovies(this.props.movieId, 'RU')
@@ -81,13 +75,11 @@ class SimilarMovies extends Component {
             <Col lg="12">
               <Carousel params={carouselParams} indent="sm">
                 {movies.map((movie) => (
-                  // <Link to={`${paths.MOVIE}${movie.id}`} key={movie.id} replace>
                   <Link
                     to={{
                       pathname: `${paths.MOVIE_id}:${movie.id}`,
                     }}
                     key={movie.id}
-                    replace
                   >
                     <Card
                       title={movie.title}

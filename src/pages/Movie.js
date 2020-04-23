@@ -66,7 +66,7 @@ class Movie extends PureComponent {
 
   getTrailer = (id) => {
     server.getTrailer(id, 'RU').then((response) => {
-      if (response.results) {
+      if (response.results.length > 0) {
         const trailers = getTrailersDetails(response.results);
 
         this.setState({ trailersData: trailers });

@@ -64,18 +64,11 @@ function MoviesResults({ movies, onClickHandler }) {
         tagName="div"
         key={movie.id}
       >
-        {/* <Link
-          to={`${paths.MOVIE}${movie.id}`}
-          key={movie.id}
-          replace
-          onClick={onClickHandler}
-        > */}
         <Link
           to={{
             pathname: `${paths.MOVIE_id}:${movie.id}`,
           }}
           key={movie.id}
-          replace
           onClick={onClickHandler}
         >
           <Card

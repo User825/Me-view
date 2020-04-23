@@ -1,9 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Modal from 'components/modal';
 import VideoBox from 'components/videoBox/';
+import Preloader from 'components/preloader';
 
 function TrailerModal({ isOpen, onClose, site, id, title }) {
+  const [videoReady, setVideoReady] = useState(false);
+
+  const onVideoReady = () => {
+    setVideoReady(true);
+  };
+
   return (
     <>
       {id && (
@@ -13,7 +20,8 @@ function TrailerModal({ isOpen, onClose, site, id, title }) {
           hasCloseButton={false}
           contentLabel={`Трейлер фильма ${title}`}
         >
-          <VideoBox id={id} site={site} />
+          {!videoReady && <Preloader isAbsolutePosition/>}
+          <VideoBox id={id} site={site} onReady={onVideoReady} />
         </Modal>
       )}
     </>

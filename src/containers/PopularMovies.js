@@ -45,12 +45,10 @@ function MoviesResults({ movies }) {
         tagName="div"
         key={movie.id}
       >
-        {/* <Link to={`${paths.MOVIE}${movie.id}`} replace> */}
         <Link
           to={{
             pathname: `${paths.MOVIE_id}:${movie.id}`,
           }}
-          replace
         >
           <Card
             imgSrc={movie.imgSrc}

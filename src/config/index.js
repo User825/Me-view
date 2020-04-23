@@ -1,3 +1,4 @@
-import paths from './routerPaths'
+import paths from './routerPaths';
+import { constants } from './constants';
 
-export {paths}
+export { paths, constants };

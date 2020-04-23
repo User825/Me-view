@@ -3,6 +3,7 @@ import { server } from 'server/';
 import { paths } from 'config/';
 
 import { Section } from 'components/global/section/';
+import Preloader from 'components/preloader';
 import Carousel from 'components/carousel/';
 import { CardAnnounce } from 'components/card';
 import { Link } from 'react-router-dom';
@@ -32,6 +33,7 @@ class NowPlayedMovies extends Component {
     page: START_PAGE,
     hasMorePage: true,
     totalPages: 0,
+    isLoading: true,
   };
 
   componentDidMount() {
@@ -45,11 +47,19 @@ class NowPlayedMovies extends Component {
   }
 
   getMovies = (page) => {
+    this.setState((state) => {
+      if (!state.isLoading) {
+        return {
+          isLoading: true,
+        };
+      }
+    });
     server.getPlayedMoviesNow(page).then((response) =>
       this.setState({
         movies: response.movies,
         totalPages: response.totalPages,
         hasMorePage: page < response.totalPages,
+        isLoading: false,
       })
     );
   };
@@ -82,27 +92,29 @@ class NowPlayedMovies extends Component {
   render() {
     return (
       <Section title="Сейчас в кино" isOneScreen isAnchor>
-        <Carousel params={carouselParams} onReachEnd={this.onReachEnd}>
-          {this.state.movies.map((movie) => (
-            // <Link to={`${paths.MOVIE}${movie.id}`} key={movie.id}>
+        {this.state.isLoading ? (
+          <Preloader />
+        ) : (
+          <Carousel params={carouselParams} onReachEnd={this.onReachEnd}>
+            {this.state.movies.map((movie) => (
               <Link
                 to={{
                   pathname: `${paths.MOVIE_id}:${movie.id}`,
                 }}
                 key={movie.id}
-                replace
               >
-              <CardAnnounce
-                title={movie.title}
-                desc={movie.desc}
-                urlSrcMobile={movie.urlSrcMobile}
-                urlSrcDesktop={movie.urlSrcDesktop}
-                date={movie.date}
-                rating={movie.rating}
-              />
-            </Link>
-          ))}
-        </Carousel>
+                <CardAnnounce
+                  title={movie.title}
+                  desc={movie.desc}
+                  urlSrcMobile={movie.urlSrcMobile}
+                  urlSrcDesktop={movie.urlSrcDesktop}
+                  date={movie.date}
+                  rating={movie.rating}
+                />
+              </Link>
+            ))}
+          </Carousel>
+        )}
       </Section>
     );
   }

@@ -5,7 +5,7 @@ import Footer from 'components/global/footer';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { Page, PageContent, PageFooter } from 'components/global/page';
 import MainPage from 'pages/MainPage';
-import Page404 from 'pages/Page404'
+import Page404 from 'pages/Page404';
 import Movie from 'pages/Movie';
 
 import { paths } from 'config/';
@@ -28,10 +28,9 @@ function App() {
                   />
                 )}
               />
-            <Route path="*">
-              <Page404 />
-            </Route>
-   
+              <Route path="*">
+                <Page404 />
+              </Route>
             </Switch>
           </PageContent>
         </Router>

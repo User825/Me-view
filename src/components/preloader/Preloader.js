@@ -1,11 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import classNames from 'classnames/bind';
 
 import styles from './preloader.module.css';
 
-function Preloader({ text = 'Загрузка' }) {
+const classNamesModule = classNames.bind(styles);
+function Preloader({ text = 'Загрузка', isAbsolutePosition}) {
+  const wrapperStyles = classNamesModule({
+    wrapper: true,
+    absolute: isAbsolutePosition
+  });
+
   return (
-    <div className={styles.wrapper}>
+    <div className={wrapperStyles}>
       <div className={styles.triangleWrap}>
         <div className={styles.triangleMain}></div>
         <div className={styles.triangleRed}></div>
