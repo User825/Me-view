@@ -5,6 +5,7 @@ import Footer from 'components/global/footer';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { Page, PageContent, PageFooter } from 'components/global/page';
 import MainPage from 'pages/MainPage';
+import Page404 from 'pages/Page404'
 import Movie from 'pages/Movie';
 import Movie1 from 'pages/Movie_1';
 
@@ -29,11 +30,13 @@ function App() {
                 )}
               />
               <Route
-                path={paths.MOVIE_1}
+                path={paths.MOVIE_full}
                 component={Movie1}
-              >
-                
-              </Route>
+              />
+            <Route path="*">
+              <Page404 />
+            </Route>
+   
             </Switch>
           </PageContent>
         </Router>
@@ -46,3 +49,7 @@ function App() {
 }
 
 export default App;
+{/* <Route
+path={`${process.env.PUBLIC_URL}/movie/:id`}
+component={Movie1}
+> */}

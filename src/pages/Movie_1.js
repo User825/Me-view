@@ -11,12 +11,14 @@ import {
   useRouteMatch
 } from "react-router-dom";
 
-function Movie_1(props) {
-  console.log(props.location.state)
+function Movie_1({match}) {
+  const id = match.params.id.replace(':', '');
   return (
-    <Movie id={props.location.state}>
+    <Movie id={id}>
       
     </Movie>
+    // <>
+    // </>
   )
 }
 

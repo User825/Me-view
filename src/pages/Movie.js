@@ -89,7 +89,6 @@ class Movie extends PureComponent {
   };
 
   render() {
-    console.log(this.props)
     const { trailersData, movieData } = this.state;
     return (
       <>

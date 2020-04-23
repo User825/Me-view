@@ -48,9 +48,7 @@ function MoviesResults({ movies }) {
         {/* <Link to={`${paths.MOVIE}${movie.id}`} replace> */}
         <Link
           to={{
-            pathname: paths.MOVIE_1,
-            search: `?${movie.id}`,
-            state: movie.id
+            pathname: `${paths.MOVIE_id}:${movie.id}`,
           }}
           replace
         >

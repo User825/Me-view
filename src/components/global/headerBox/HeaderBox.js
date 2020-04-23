@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import styles from './headerBox.module.css';
 import paths from 'config/routerPaths';
 
-import Logo from './Logo';
+import Typography from 'components/global/typography';
 
 const mainPath = paths.MAIN;
 function HeaderBox({ children }) {
@@ -14,7 +14,16 @@ function HeaderBox({ children }) {
       <div className={styles.inner}>
         <div className={styles.logoBox}>
           <Link to={mainPath}>
-            <Logo />
+            <Typography
+              tagName="h1"
+              weight="bold"
+              size="lg"
+              bottomIndent="lg"
+              isGlitch
+              color="contrast"
+            >
+              Me view
+            </Typography>
           </Link>
         </div>
         <div className={styles.actionsBox}>{children}</div>

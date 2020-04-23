@@ -25,6 +25,7 @@
 
   /* Fonts */
   --base-font: 'Exo 2', 'Helvetica', 'Arial', sans-serif;
+  --xl-text: 64px;
   --lg-text: 36px;
   --md-text: 28px;
   --sm-text: 18px;
@@ -127,6 +128,7 @@ a {
     --md-indent: 14px;
     --lg-indent: 18px;
 
+    --xl-text: 48px;
     --lg-text: 32px;
     --md-text: 22px;
     --sm-text: 16px;
@@ -139,7 +141,8 @@ a {
     --sm-indent: 6px;
     --md-indent: 8px;
     --lg-indent: 12px;
-
+    
+    --xl-text: 36px;
     --lg-text: 24px;
     --md-text: 18px;
     --sm-text: 14px;

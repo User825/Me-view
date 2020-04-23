@@ -44,7 +44,7 @@ function movieSection({
         </div>
       </div>
       <div className={styles.titleBox}>
-        <Typography tagName="h1" weight="bold" size="lg" bottomIndent="lg">
+        <Typography tagName="h2" weight="bold" size="lg" bottomIndent="lg">
           {title}
         </Typography>
       </div>

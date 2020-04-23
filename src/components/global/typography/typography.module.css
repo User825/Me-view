@@ -6,6 +6,10 @@
   line-height: 1.25;
 }
 
+.size_xl {
+  font-size: var(--xl-text);
+}
+
 .size_lg {
   font-size: var(--lg-text);
 }
@@ -56,4 +60,104 @@
 
 .color_accent {
   color: var(--accent-color);
+}
+
+.align__left {
+  text-align: left;
+}
+
+.align__center {
+  text-align: center;
+}
+
+.align__right {
+  text-align: right;
+}
+
+.underline {
+  text-decoration: underline;
+}
+
+.glitch {
+  composes: glitch-first-after from '../../../styles/animation.css';
+  composes: glitch-second-before from '../../../styles/animation.css';
+
+  position: relative;
+}
+
+.glitch::before,
+.glitch::after {
+  content: attr(text);
+
+  position: absolute;
+  top: 0;
+
+  width: 100%;
+  height: 100%;
+
+  overflow: hidden;
+}
+
+.glitch::before {
+  left: -3px;
+  text-shadow: -2px 0 red;
+
+  animation-duration: 8s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-direction: alternate-reverse;
+}
+
+.glitch::after {
+  left: 3px;
+  text-shadow: 2px 0 var(--accent-color);
+
+  animation-duration: 8s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-direction: alternate-reverse;
+}
+
+.glitch_base {
+  composes: glitch;
+}
+
+.glitch_base::before,
+.glitch_base::after {
+  color: var(--base-color);
+
+  background-color: var(--contrast-color);
+}
+
+.glitch_light {
+  composes: glitch;
+}
+
+.glitch_light::before,
+.glitch_light::after {
+  color: var(--base-color-light);
+
+  background-color: var(--contrast-color);
+}
+
+.glitch_contrast {
+  composes: glitch;
+}
+
+.glitch_contrast::before,
+.glitch_contrast::after {
+  color: var(--contrast-color);
+
+  background-color: var(--base-color);
+}
+
+.glitch_accent {
+  composes: glitch;
+}
+
+.glitch_accent::before,
+.glitch_accent::after {
+  color: var(--accent-color);
+
+  /* background-color: var(--contrast-color); */
 }
