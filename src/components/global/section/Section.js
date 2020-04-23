@@ -6,6 +6,7 @@ import scrollIntoView from 'smooth-scroll-into-view-if-needed';
 import styles from './section.module.css';
 
 import { Wrapper, Container, Row } from 'components/global/layout/';
+import Typography from 'components/global/typography';
 import { Down } from 'components/icons';
 
 const classNamesModule = classNames.bind(styles);
@@ -48,8 +49,8 @@ function Section({
         fluid
       >
         {title && !isHiddenTitle && (
-          <Row gap="sm" verticalGap="sm" className={styles.titleBox}>
-            <h2 className={titleStyles}>{title}</h2>
+          <Row gap="sm" className={styles.titleBox}>
+            <Typography tagName='h2' size="md" bottomIndent="sm">{title}</Typography>
           </Row>
         )}
         {title && isHiddenTitle && <h2 className={titleStyles}>{title}</h2>}

@@ -18,7 +18,6 @@ function HeaderBox({ children }) {
               tagName="h1"
               weight="bold"
               size="lg"
-              bottomIndent="lg"
               isGlitch
               color="contrast"
             >

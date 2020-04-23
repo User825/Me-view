@@ -7,7 +7,6 @@ import { Page, PageContent, PageFooter } from 'components/global/page';
 import MainPage from 'pages/MainPage';
 import Page404 from 'pages/Page404'
 import Movie from 'pages/Movie';
-import Movie1 from 'pages/Movie_1';
 
 import { paths } from 'config/';
 
@@ -20,18 +19,14 @@ function App() {
           <PageContent>
             <Switch>
               <Route exact path={paths.MAIN} component={MainPage} />
-              {/* <Route
+              <Route
                 path={paths.MOVIE}
                 render={(props) => (
                   <Movie
-                    id={props.location.pathname.replace(paths.MOVIE, '')}
+                    id={props.match.params.id.replace(':', '')}
                     {...props}
                   />
                 )}
-              /> */}
-              <Route
-                path={paths.MOVIE_full}
-                component={Movie1}
               />
             <Route path="*">
               <Page404 />
@@ -49,7 +44,3 @@ function App() {
 }
 
 export default App;
-{/* <Route
-path={`${process.env.PUBLIC_URL}/movie/:id`}
-component={Movie1}
-> */}
