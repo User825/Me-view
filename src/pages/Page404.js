@@ -8,6 +8,8 @@ import Typography from 'components/global/typography';
 const mainPath = paths.MAIN;
 
 function Page404(props) {
+  document.title = 'Me view 404';
+  
   return (
     <Wrapper verticalGap="lg">
       <Container fluid verticalGap="lg">

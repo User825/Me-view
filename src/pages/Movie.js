@@ -5,6 +5,7 @@ import { changeColorsSchema } from 'utils/';
 
 import MovieSection from 'components/movieSection/';
 import { Section } from 'components/global/section/';
+import Preloader from 'components/preloader';
 
 import SimilarMovies from 'containers/SimilarMovies';
 import TrailerModal from 'containers/TrailerModal';
@@ -32,9 +33,10 @@ class Movie extends PureComponent {
     trailersData: [],
     isModalOpen: false,
     activeTrailer: {},
+    isLoading: true,
   };
 
-  componentDidMount() {
+  componentDidMount() {  
     this.getMovie(this.props.id);
     this.getTrailer(this.props.id);
     this.getBackdrop(this.props.id);
@@ -49,9 +51,13 @@ class Movie extends PureComponent {
   }
 
   getMovie = (id) => {
+    this.setState({isLoading: true})
     server
       .getMovie(id)
-      .then((response) => this.setState({ movieData: response }));
+      .then((response) => {
+        document.title = `${response.title}`;
+        this.setState({ movieData: response, isLoading: false });
+      })
   };
 
   getBackdrop = (id) => {
@@ -89,10 +95,14 @@ class Movie extends PureComponent {
   };
 
   render() {
-    const { trailersData, movieData } = this.state;
+    const { trailersData, movieData, isLoading } = this.state;
     return (
       <>
-        {movieData && (
+        {isLoading ? (
+          <Preloader />
+        )
+        :
+        (
           <>
             <Section>
               <MovieSection

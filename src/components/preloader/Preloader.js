@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import styles from './preloader.module.css';
 
-function Preloader({ text = 'Идёт загрузка' }) {
+function Preloader({ text = 'Загрузка' }) {
   return (
     <div className={styles.wrapper}>
       <div className={styles.triangleWrap}>

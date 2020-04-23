@@ -75,6 +75,9 @@
 .triangleText {
   composes: text-transform from '../../styles/animation.css';
 
+  display: block;
+  min-width: 100%;
+
   color: var(--contrast-color);
   position: absolute;
   top: 50%;

@@ -13,7 +13,7 @@
 }
 
 .disabledButton {
-  display: none;
+  display: none !important;
 }
 
 .indent_sm {
@@ -34,12 +34,12 @@
 .nextButton,
 .prevButton {
   position: absolute;
-  top: 0;
-  z-index: 1;
+  top: 0 !important;
+  z-index: 1 !important;
 
-  width: calc(var(--lg-indent) * 3);
-  height: 100%;
-  margin-top: 0;
+  width: calc(var(--lg-indent) * 3) !important;
+  height: 100% !important;
+  margin-top: 0 !important;
 
   outline: none;
 }
@@ -51,9 +51,9 @@
 }
 
 .nextButton {
-  right: 0;
+  right: 0 !important;
 }
 
 .prevButton {
-  left: 0;
+  left: 0 !important;
 }

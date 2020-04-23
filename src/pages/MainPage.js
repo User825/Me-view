@@ -6,6 +6,7 @@ import NowPlayedMovies from 'containers/NowPlayedMovies';
 class MainPage extends PureComponent {
   componentDidMount() {
     changeColorsSchema('');
+    document.title = 'Me view';
   }
 
   render() {

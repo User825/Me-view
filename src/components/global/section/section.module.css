@@ -77,15 +77,23 @@
 .anchorBtn:hover,
 .anchorBtn:focus {
   outline: none;
+
   fill: var(--accent-color-light);
 }
 
 .anchor {
   position: absolute;
   bottom: calc(var(--md-indent) * -1.5);
+  
+  outline: none;
 }
 
 @media mobile-viewport {
+  .wrapper {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
   .oneScreen {
     height: auto;
     min-height: auto;
