@@ -1,12 +1,11 @@
-import React, { Component } from "react";
-import { server } from "server/";
-import { paths } from "config/";
+import React, { Component } from 'react';
+import { server } from 'server/';
+import { paths } from 'config/';
 
-import { Section } from "components/global/section/";
-import Carousel from "components/carousel/";
-import { CardAnnounce } from "components/card";
-import { Link } from "react-router-dom";
-
+import { Section } from 'components/global/section/';
+import Carousel from 'components/carousel/';
+import { CardAnnounce } from 'components/card';
+import { Link } from 'react-router-dom';
 
 const START_PAGE = 1;
 
@@ -16,15 +15,15 @@ const carouselParams = {
   centeredSlides: true,
   setWrapperSize: true,
   speed: 400,
-  effect: "slide",
+  effect: 'slide',
   centeredSlidesBounds: true,
   centerInsufficientSlides: true,
   watchOverflow: true,
   simulateTouch: false,
   keyboard: {
     enabled: true,
-    onlyInViewport: true
-  }
+    onlyInViewport: true,
+  },
 };
 
 class NowPlayedMovies extends Component {
@@ -32,7 +31,7 @@ class NowPlayedMovies extends Component {
     movies: [],
     page: START_PAGE,
     hasMorePage: true,
-    totalPages: 0
+    totalPages: 0,
   };
 
   componentDidMount() {
@@ -45,24 +44,24 @@ class NowPlayedMovies extends Component {
     }
   }
 
-  getMovies = page => {
-    server.getPlayedMoviesNow(page).then(response =>
+  getMovies = (page) => {
+    server.getPlayedMoviesNow(page).then((response) =>
       this.setState({
         movies: response.movies,
         totalPages: response.totalPages,
-        hasMorePage: page < response.totalPages
+        hasMorePage: page < response.totalPages,
       })
     );
   };
 
-  addNewMovies = page => {
-    server.getPlayedMoviesNow(page).then(response =>
-      this.setState(state => {
+  addNewMovies = (page) => {
+    server.getPlayedMoviesNow(page).then((response) =>
+      this.setState((state) => {
         const prevMovies = state.movies;
 
         return {
           movies: prevMovies.concat(response.movies),
-          hasMorePage: page < response.totalPages
+          hasMorePage: page < response.totalPages,
         };
       })
     );
@@ -70,11 +69,11 @@ class NowPlayedMovies extends Component {
 
   onReachEnd = () => {
     if (this.state.hasMorePage) {
-      this.setState(state => {
+      this.setState((state) => {
         const prevPage = state.page;
 
         return {
-          page: prevPage + 1 < state.totalPages ? prevPage + 1 : prevPage
+          page: prevPage + 1 < state.totalPages ? prevPage + 1 : prevPage,
         };
       });
     }
@@ -84,8 +83,15 @@ class NowPlayedMovies extends Component {
     return (
       <Section title="Сейчас в кино" isOneScreen isAnchor>
         <Carousel params={carouselParams} onReachEnd={this.onReachEnd}>
-          {this.state.movies.map(movie => (
-            <Link to={`${paths.MOVIE}${movie.id}`} key={movie.id}>
+          {this.state.movies.map((movie) => (
+            // <Link to={`${paths.MOVIE}${movie.id}`} key={movie.id}>
+              <Link
+                to={{
+                  pathname: `${paths.MOVIE_id}:${movie.id}`,
+                }}
+                key={movie.id}
+                replace
+              >
               <CardAnnounce
                 title={movie.title}
                 desc={movie.desc}

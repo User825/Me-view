@@ -15,12 +15,12 @@ function App() {
   return (
     <div>
       <Page>
-        <Router>
+        <Router basename={process.env.PUBLIC_URL}>
           <Header />
           <PageContent>
             <Switch>
               <Route exact path={paths.MAIN} component={MainPage} />
-              <Route
+              {/* <Route
                 path={paths.MOVIE}
                 render={(props) => (
                   <Movie
@@ -28,7 +28,7 @@ function App() {
                     {...props}
                   />
                 )}
-              />
+              /> */}
               <Route
                 path={paths.MOVIE_full}
                 component={Movie1}

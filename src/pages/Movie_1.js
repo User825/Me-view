@@ -12,6 +12,7 @@ import {
 } from "react-router-dom";
 
 function Movie_1({match}) {
+  console.log(match.params.id)
   const id = match.params.id.replace(':', '');
   return (
     <Movie id={id}>

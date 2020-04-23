@@ -2,7 +2,7 @@
   "name": "me-view",
   "version": "0.1.2",
   "private": true,
-  "homepage": "https://user825.github.io/Me-view/",
+  "homepage": "https://user825.github.io/Me-view",
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",

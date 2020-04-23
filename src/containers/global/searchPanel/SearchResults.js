@@ -11,7 +11,6 @@ import { Col } from 'components/global/layout';
 import Button from 'components/global/button';
 import { Next } from 'components/icons/';
 
-
 const getDescText = (resultsQuantity) => {
   const searchEndCount = createCountFormatter(resultsQuantity, {
     one: '',
@@ -65,8 +64,16 @@ function MoviesResults({ movies, onClickHandler }) {
         tagName="div"
         key={movie.id}
       >
-        <Link
+        {/* <Link
           to={`${paths.MOVIE}${movie.id}`}
+          key={movie.id}
+          replace
+          onClick={onClickHandler}
+        > */}
+        <Link
+          to={{
+            pathname: `${paths.MOVIE_id}:${movie.id}`,
+          }}
           key={movie.id}
           replace
           onClick={onClickHandler}
