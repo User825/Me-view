@@ -62,7 +62,7 @@ function Trailers({ trailersList, movieTitle, onTrailerClick }) {
             <AccordionItemHeading>
               <AccordionItemButton>
                 <button type="button" className={accordionButtonStyles}>
-                  Все трейлеры
+                  <span>Все трейлеры</span>
                   <Down />
                 </button>
               </AccordionItemButton>
