@@ -2,22 +2,29 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames/bind';
 
+import Typography from 'components/global/typography';
+
 import styles from './preloader.module.css';
 
 const classNamesModule = classNames.bind(styles);
-function Preloader({ text = 'Загрузка', isAbsolutePosition}) {
+function Preloader({ text = 'Загрузка', isAbsolutePosition }) {
   const wrapperStyles = classNamesModule({
     wrapper: true,
-    absolute: isAbsolutePosition
+    absolute: isAbsolutePosition,
   });
 
   return (
     <div className={wrapperStyles}>
-      <div className={styles.triangleWrap}>
-        <div className={styles.triangleMain}></div>
-        <div className={styles.triangleRed}></div>
-        <div className={styles.triangleBlue}></div>
-        <div className={styles.triangleText}>{text}</div>
+      <div className={styles.text}>
+        <Typography
+          tagName="span"
+          weight="bold"
+          size="lg"
+          isGlitch
+          color="contrast"
+        >
+          {text}
+        </Typography>
       </div>
     </div>
   );

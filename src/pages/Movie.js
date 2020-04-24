@@ -36,7 +36,7 @@ class Movie extends PureComponent {
     isLoading: true,
   };
 
-  componentDidMount() {  
+  componentDidMount() {
     this.getMovie(this.props.id);
     this.getTrailer(this.props.id);
     this.getBackdrop(this.props.id);
@@ -50,14 +50,16 @@ class Movie extends PureComponent {
     }
   }
 
+  componentWillUnmount() {
+    changeColorsSchema();
+  }
+
   getMovie = (id) => {
-    this.setState({isLoading: true})
-    server
-      .getMovie(id)
-      .then((response) => {
-        document.title = `${response.title}`;
-        this.setState({ movieData: response, isLoading: false });
-      })
+    this.setState({ isLoading: true });
+    server.getMovie(id).then((response) => {
+      document.title = `${response.title}`;
+      this.setState({ movieData: response, isLoading: false });
+    });
   };
 
   getBackdrop = (id) => {
@@ -68,15 +70,22 @@ class Movie extends PureComponent {
     server.getTrailer(id, 'RU').then((response) => {
       if (response.results.length > 0) {
         const trailers = getTrailersDetails(response.results);
+        
+        server.getTrailer(id, 'EN').then((responseEn) => {
+          const trailersEng = responseEn.results
+            ? getTrailersDetails(responseEn.results)
+            : null;
+          const allTrailers = trailers.concat(trailersEng);
 
-        this.setState({ trailersData: trailers });
+          this.setState({ trailersData: allTrailers });
+        });
       } else {
         server.getTrailer(id, 'EN').then((responseEn) => {
-          const trailers = responseEn.results
+          const trailersEng = responseEn.results
             ? getTrailersDetails(responseEn.results)
             : null;
 
-          this.setState({ trailersData: trailers });
+          this.setState({ trailersData: trailersEng });
         });
       }
     });
@@ -99,10 +108,8 @@ class Movie extends PureComponent {
     return (
       <>
         {isLoading ? (
-          <Preloader />
-        )
-        :
-        (
+          <Preloader isAbsolutePosition />
+        ) : (
           <>
             <Section>
               <MovieSection

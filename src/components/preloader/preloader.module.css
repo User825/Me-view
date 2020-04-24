@@ -2,8 +2,11 @@
   composes: body-light from '../../styles/animation.css';
 
   display: flex;
+  justify-content: center;
+  align-items: center;
+
   width: 100%;
-  height: 300px;
+  height: 100%;
 
   background-color: transparent;
 
@@ -20,84 +23,23 @@
   transform: translate(-50%, -50%);
 }
 
-.triangleWrap {
-  margin: auto;
-  position: relative;
-  width: 250px;
-  height: 217px;
-}
-
-.triangle {
-  composes: triangleMove from '../../styles/animation.css';
-
-  margin: auto;
-  border-style: solid;
-  border-width: 0 125px 216.5px 125px;
-  border-color: transparent transparent #f2f2f0 transparent;
-
-  animation-duration: 3s;
-  animation-iteration-count: infinite;
-  transition-timing-function: linear;
-}
-
-.triangle::after {
-  position: absolute;
-  top: 11.5px;
-  left: -114px;
-  display: block;
-  content: "";
-  width: 0;
-  height: 0;
-  border-style: solid;
-  border-width: 0 115px 199.2px 115px;
-  border-color: transparent transparent #090909 transparent;
-}
-
-.triangleMain {
-  composes: triangle;
-
-  position: relative;
-  z-index: 10;
-}
-
-.triangleRed {
-  composes: triangle;
-
-  left: 0;
-  top: 0;
-  position: absolute !important;
-  border-color: transparent transparent red transparent;
-  animation-delay: 0.5s;
-}
-
-.triangleBlue {
-  composes: triangle;
-
-  left: 0;
-  top: 0;
-  position: absolute !important;
-  border-color: transparent transparent blue transparent;
-  animation-delay: 0.3s;
-}
-
-.triangleText {
+.text {
   composes: text-transform from '../../styles/animation.css';
 
   display: block;
-  min-width: 100%;
+  padding: 10px;
+
+  position: relative;
+  z-index: 9999;
 
   color: var(--contrast-color);
-  position: absolute;
-  top: 50%;
-  left: 0;
-  text-align: center;
-  z-index: 9999;
+  text-align: center; 
   text-transform: uppercase;
   font-size: 30px;
   font-weight: 700;
-  padding: 10px;
-  background-color: #090909;
   letter-spacing: 20px;
+  
+  background-color: #090909;  
 
   animation-duration: 10s;
   animation-iteration-count: infinite;
