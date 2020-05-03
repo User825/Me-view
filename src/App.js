@@ -7,9 +7,13 @@ import { Page, PageContent, PageFooter } from 'components/global/page';
 import MainPage from 'pages/MainPage';
 import Page404 from 'pages/Page404';
 import Movie from 'pages/Movie';
-import TVShow from 'pages/TVShow'
+import TVShow from 'pages/TVShow';
+import PageWrapper from 'pages/PageWrapper';
 
 import { paths } from 'config/';
+
+const MoviePage = PageWrapper(Movie);
+const TVShowPage = PageWrapper(TVShow);
 
 function App() {
   return (
@@ -23,7 +27,7 @@ function App() {
               <Route
                 path={paths.MOVIE}
                 render={(props) => (
-                  <Movie
+                  <MoviePage
                     id={props.match.params.id.replace(':', '')}
                     {...props}
                   />
@@ -32,7 +36,7 @@ function App() {
               <Route
                 path={paths.TV_SHOW}
                 render={(props) => (
-                  <TVShow
+                  <TVShowPage
                     id={props.match.params.id.replace(':', '')}
                     {...props}
                   />

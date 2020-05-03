@@ -51,7 +51,7 @@ class Movie extends PureComponent {
 
   getBackdrop = (id) => {
     server.getBackdropMovie(id).then((response) => {
-      changeColorsSchema(response)
+      changeColorsSchema(response);
     });
   };
 
@@ -85,7 +85,6 @@ class Movie extends PureComponent {
 
   SimilarMoviesCarousel = SimilarWrapper({
     WrappedComponent: SmallCardCarousel,
-    id: this.props.id,
   });
 
   render() {
@@ -127,7 +126,11 @@ class Movie extends PureComponent {
                   />
                 )}
               />
-              <SimilarMoviesCarousel title='Похожие фильмы'  linkPrefixPath={paths.MOVIE_id}/>
+              <SimilarMoviesCarousel
+                title="Похожие фильмы"
+                linkPrefixPath={paths.MOVIE_id}
+                id={this.props.id}
+              />
             </Section>
             {this.state.isModalOpen > 0 && (
               <TrailerModal

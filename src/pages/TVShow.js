@@ -95,7 +95,6 @@ class TVShow extends PureComponent {
 
   SimilarShowsCarousel = SimilarWrapper({
     WrappedComponent: SmallCardCarousel,
-    id: this.props.id,
     isShow: true,
   });
 
@@ -144,6 +143,7 @@ class TVShow extends PureComponent {
               <SimilarShowsCarousel
                 title="Похожие сериалы"
                 linkPrefixPath={paths.TV_SHOW_id}
+                id={this.props.id}
               />
             </Section>
             {this.state.isModalOpen > 0 && (

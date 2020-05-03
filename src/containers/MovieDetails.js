@@ -47,7 +47,7 @@ function MovieDetails({ date, genres, productionCountries, children }) {
 }
 
 MovieDetails.propTypes = {
-  date: PropTypes.instanceOf(Date),
+  date: PropTypes.oneOfType([PropTypes.instanceOf(Date), PropTypes.string]),
   genres: PropTypes.string,
   productionCountries: PropTypes.arrayOf(PropTypes.string),
 };

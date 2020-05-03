@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { server } from 'server/';
 
-const Similar = ({ WrappedComponent, id, isShow = false }, ...props) => {
+const Similar = ({ WrappedComponent, isShow = false }, ...props) => {
   const getSimilar = isShow ? server.getSimilarShow : server.getSimilarMovies;
 
   return class SimilarWrapper extends React.Component {
@@ -11,13 +11,20 @@ const Similar = ({ WrappedComponent, id, isShow = false }, ...props) => {
     };
 
     componentDidMount() {
-      getSimilar(id).then((response) =>
+      getSimilar(this.props.id).then((response) =>
         this.setState({ cards: response.similar })
       );
     }
 
     render() {
-      return <WrappedComponent cards={this.state.cards} {...this.props} />;
+
+      return (
+        <>
+          {this.state.cards.length > 0 && (
+            <WrappedComponent cards={this.state.cards} {...this.props} />
+          )}
+        </>
+      );
     }
   };
 };
