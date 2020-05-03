@@ -1,0 +1,13 @@
+.link {
+  color: var(--accent-color-dark);
+  text-decoration: underline;
+}
+
+.link:hover,
+.link:focus {
+  opacity: 0.8;
+}
+
+.link:active {
+  opacity: 0.5;
+}

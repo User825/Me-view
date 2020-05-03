@@ -91,7 +91,7 @@ class NowPlayedMovies extends Component {
 
   render() {
     return (
-      <Section title="Сейчас в кино" isOneScreen isAnchor>
+      <Section title="Сейчас в кино" isOneScreen isAnchor gap="sm" verticalGap="sm">
         {this.state.isLoading ? (
           <Preloader />
         ) : (
@@ -119,7 +119,5 @@ class NowPlayedMovies extends Component {
     );
   }
 }
-
-NowPlayedMovies.propTypes = {};
 
 export default NowPlayedMovies;

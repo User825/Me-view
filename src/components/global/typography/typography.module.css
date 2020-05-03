@@ -62,15 +62,15 @@
   color: var(--accent-color);
 }
 
-.align__left {
+.align_left {
   text-align: left;
 }
 
-.align__center {
+.align_center {
   text-align: center;
 }
 
-.align__right {
+.align_right {
   text-align: right;
 }
 

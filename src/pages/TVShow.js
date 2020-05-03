@@ -1,12 +1,12 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { server } from 'server/';
-import { changeColorsSchema } from 'utils/';
+import { changeColorsSchema, createCountFormatter } from 'utils/';
 import { paths } from 'config/';
 
 import MovieSection from 'components/movieSection/';
 import { Section } from 'components/global/section/';
-import Preloader from 'components/preloader/';
+import Preloader from 'components/preloader';
 import TrailerList from 'containers/TrailerList';
 import SmallCardCarousel from 'containers/SmallCardCarousel';
 import TrailerModal from 'containers/TrailerModal';
@@ -14,9 +14,21 @@ import MovieDetails from 'containers/MovieDetails';
 import MovieDesc from 'containers/MovieDesc';
 import SimilarWrapper from 'containers/SimilarWrapper';
 
-class Movie extends PureComponent {
+const seasonsQuantityText = (number) => {
+  const postfixs = {
+    one: '',
+    two: 'а',
+    few: 'ов',
+  };
+
+  const contPostfix = createCountFormatter(number, postfixs);
+
+  return `${number} сезон${contPostfix}`;
+};
+
+class TVShow extends PureComponent {
   state = {
-    movieData: null,
+    showData: null,
     trailersData: [],
     isModalOpen: false,
     activeTrailer: {},
@@ -24,14 +36,14 @@ class Movie extends PureComponent {
   };
 
   componentDidMount() {
-    this.getMovie(this.props.id);
+    this.getShowDetails(this.props.id);
     this.getTrailer(this.props.id);
     this.getBackdrop(this.props.id);
   }
 
   componentDidUpdate(prevProps, prevState) {
     if (this.props.id !== prevProps.id) {
-      this.getMovie(this.props.id);
+      this.getShowDetails(this.props.id);
       this.getTrailer(this.props.id);
       this.getBackdrop(this.props.id);
     }
@@ -41,25 +53,23 @@ class Movie extends PureComponent {
     changeColorsSchema();
   }
 
-  getMovie = (id) => {
+  getShowDetails = (id) => {
     this.setState({ isLoading: true });
-    server.getMovie(id).then((response) => {
+    server.getShowAllData(id).then((response) => {
       document.title = `${response.title}`;
-      this.setState({ movieData: response, isLoading: false });
+      this.setState({ showData: response, isLoading: false });
     });
   };
 
   getBackdrop = (id) => {
-    server.getBackdropMovie(id).then((response) => {
-      changeColorsSchema(response)
-    });
+    server.getBackdropShow(id).then((response) => changeColorsSchema(response));
   };
 
   getTrailer = (id) => {
-    server.getTrailer(id, 'ru').then((response) => {
+    server.getShowTrailers(id, 'ru').then((response) => {
       const trailersLocale = response ? response : [];
 
-      server.getTrailer(id, 'en').then((responseEn) => {
+      server.getShowTrailers(id, 'en').then((responseEn) => {
         const trailersEng = responseEn ? responseEn : [];
         const allTrailers = trailersLocale.concat(trailersEng);
 
@@ -83,14 +93,16 @@ class Movie extends PureComponent {
     this.setState({ isModalOpen: true, activeTrailer: activeTrailer });
   };
 
-  SimilarMoviesCarousel = SimilarWrapper({
+  SimilarShowsCarousel = SimilarWrapper({
     WrappedComponent: SmallCardCarousel,
     id: this.props.id,
+    isShow: true,
   });
 
   render() {
-    const { trailersData, movieData, isLoading } = this.state;
-    const SimilarMoviesCarousel = this.SimilarMoviesCarousel;
+    const { trailersData, showData, isLoading } = this.state;
+    const SimilarShowsCarousel = this.SimilarShowsCarousel;
+
     return (
       <>
         {isLoading ? (
@@ -99,22 +111,24 @@ class Movie extends PureComponent {
           <>
             <Section gap="sm" verticalGap="sm">
               <MovieSection
-                title={movieData.title}
-                posterSrc={movieData.posterSrc}
-                rating={movieData.rating}
+                title={showData.title}
+                posterSrc={showData.posterSrc}
+                rating={showData.rating}
                 DetailsContent={() => (
                   <MovieDetails
-                    date={movieData.releaseDate}
-                    genres={movieData.genres}
-                    productionCountries={movieData.productionCountries}
-                  />
+                    date={showData.year}
+                    genres={showData.genres}
+                    productionCountries={showData.productionCountries}
+                  >
+                    {seasonsQuantityText(showData.seasonsQuantity)}
+                  </MovieDetails>
                 )}
                 TrailersContent={() => (
                   <>
                     {trailersData && (
                       <TrailerList
                         trailersList={trailersData}
-                        movieTitle={movieData.title}
+                        movieTitle={showData.title}
                         onTrailerClick={this.onTrailerClick}
                       />
                     )}
@@ -122,12 +136,15 @@ class Movie extends PureComponent {
                 )}
                 DescContent={() => (
                   <MovieDesc
-                    desc={movieData.desc}
-                    homepage={movieData.homepage}
+                    desc={showData.desc}
+                    homepage={showData.homepage}
                   />
                 )}
               />
-              <SimilarMoviesCarousel title='Похожие фильмы'  linkPrefixPath={paths.MOVIE_id}/>
+              <SimilarShowsCarousel
+                title="Похожие сериалы"
+                linkPrefixPath={paths.TV_SHOW_id}
+              />
             </Section>
             {this.state.isModalOpen > 0 && (
               <TrailerModal
@@ -135,7 +152,7 @@ class Movie extends PureComponent {
                 onClose={this.closeModal}
                 site={this.state.activeTrailer.site}
                 id={this.state.activeTrailer.id}
-                title={movieData.title}
+                title={showData.title}
               />
             )}
           </>
@@ -145,8 +162,8 @@ class Movie extends PureComponent {
   }
 }
 
-Movie.propTypes = {
+TVShow.propTypes = {
   id: PropTypes.string.isRequired,
 };
 
-export default Movie;
+export default TVShow;

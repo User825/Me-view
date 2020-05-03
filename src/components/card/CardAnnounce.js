@@ -21,7 +21,7 @@ const CardAnnounce = ({
           }
           <img
             className={styles.poster}
-            src={urlSrcDesktop}
+            src={urlSrcDesktop ? urlSrcDesktop : `${process.env.PUBLIC_URL}/img/no-image.jpg`}
             alt={`Постер к фильму ${title}`}
           />
         </picture>

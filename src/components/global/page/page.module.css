@@ -1,3 +1,5 @@
+@value tablet-viewport,  mobile-viewport from "../../../styles/breakpoints.css";
+
 .page {
   position: relative;
 
@@ -15,6 +17,55 @@
   flex: 1 0 auto;
 }
 
+.scrollTop {
+  width: 100px;
+
+  position: fixed;
+  z-index: 25;  
+  bottom: var(--lg-indent);
+  right: var(--lg-indent);
+
+  padding: 20px;
+  margin: 0;
+  
+  border: none;
+  background-color: transparent;
+
+  transform: translateY(30vh);
+
+  transition: opacity var(--transition-props), transform 0.5s ease-in-out;
+
+  cursor: pointer;
+}
+
+.scrollTop svg {
+  width: 100%;
+  height: auto;
+  fill: var(--accent-color-dark);
+
+  transition: fill var(--transition-props);
+}
+
+.scrollTop:hover svg {
+  fill: var(--accent-color-light);
+}
+
+.scrollTop:active {
+  opacity: 0.7;
+}
+
+.scrollTopVisible {
+  composes: scrollTop;
+
+  transform: translateY(0);
+}
+
 .page__footer {
   flex-shrink: 0;
+}
+
+@media mobile-viewport {
+  .scrollTop {
+    width: 80px;
+  }
 }

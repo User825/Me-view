@@ -1,0 +1,108 @@
+.tabs {
+  width: 100%;
+
+  background-color: var(--base-color);
+
+  overflow: hidden;
+}
+
+.tabList {
+  position: relative;
+  z-index: 1;
+
+  display: flex;
+
+  margin: 0;
+  padding: 0;
+
+  list-style: none;
+
+  overflow-x: auto;
+  overflow-y: hidden;
+
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+
+  background-color: var(--base-color);
+}
+
+.tabList::-webkit-scrollbar {
+  width: 0;
+  background: transparent;
+}
+
+.tab {
+  flex: 1 0 auto;
+
+  display: flex;
+  justify-content: center;
+
+  padding: var(--sm-indent);
+
+  cursor: pointer;
+
+  outline: none;
+}
+
+.tab:first-child {
+  margin-left: var(--sm-indent);
+}
+
+.tab:last-child {
+  margin-right: var(--sm-indent);
+}
+
+.tabBox {
+  display: inline-flex;
+  flex-direction: column;
+
+  margin: 0;
+
+  color: var(--contrast-color-dark);
+  font-size: var(--md-text);
+  font-weight: normal;
+  text-align: center;
+
+  transition: color var(--transition-props);
+}
+
+.tabBox::after {
+  content: '';
+
+  width: 100%;
+  height: 3px;
+  margin-top: 3px;
+
+  background-color: transparent;
+
+  transition: background-color var(--transition-props);
+}
+
+.tab:hover:not(.selectedTab) .tabBox {
+  color: var(--contrast-color);
+}
+
+.selectedTab .tabBox {
+  color: var(--contrast-color);
+}
+
+.selectedTab .tabBox::after {
+  background-color: var(--accent-color);
+}
+
+.tabPanel {
+  width: 100%; 
+  margin-top: 2px;
+
+  background-color: var(--contrast-color);
+
+  border-radius: 6px 6px 0 0;
+}
+
+.selectedPanel {
+  /* min-height: 100vh; */
+  composes: fade-in from '../../styles/animation.css';
+  animation-duration: 1s;
+  animation-fill-mode: both;
+}

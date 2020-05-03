@@ -2,6 +2,7 @@ import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames/bind';
 import scrollIntoView from 'smooth-scroll-into-view-if-needed';
+import smoothScrollIntoView from 'smooth-scroll-into-view-if-needed';
 
 import styles from './section.module.css';
 
@@ -9,6 +10,10 @@ import { Wrapper, Container, Row } from 'components/global/layout/';
 import Typography from 'components/global/typography';
 import { Down } from 'components/icons';
 
+const scrollIntoViewSmoothly =
+  'scrollBehavior' in document.documentElement.style
+    ? scrollIntoView
+    : smoothScrollIntoView;
 const classNamesModule = classNames.bind(styles);
 
 function Section({
@@ -16,6 +21,8 @@ function Section({
   isHiddenTitle = false,
   isOneScreen = false,
   isAnchor = false,
+  gap,
+  verticalGap,
   children,
 }) {
   const anchor = useRef(null);
@@ -32,7 +39,7 @@ function Section({
   const onAnchorBtnClick = (evt) => {
     const anchorBlock = anchor.current;
     if (anchorBlock) {
-      scrollIntoView(anchorBlock, {
+      scrollIntoViewSmoothly(anchorBlock, {
         block: 'start',
         inline: 'nearest',
       });
@@ -44,13 +51,15 @@ function Section({
       <Container
         className={styles.container}
         tagName="section"
-        gap="sm"
-        verticalGap="sm"
+        {...(gap ? { gap: gap } : {})}
+        {...(verticalGap ? { verticalGap: verticalGap } : {})}
         fluid
       >
         {title && !isHiddenTitle && (
           <Row gap="sm" className={styles.titleBox}>
-            <Typography tagName='h2' size="md" bottomIndent="sm">{title}</Typography>
+            <Typography tagName="h2" size="md" bottomIndent="sm">
+              {title}
+            </Typography>
           </Row>
         )}
         {title && isHiddenTitle && <h2 className={titleStyles}>{title}</h2>}

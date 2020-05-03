@@ -7,6 +7,7 @@ import { Page, PageContent, PageFooter } from 'components/global/page';
 import MainPage from 'pages/MainPage';
 import Page404 from 'pages/Page404';
 import Movie from 'pages/Movie';
+import TVShow from 'pages/TVShow'
 
 import { paths } from 'config/';
 
@@ -23,6 +24,15 @@ function App() {
                 path={paths.MOVIE}
                 render={(props) => (
                   <Movie
+                    id={props.match.params.id.replace(':', '')}
+                    {...props}
+                  />
+                )}
+              />
+              <Route
+                path={paths.TV_SHOW}
+                render={(props) => (
+                  <TVShow
                     id={props.match.params.id.replace(':', '')}
                     {...props}
                   />

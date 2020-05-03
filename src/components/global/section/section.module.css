@@ -25,6 +25,7 @@
 
   background-color: var(--contrast-color);
   border-radius: 6px;
+  overflow: hidden;  
 }
 
 .titleBox {
@@ -83,7 +84,10 @@
 
 .anchor {
   position: absolute;
-  bottom: calc(var(--md-indent) * -1.5);
+  /* !dev */
+  /* bottom: calc(var(--md-indent) * -1.5);*/
+  /* !dev */
+  bottom: 0;
   
   outline: none;
 }

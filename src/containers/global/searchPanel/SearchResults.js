@@ -73,7 +73,7 @@ function MoviesResults({ movies, onClickHandler }) {
         >
           <Card
             stylesType="light"
-            imgSrc={movie.imgSrc}
+            imgSrc={movie.posterSrc}
             title={movie.title}
             year={movie.year}
             genres={movie.genres}
