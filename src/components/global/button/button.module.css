@@ -89,10 +89,30 @@
   box-shadow: 0px 0px 3px var(--base-color);
 }
 
+.transparent {
+  composes: button;
+
+  color: var(--accent-color-dark);
+  fill: var(--accent-color-dark);
+}
+
+.transparent:hover,
+.transparent:focus {
+
+  color: var(--accent-color-light);
+  fill: var(--accent-color-light);
+}
+
 .button:active {
   opacity: 0.4;
 
   box-shadow: 0;
+}
+
+.autoSize {
+  height: auto;
+  min-height: auto !important;
+  padding: var(--xs-indent) !important;
 }
 
 .icon {
@@ -103,7 +123,6 @@
   align-items: flex-end;
 
   max-width: 40px;
-  margin-right: 5px;
 }
 
 .iconRight {
@@ -112,6 +131,10 @@
   order: 1;
   margin-right: 0px;
   margin-left: 5px;
+}
+
+.text {
+  padding: 0 5px;
 }
 
 .centred {

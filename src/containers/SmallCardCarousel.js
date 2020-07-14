@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Carousel from 'components/carousel/';
-
-import { Card } from 'components/card/';
 import { Link } from 'react-router-dom';
-import { Row, Col } from 'components/global/layout';
-import Typography from 'components/global/typography';
+
+import Carousel from 'components/carousel/';
+import { Card } from 'components/card/';
+import { Section } from 'components/global/section/';
+import { Col } from 'components/global/layout';
 
 const carouselParams = {
   spaceBetween: 10,
@@ -22,60 +22,58 @@ const carouselParams = {
   breakpoints: {
     320: {
       slidesPerView: 3,
-      slidesPerGroup: 1,
+      slidesPerGroup: 3,
     },
     465: {
       slidesPerView: 4,
-      slidesPerGroup: 1,
+      slidesPerGroup: 4,
     },
     768: {
       slidesPerView: 6,
-      slidesPerGroup: 2,
+      slidesPerGroup: 3,
     },
     1024: {
       slidesPerView: 8,
-      slidesPerGroup: 2,
+      slidesPerGroup: 4,
     },
     1440: {
       slidesPerView: 10,
-      slidesPerGroup: 2,
+      slidesPerGroup: 5,
     },
   },
 };
 
-function SmallCardCarousel ({cards, title, linkPrefixPath}) {
+function SmallCardCarousel({ cards, title, onReachEnd, linkPrefixPath }) {
   return (
-    <>
+    <Section isDark title={title}>
       {cards.length > 0 && (
-        <>
-          <Row verticalGap="md">
-            <Typography tagName="h2" size="md">
-              {title}
-            </Typography>
-          </Row>
-          <Col lg="12">
-            <Carousel params={carouselParams} indent="sm">
-              {cards.map((card) => (
-                <Link
-                  to={{
-                    pathname: `${linkPrefixPath}:${card.id}`,
-                  }}
-                  key={card.id}
-                >
-                  <Card
-                    title={card.title}
-                    imgSrc={card.posterSrc}
-                    rating={card.rating}
-                    size="small"
-                    fixedTitleHeight
-                  />
-                </Link>
-              ))}
-            </Carousel>
-          </Col>
-        </>
+        <Col lg="12" gap="lg">
+          <Carousel
+            params={carouselParams}
+            isRoundedStyle={false}
+            onReachEnd={onReachEnd}
+            indent="lg"
+          >
+            {cards.map((card) => (
+              <Link
+                to={{
+                  pathname: `${linkPrefixPath}:${card.id}`,
+                }}
+                key={card.id}
+              >
+                <Card
+                  title={card.title}
+                  imgSrc={card.posterSrc}
+                  rating={card.rating}
+                  size="small"
+                  fixedTitleHeight
+                />
+              </Link>
+            ))}
+          </Carousel>
+        </Col>
       )}
-    </>
+    </Section>
   );
 }
 
@@ -90,6 +88,7 @@ SmallCardCarousel.propTypes = {
   ),
   title: PropTypes.string,
   linkPrefixPath: PropTypes.string,
+  onReachEnd: PropTypes.func,
 };
 
 export default SmallCardCarousel;

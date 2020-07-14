@@ -17,6 +17,7 @@ function Row({
   children,
   gap,
   verticalGap,
+  fullHeight,
   ...props
 }) {
   const rowStyles = classNamesModule({
@@ -49,6 +50,10 @@ function Row({
     rowBottomSm: sm.bottom,
     rowAroundSm: sm.around,
     rowBetweenSm: sm.between,
+    rowColumnSm: sm.column,
+    rowColumnMd: md.column,
+    rowColumnLg: lg.column,
+    fullHeightRow: fullHeight,
     [className]: className,
   });
 

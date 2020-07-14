@@ -19,7 +19,7 @@ function Wrapper({ children, className, gap, verticalGap, }) {
 
 Wrapper.propTypes = {
   className: PropTypes.string, 
-  gap: PropTypes.oneOf(['sm', 'lg', 'md']),
+  gap: PropTypes.oneOf(['sm', 'lg', 'md', 'xl']),
   verticalGap: PropTypes.oneOf(['sm', 'lg', 'md']),
   children: PropTypes.node,
 };

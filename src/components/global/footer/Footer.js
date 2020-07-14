@@ -4,8 +4,6 @@ import styles from './footer.module.css';
 
 import { TMDB } from 'components/icons';
 
-const TMBD_COLOR = '#081c24';
-
 function Footer() {
   return (
     <div className={styles.footer}>
@@ -28,7 +26,7 @@ function Footer() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          <TMDB fill={TMBD_COLOR} />
+          <TMDB />
         </a>
       </div>
     </div>

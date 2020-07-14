@@ -11,10 +11,12 @@
   height: 406px;
 
   background-color: var(--contrast-color);
+  background-image: url("../../assets/noise-bg.png");
+  opacity: 0.9;
 
-  animation-duration: 4s;
+  animation-duration: 0.6s;
   animation-iteration-count: infinite;
-  transition-timing-function: linear;
+  transition-timing-function: ease-in-out;
 }
 
 .card::after,

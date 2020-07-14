@@ -4,6 +4,7 @@
   display: block;
 
   width: 100%;
+  height: 100%;
   max-width: var(--desktop-m-width);
   margin-right: auto;
   margin-left: auto;
@@ -18,12 +19,18 @@
   margin-left: auto;
 
   box-sizing: border-box;
+
+  box-shadow: 0px 0px 12px -4px var(--base-color);
 }
 
 .containerFluid {
   composes: container;
 
   width: 100%;
+}
+
+.containerNoBoxShadow {
+  box-shadow: none;
 }
 
 .row {
@@ -97,8 +104,27 @@
   justify-content: space-between;
 }
 
+.rowColumnLg {
+  flex-direction: column;
+}
+
+.fullHeightRow {
+  height: 100%;
+}
+
 .col {
   flex: 0 0 auto;
+}
+
+.colCenter {
+  align-self: center;
+
+  text-align: center;
+}
+
+.gap_xs {
+  padding-left: var(--xs-indent);
+  padding-right: var(--xs-indent);
 }
 
 .gap_sm {
@@ -114,6 +140,16 @@
 .gap_lg {
   padding-left: var(--lg-indent);
   padding-right: var(--lg-indent);
+}
+
+.gap_xl {
+  padding-left: var(--xl-indent);
+  padding-right: var(--xl-indent);
+}
+
+.verticalGap_xs {
+  padding-top: var(--xs-indent);
+  padding-bottom: var(--xs-indent);
 }
 
 .verticalGap_sm {
@@ -280,6 +316,12 @@
     justify-content: space-between;
   }
 
+  .rowColumnMd{
+    composes: row;
+
+    flex-direction: column;
+  }
+
   .colMd1 {
     -ms-flex-preferred-size: 8.33333333%;
     flex-basis: 8.33333333%;
@@ -428,6 +470,12 @@
     composes: row;
 
     justify-content: space-between;
+  }
+
+  .rowColumnSm{
+    composes: row;
+
+    flex-direction: column;
   }
 
   .colSm1 {

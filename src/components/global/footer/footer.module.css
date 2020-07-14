@@ -3,10 +3,8 @@
 .footer {
   position: relative;
 
-  padding: 15px 0;
   width: 100%;
-
-  background-color: var(--accent-color-dark);
+  padding: var(--lg-indent) 0 var(--xl-indent);
 }
 
 .inner {
@@ -18,8 +16,8 @@
   max-width: var(--desktop-m-width);
   min-width: var(--mobile-width);
   margin: 0 auto;
-  padding-left: var(--lg-indent);
-  padding-right: var(--lg-indent);
+  padding-left: var(--xl-indent);
+  padding-right: var(--xl-indent);
 }
 
 .copyRight {
@@ -29,12 +27,13 @@
   margin: 0;
 
   font-size: 18px;
+  color: var(--changed-contrast-color);
 }
 
 .copyRightLink {
   padding: 0 10px;
 
-  color: var(--base-color);
+  color: var(--changed-contrast-color);
   text-decoration: underline;
 }
 
@@ -43,6 +42,8 @@
   align-items: center;
 
   width: 100px;
+
+  fill: var(--changed-contrast-color);
 }
 
 .poweredBox,

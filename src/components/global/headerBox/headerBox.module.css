@@ -7,8 +7,6 @@
 
   padding: var(--sm-indent) 0;
   width: 100%;
-
-  background-color: var(--base-color);
 }
 
 .inner {
@@ -19,8 +17,8 @@
   width: 100%;
   max-width: var(--desktop-m-width);
   margin: auto;
-  padding-left: var(--lg-indent);
-  padding-right: var(--lg-indent);
+  padding-left: var(--xl-indent);
+  padding-right: var(--xl-indent);
 }
 
 .logoBox {

@@ -8,9 +8,9 @@ import paths from 'config/routerPaths';
 import Typography from 'components/global/typography';
 
 const mainPath = paths.MAIN;
-function HeaderBox({ children }) {
+const HeaderBox =  React.forwardRef(({ children }, ref) => {
   return (
-    <header className={styles.header}>
+    <header ref={ref} className={styles.header}>
       <div className={styles.inner}>
         <div className={styles.logoBox}>
           <Link to={mainPath}>
@@ -19,7 +19,7 @@ function HeaderBox({ children }) {
               weight="bold"
               size="lg"
               isGlitch
-              color="contrast"
+              color="changed-contrast"
             >
               Me view
             </Typography>
@@ -29,7 +29,7 @@ function HeaderBox({ children }) {
       </div>
     </header>
   );
-}
+})
 
 HeaderBox.propTypes = {
   children: PropTypes.node,

@@ -24,6 +24,7 @@ function Section({
   gap,
   verticalGap,
   children,
+  isDark = false
 }) {
   const anchor = useRef(null);
   const titleStyles = classNamesModule({
@@ -34,6 +35,11 @@ function Section({
     wrapper: true,
     oneScreen: isOneScreen,
     withAnchor: isAnchor,
+  });
+  const containerStyles = classNamesModule({
+    container: true,
+    containerDefault: !isDark,
+    containerDark: isDark
   });
 
   const onAnchorBtnClick = (evt) => {
@@ -47,17 +53,17 @@ function Section({
   };
 
   return (
-    <Wrapper className={wrapperStyles} gap="lg">
+    <Wrapper className={wrapperStyles} gap="xl">
       <Container
-        className={styles.container}
+        className={containerStyles}
         tagName="section"
         {...(gap ? { gap: gap } : {})}
         {...(verticalGap ? { verticalGap: verticalGap } : {})}
         fluid
       >
         {title && !isHiddenTitle && (
-          <Row gap="sm" className={styles.titleBox}>
-            <Typography tagName="h2" size="md" bottomIndent="sm">
+          <Row gap="lg" className={styles.titleBox} verticalGap="sm">
+            <Typography tagName="h2" size="md" className={styles.title}>
               {title}
             </Typography>
           </Row>

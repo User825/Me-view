@@ -6,12 +6,13 @@ import styles from "./index.module.css";
 
 const classNamesModule = classNames.bind(styles);
 
-function Container({ tagName = "div", fluid, className, children, gap, verticalGap, ...props }) {
+function Container({ tagName = "div", fluid, className, children, gap, noBoxShadow = false, verticalGap, ...props }) {
   const rowStyles = classNamesModule({
     container: "container",
     [`gap_${gap}`]: gap,
     [`verticalGap_${verticalGap}`]: verticalGap,
     containerFluid: fluid,
+    containerNoBoxShadow: noBoxShadow,
     [className]: className
   });
 
@@ -29,6 +30,7 @@ Container.propTypes = {
   children: PropTypes.node,
   gap: PropTypes.oneOf(['sm', 'lg', 'md']), 
   verticalGap: PropTypes.oneOf(['sm', 'lg', 'md']),
+  noBoxShadow: PropTypes.bool
 };
 
 export default Container;

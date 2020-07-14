@@ -2,12 +2,18 @@ import debounce from './debounce';
 import createCountFormatter from './createCountFormatter';
 import getCountriesLocaleName from './getCountriesLocaleName';
 import changeColorsSchema from './changeColorSchema';
-import setHeaderHeightSize from './setHeaderHeightSize';
+import setElemHeightInCustomProps from './setElemHeightInCustomProps';
+import removeDuplicates from './removeDuplicates';
+import getRandomNumber from './getRandomNumber';
+import preloadImages from './preloadImages'
 
 export {
   debounce,
   createCountFormatter,
   getCountriesLocaleName,
   changeColorsSchema,
-  setHeaderHeightSize,
+  setElemHeightInCustomProps,
+  removeDuplicates,
+  getRandomNumber,
+  preloadImages
 };

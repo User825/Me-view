@@ -1,0 +1,11 @@
+.primary {
+  composes: primary from './button.module.css'
+}
+
+.default {
+  composes: default from './button.module.css'
+}
+
+.invert {
+  composes: invert from './button.module.css'
+}

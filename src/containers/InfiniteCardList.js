@@ -1,11 +1,13 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
+import { removeDuplicates } from 'utils/';
+
+import InfiniteScroll from 'react-infinite-scroller';
+import { Link } from 'react-router-dom';
 
 import CardList from 'components/cardList';
 import { Card, CardSkeleton } from 'components/card/';
 import { Col } from 'components/global/layout';
-import InfiniteScroll from 'react-infinite-scroller';
-import { Link } from 'react-router-dom';
 
 const START_PAGE = 1;
 
@@ -60,8 +62,7 @@ function Cards({ cards, linkPrefixPath }) {
     );
   });
 }
-
-class infiniteCardList extends Component {
+class infiniteCardList extends React.PureComponent {
   state = {
     cards: [],
     isLoading: true,
@@ -75,14 +76,17 @@ class infiniteCardList extends Component {
   }
 
   getCards = (page) => {
-     this.props.fetchCards(page).then((response) => {
-      if(!response) return;
-      
+    this.props.fetchCards(page).then((response) => {
+      if (!response) return;
+
       const { cards, totalPages } = response;
       this.setState((state) => {
         const prevCards = state.cards;
+        const allCards = prevCards.concat(cards);
+        const newCards = removeDuplicates(allCards, 'id');
+
         return {
-          cards: prevCards.concat(cards),
+          cards: newCards,
           totalPages: totalPages,
           isLoading: false,
           isFetching: false,
@@ -110,10 +114,15 @@ class infiniteCardList extends Component {
               pageStart={START_PAGE}
               loadMore={this.onLoad}
               hasMore={this.state.hasMorePage}
-              threshold={300}
+              threshold={0}
+              useWindow={false}
+              getScrollParent={() => document.getElementById('page-root')}
             >
               <CardList>
-                <Cards cards={this.state.cards} linkPrefixPath={this.props.linkPrefixPath} />
+                <Cards
+                  cards={this.state.cards}
+                  linkPrefixPath={this.props.linkPrefixPath}
+                />
                 {this.state.isFetching && <SkeletonResults quantity={12} />}
               </CardList>
             </InfiniteScroll>
@@ -126,7 +135,7 @@ class infiniteCardList extends Component {
 
 infiniteCardList.propTypes = {
   fetchCards: PropTypes.func.isRequired,
-  linkPrefixPath: PropTypes.string.isRequired
+  linkPrefixPath: PropTypes.string.isRequired,
 };
 
 export default infiniteCardList;

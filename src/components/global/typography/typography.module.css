@@ -46,6 +46,22 @@
   font-weight: 700;
 }
 
+.inlineChildren * {
+  display: inline;
+}
+
+.interactive-opacity:hover {
+  opacity: 0.7;
+}
+
+.interactive-opacity:focus-visible {
+  opacity: 0.7;
+}
+
+.interactive-opacity:active {
+  opacity: 0.5;
+}
+
 .color_base {
   color: var(--base-color);
 }
@@ -60,6 +76,14 @@
 
 .color_accent {
   color: var(--accent-color);
+}
+
+.color_changed-contrast {
+  color: var(--changed-contrast-color);
+}
+
+.color_inherit {
+  color: inherit;
 }
 
 .align_left {
@@ -125,8 +149,6 @@
 .glitch_base::before,
 .glitch_base::after {
   color: var(--base-color);
-
-  background-color: var(--contrast-color);
 }
 
 .glitch_light {
@@ -136,8 +158,6 @@
 .glitch_light::before,
 .glitch_light::after {
   color: var(--base-color-light);
-
-  background-color: var(--contrast-color);
 }
 
 .glitch_contrast {
@@ -147,8 +167,6 @@
 .glitch_contrast::before,
 .glitch_contrast::after {
   color: var(--contrast-color);
-
-  background-color: var(--base-color);
 }
 
 .glitch_accent {
@@ -158,6 +176,22 @@
 .glitch_accent::before,
 .glitch_accent::after {
   color: var(--accent-color);
+}
 
-  /* background-color: var(--contrast-color); */
+.glitch_changed-contrast {
+  composes: glitch;
+}
+
+.glitch_changed-contrast::before,
+.glitch_changed-contrast::after {
+  color: var(--changed-contrast-color);
+}
+
+.glitch_inherit {
+  composes: glitch;
+}
+
+.glitch_inherit::before,
+.glitch_inherit::after {
+  color: inherit;
 }

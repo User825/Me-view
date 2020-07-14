@@ -1,17 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames/bind';
+import Swiper from 'react-id-swiper';
 
 import styles from './carousel.module.css';
 import 'swiper/css/swiper.css';
-
-import Swiper from 'react-id-swiper';
 
 const classNamesModule = classNames.bind(styles);
 function Carousel({
   params,
   children,
-  isRoundedStyle = true,
+  isRoundedStyle = false,
   isNavigation = true,
   isPagination = false,
   onReachEnd,

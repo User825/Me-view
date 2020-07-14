@@ -1,3 +1,3 @@
-import server from './TmdbService';
+import server from './services';
 
 export { server };

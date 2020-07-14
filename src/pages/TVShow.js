@@ -1,18 +1,22 @@
-import React, { PureComponent } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { server } from 'server/';
 import { changeColorsSchema, createCountFormatter } from 'utils/';
 import { paths } from 'config/';
 
-import MovieSection from 'components/movieSection/';
+import { Link } from 'react-router-dom';
+
+import { ProfileSection, ProfileContentBox } from 'components/profileSection/';
 import { Section } from 'components/global/section/';
-import Preloader from 'components/preloader';
+import Typography from 'components/global/typography';
+import { Row, Col } from 'components/global/layout/';
+import { Card } from 'components/card/';
+
 import TrailerList from 'containers/TrailerList';
-import SmallCardCarousel from 'containers/SmallCardCarousel';
+import CreditsDetails from 'containers/CreditsDetails';
 import TrailerModal from 'containers/TrailerModal';
-import MovieDetails from 'containers/MovieDetails';
-import MovieDesc from 'containers/MovieDesc';
-import SimilarWrapper from 'containers/SimilarWrapper';
+import ProfileDetails from 'containers/ProfileDetails';
+import ProfileDesc from 'containers/ProfileDesc';
+import SimilarCards from 'containers/SimilarCards';
 
 const seasonsQuantityText = (number) => {
   const postfixs = {
@@ -26,144 +30,187 @@ const seasonsQuantityText = (number) => {
   return `${number} сезон${contPostfix}`;
 };
 
-class TVShow extends PureComponent {
-  state = {
-    showData: null,
-    trailersData: [],
-    isModalOpen: false,
-    activeTrailer: {},
-    isLoading: true,
+const TVShow = ({ showData, trailers, backdrop, id, credits }) => {
+  const [hasModalOpen, setModalOpenState] = useState(false);
+  const [activeTrailer, setActiveTrailer] = useState({});
+  const [isTrailerPage, setTrailerPageState] = useState(false);
+  const [isMainPage, setMainPageState] = useState(true);
+  const [isCreditPage, setCreditPageStatus] = useState(false);
+
+  useEffect(() => {
+    changeColorsSchema(backdrop);
+    return () => {
+      changeColorsSchema();
+    };
+  }, [backdrop]);
+
+  useEffect(() => {
+    setMainPageState(!isTrailerPage && !isCreditPage);
+    return () => {
+      setMainPageState(true);
+    };
+  }, [isTrailerPage, isCreditPage]);
+
+  const closeModal = () => {
+    setModalOpenState(false);
   };
 
-  componentDidMount() {
-    this.getShowDetails(this.props.id);
-    this.getTrailer(this.props.id);
-    this.getBackdrop(this.props.id);
-  }
-
-  componentDidUpdate(prevProps, prevState) {
-    if (this.props.id !== prevProps.id) {
-      this.getShowDetails(this.props.id);
-      this.getTrailer(this.props.id);
-      this.getBackdrop(this.props.id);
-    }
-  }
-
-  componentWillUnmount() {
-    changeColorsSchema();
-  }
-
-  getShowDetails = (id) => {
-    this.setState({ isLoading: true });
-    server.getShowAllData(id).then((response) => {
-      document.title = `${response.title}`;
-      this.setState({ showData: response, isLoading: false });
-    });
-  };
-
-  getBackdrop = (id) => {
-    server.getBackdropShow(id).then((response) => changeColorsSchema(response));
-  };
-
-  getTrailer = (id) => {
-    server.getShowTrailers(id, 'ru').then((response) => {
-      const trailersLocale = response ? response : [];
-
-      server.getShowTrailers(id, 'en').then((responseEn) => {
-        const trailersEng = responseEn ? responseEn : [];
-        const allTrailers = trailersLocale.concat(trailersEng);
-
-        this.setState({ trailersData: allTrailers });
-      });
-    });
-  };
-
-  openModal = () => {
-    this.setState({ isModalOpen: true });
-  };
-
-  closeModal = () => {
-    this.setState({ isModalOpen: false });
-  };
-
-  onTrailerClick = (evt, activeTrailerID) => {
-    const activeTrailer = this.state.trailersData.find(
+  const onTrailerClick = (evt, activeTrailerID) => {
+    const activeTrailer = trailers.find(
       (trailer) => trailer.id === activeTrailerID
     );
-    this.setState({ isModalOpen: true, activeTrailer: activeTrailer });
+
+    setActiveTrailer(activeTrailer);
+    setModalOpenState(true);
   };
 
-  SimilarShowsCarousel = SimilarWrapper({
-    WrappedComponent: SmallCardCarousel,
-    isShow: true,
-  });
+  const onMoreCreditsChange = () => {
+    setCreditPageStatus(!isCreditPage);
+  };
 
-  render() {
-    const { trailersData, showData, isLoading } = this.state;
-    const SimilarShowsCarousel = this.SimilarShowsCarousel;
+  const onMoreTrailerClick = () => {
+    setTrailerPageState(!isTrailerPage);
+  };
 
-    return (
-      <>
-        {isLoading ? (
-          <Preloader isAbsolutePosition />
-        ) : (
-          <>
-            <Section gap="sm" verticalGap="sm">
-              <MovieSection
-                title={showData.title}
-                posterSrc={showData.posterSrc}
-                rating={showData.rating}
-                DetailsContent={() => (
-                  <MovieDetails
-                    date={showData.year}
-                    genres={showData.genres}
-                    productionCountries={showData.productionCountries}
-                  >
-                    {seasonsQuantityText(showData.seasonsQuantity)}
-                  </MovieDetails>
-                )}
-                TrailersContent={() => (
-                  <>
-                    {trailersData && (
-                      <TrailerList
-                        trailersList={trailersData}
-                        movieTitle={showData.title}
-                        onTrailerClick={this.onTrailerClick}
-                      />
-                    )}
-                  </>
-                )}
-                DescContent={() => (
-                  <MovieDesc
-                    desc={showData.desc}
-                    homepage={showData.homepage}
-                  />
-                )}
+  return (
+    <>
+      <Section>
+        <ProfileSection
+          title={showData.title}
+          posterSrc={showData.posterSrc}
+          rating={showData.rating}
+        >
+          <ProfileContentBox isVisible={isMainPage} initialVisible>
+            <Typography tagName="h2" weight="bold" size="xl">
+              {showData.title}
+            </Typography>
+            <ProfileDetails
+              date={showData.year}
+              genres={showData.genres}
+              productionCountries={showData.productionCountries}
+            >
+              {seasonsQuantityText(showData.seasonsQuantity)}
+              <CreditsDetails
+                credits={credits}
+                onMoreCreditsChange={onMoreCreditsChange}
               />
-              <SimilarShowsCarousel
-                title="Похожие сериалы"
-                linkPrefixPath={paths.TV_SHOW_id}
-                id={this.props.id}
-              />
-            </Section>
-            {this.state.isModalOpen > 0 && (
-              <TrailerModal
-                isOpen={this.state.isModalOpen}
-                onClose={this.closeModal}
-                site={this.state.activeTrailer.site}
-                id={this.state.activeTrailer.id}
-                title={showData.title}
+            </ProfileDetails>
+            {trailers && (
+              <TrailerList
+                trailersList={trailers}
+                movieTitle={showData.title}
+                onTrailerClick={onTrailerClick}
+                onMoreTrailerClick={onMoreTrailerClick}
               />
             )}
-          </>
-        )}
-      </>
-    );
-  }
-}
+            <ProfileDesc desc={showData.desc} homepage={showData.homepage} />
+          </ProfileContentBox>
+
+          <ProfileContentBox isVisible={isTrailerPage}>
+            <button
+              type="button"
+              className="reset-button"
+              onClick={onMoreTrailerClick}
+            >
+              <Typography size="sm" inlineChildren align="left">
+                <Typography tagName="span" isInteractiveOpacity color="accent">
+                  ← Вернуться к описанию сериала
+                </Typography>
+              </Typography>
+            </button>
+            <TrailerList
+              allTrailers
+              trailersList={trailers}
+              movieTitle={showData.title}
+              onTrailerClick={onTrailerClick}
+              onMoreTrailerClick={onMoreTrailerClick}
+            />
+          </ProfileContentBox>
+          <ProfileContentBox isVisible={isCreditPage}>
+            <button
+              type="button"
+              className="reset-button"
+              onClick={onMoreCreditsChange}
+            >
+              <Typography size="sm" inlineChildren align="left">
+                <Typography tagName="span" isInteractiveOpacity color="accent">
+                  ← Вернуться к описанию сериала
+                </Typography>
+              </Typography>
+            </button>
+            <Row verticalGap="md">
+              {credits.actors.map((actor) => (
+                <Col
+                  sm="6"
+                  md="4"
+                  lg="4"
+                  gap="sm"
+                  verticalGap="sm"
+                  key={actor.id}
+                >
+                  <Link
+                    to={{
+                      pathname: `${paths.PERSON_id}:${actor.id}`,
+                    }}
+                  >
+                    <Card
+                      imgSrc={actor.img}
+                      title={actor.name}
+                      desc={actor.character}
+                      size="small"
+                    />
+                  </Link>
+                </Col>
+              ))}
+            </Row>
+          </ProfileContentBox>
+        </ProfileSection>
+      </Section>
+      <SimilarCards
+        title="Похожие сериалы"
+        linkPrefixPath={paths.TV_SHOW_id}
+        id={id}
+        isShow
+      />
+      {hasModalOpen > 0 && (
+        <TrailerModal
+          isOpen={hasModalOpen}
+          onClose={closeModal}
+          site={activeTrailer.site}
+          id={activeTrailer.id}
+          title={showData.title}
+        />
+      )}
+    </>
+  );
+};
 
 TVShow.propTypes = {
   id: PropTypes.string.isRequired,
+  showData: PropTypes.PropTypes.shape({
+    desc: PropTypes.string,
+    genres: PropTypes.string,
+    homepage: PropTypes.string,
+    id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    posterSrc: PropTypes.string,
+    rating: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    title: PropTypes.string,
+    year: PropTypes.string,
+    seasonsQuantity: PropTypes.number,
+  }),
+  trailers: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string,
+      poster: PropTypes.string,
+      site: PropTypes.oneOf(['YouTube', 'Vimeo']),
+    })
+  ),
+  backdrop: PropTypes.string,
+  credits: PropTypes.shape({
+    actors: PropTypes.array,
+    crew: PropTypes.array,
+    directors: PropTypes.array,
+  }),
 };
 
 export default TVShow;

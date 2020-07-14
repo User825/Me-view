@@ -1,0 +1,91 @@
+.box {
+  position: relative;
+  display: flex;
+  width: max-content;
+
+  border-radius: 100px;
+  overflow: hidden;
+
+  box-shadow: 0px 0px 3px var(--accent-color-light);
+
+  cursor: pointer;
+
+  transition: opacity var(--transition-props);
+}
+
+.box:hover,
+.box:focus {
+  opacity: 0.7;
+}
+
+.input {
+  position: absolute;
+
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+
+  clip: rect(0 0 0 0);
+}
+
+.label {
+  width: max-content;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 27px;
+  padding: 5px var(--sm-indent);
+
+  font-size: var(--xs-text);
+  line-height: inherit;
+
+  transition:
+    color var(--transition-props),
+    background-color var(--transition-props);
+}
+
+
+.primary {
+  composes: label;
+
+  color: var(--contrast-color);
+
+  background-color: var(--accent-color-dark);
+}
+
+.invert {
+  composes: label;
+
+  color: var(--base-color);
+
+  background-color: var(--contrast-color);
+}
+
+.gray {
+  composes: label;
+
+  color: var(--base-color);
+
+  background-color: var(--contrast-color-medium);
+}
+
+.input:checked + .primary {
+  color: var(--base-color);
+
+  background-color: var(--accent-color-light);
+}
+
+.input:checked + .invert {
+  color: var(--contrast-color);
+
+  background-color: var(--background-color);
+}
+
+.input:checked + .gray {
+  color: var(--contrast-color);
+
+  background-color: var(--base-color-light);
+}

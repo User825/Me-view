@@ -1,64 +1,81 @@
-import React, { Component } from 'react';
-import { setHeaderHeightSize } from 'utils/';
+import React, { useState, useEffect, useRef } from 'react';
+import { setElemHeightInCustomProps } from 'utils/';
 
 import HeaderBox from 'components/global/headerBox';
 import Button from 'components/global/button';
-import { Search } from 'components/icons/';
+import { Row } from 'components/global/layout/';
+import { Search, Dice } from 'components/icons/';
 import Modal from 'components/modal';
 
 import SearchPanel from 'containers/global/searchPanel/SearchPanel';
+import ChoosePanel from 'containers/global/choosePanel/ChoosePanel';
 
 const HEADER_HEIGHT_CSS_CUSTOM_PROPS_NAME = '--header-height';
 
-function IconSearch() {
-  return <Search size={20} />;
-}
+const Header = () => {
+  const [isSearchModalOpen, setSearchModalOpenState] = useState(false);
+  const [isChooseModalOpen, setChooseModalOpenState] = useState(false);
+  const header = useRef(null);
 
-class Header extends Component {
-  state = {
-    isSearchModalOpen: false,
-  };
-
-  headerRef = React.createRef(null);
-
-  componentDidMount() {
-    const headerBox = this.headerRef.current;
-
-    setHeaderHeightSize(headerBox, HEADER_HEIGHT_CSS_CUSTOM_PROPS_NAME);
-  }
-
-  openSearchModal = () => {
-    this.setState({ isSearchModalOpen: true });
-  };
-
-  closeSearchModal = () => {
-    this.setState({ isSearchModalOpen: false });
-  };
-
-  render() {
-    return (
-      <div ref={this.headerRef}>
-        <HeaderBox>
-          <Button
-            text="Найти фильм"
-            iconComponent={IconSearch}
-            iconRight={false}
-            styleType="primary"
-            handler={this.openSearchModal}
-          />
-          <Modal
-            isOpen={this.state.isSearchModalOpen}
-            onClose={this.closeSearchModal}
-            position="top"
-            shouldCloseOnOverlayClick={false}
-            contentLabel="search-panel"
-          >
-            <SearchPanel closeModal={this.closeSearchModal} />
-          </Modal>
-        </HeaderBox>
-      </div>
+  useEffect(() => {
+    setElemHeightInCustomProps(
+      header.current,
+      HEADER_HEIGHT_CSS_CUSTOM_PROPS_NAME
     );
-  }
-}
+  }, [header]);
+
+  const openSearchModal = () => {
+    setSearchModalOpenState(true);
+  };
+
+  const closeSearchModal = () => {
+    setSearchModalOpenState(false);
+  };
+
+  const openChooseModal = () => {
+    setChooseModalOpenState(true);
+  };
+
+  const closeChooseModal = () => {
+    setChooseModalOpenState(false);
+  };
+  return (
+    <HeaderBox ref={header}>
+      <Row gap="lg">
+        <Button
+          iconComponent={() => <Dice size={25} />}
+          iconRight={false}
+          styleType="primary"
+          handler={openChooseModal}
+        />
+      </Row>
+      <Button
+        iconComponent={() => <Search size={25} />}
+        iconRight={false}
+        styleType="primary"
+        handler={openSearchModal}
+      />
+      <Modal
+        isOpen={isSearchModalOpen}
+        onClose={closeSearchModal}
+        position="top"
+        shouldCloseOnOverlayClick={false}
+        contentLabel="search-panel"
+      >
+        <SearchPanel closeModal={closeSearchModal} />
+      </Modal>
+      <Modal
+        isOpen={isChooseModalOpen}
+        onClose={closeChooseModal}
+        position="top"
+        shouldCloseOnOverlayClick={false}
+        contentLabel="choose-movie-panel"
+        noScroll
+      >
+        <ChoosePanel closeModal={closeChooseModal} />
+      </Modal>
+    </HeaderBox>
+  );
+};
 
 export default Header;

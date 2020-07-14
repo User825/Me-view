@@ -9,26 +9,16 @@ import { Card, CardSkeleton } from 'components/card/';
 import CardList from 'components/cardList';
 import { Col } from 'components/global/layout';
 import Button from 'components/global/button';
-import { Next } from 'components/icons/';
 
 const getDescText = (resultsQuantity) => {
-  const searchEndCount = createCountFormatter(resultsQuantity, {
-    one: '',
-    two: 'о',
-    few: 'о',
-  });
   const resultsEndCount = createCountFormatter(resultsQuantity, {
     one: '',
     two: 'а',
     few: 'ов',
   });
 
-  return `Найден${searchEndCount} ${resultsQuantity} фильм${resultsEndCount}`;
+  return `${resultsQuantity} результат${resultsEndCount} поиска`;
 };
-
-function NextIcon() {
-  return <Next size={20} />;
-}
 
 function SkeletonResults({ quantity, text }) {
   const skeletonList = [];
@@ -52,8 +42,16 @@ function SkeletonResults({ quantity, text }) {
   });
 }
 
-function MoviesResults({ movies, onClickHandler }) {
-  return movies.map((movie) => {
+function ItemsResults({ items, onClickHandler }) {
+  return items.map((item) => {
+    const itemPath =
+      item.type === 'movie'
+        ? paths.MOVIE_id
+        : item.type === 'tv'
+        ? paths.TV_SHOW_id
+        : item.type === 'person'
+        ? paths.PERSON_id
+        : null;
     return (
       <Col
         sm="6"
@@ -62,22 +60,20 @@ function MoviesResults({ movies, onClickHandler }) {
         gap="sm"
         verticalGap="sm"
         tagName="div"
-        key={movie.id}
+        key={item.id}
       >
         <Link
-          to={{
-            pathname: `${paths.MOVIE_id}:${movie.id}`,
-          }}
-          key={movie.id}
+          to={`${itemPath}:${item.id}`}
+          key={item.id}
           onClick={onClickHandler}
         >
           <Card
             stylesType="light"
-            imgSrc={movie.posterSrc}
-            title={movie.title}
-            year={movie.year}
-            genres={movie.genres}
-            rating={movie.rating}
+            imgSrc={item.posterSrc}
+            title={item.title}
+            year={item.year}
+            genres={item.genres}
+            rating={item.rating}
           />
         </Link>
       </Col>
@@ -87,7 +83,7 @@ function MoviesResults({ movies, onClickHandler }) {
 
 function SearchResults({
   resultsQuantity,
-  movies,
+  items,
   isLoading,
   isFetching,
   hasMore,
@@ -113,18 +109,18 @@ function SearchResults({
       ) : (
         <>
           <CardList desc={desc} descStyle={descStyle}>
-            <MoviesResults movies={movies} onClickHandler={onResultClick} />
+            <ItemsResults items={items} onClickHandler={onResultClick} />
             {isFetching && <SkeletonResults quantity={12} />}
             {hasMore && (
-              <Col sm="4" md="3" lg="2" gap="sm" verticalGap="sm" tagName="div">
-                <Card stylesType="light" onlyContainer>
+              <Col sm="6" md="3" lg="2" gap="sm" verticalGap="sm" tagName="div">
+                <Card stylesType="light" onlyContainer height="386px">
                   <Button
                     text="Загрузить еще"
                     handler={onLoad}
                     iconRight
-                    iconComponent={NextIcon}
                     width="100%"
                     styleType="primary"
+                    centred
                   />
                 </Card>
               </Col>
@@ -138,7 +134,7 @@ function SearchResults({
 
 SearchResults.propTypes = {
   resultsQuantity: PropTypes.number.isRequired,
-  movies: PropTypes.array.isRequired,
+  items: PropTypes.array.isRequired,
   isLoading: PropTypes.bool.isRequired,
   isFetching: PropTypes.bool.isRequired,
   hasMore: PropTypes.bool.isRequired,

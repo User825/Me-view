@@ -8,33 +8,48 @@ import styles from './modal.module.css';
 import ReactModal from 'react-modal';
 
 const classNamesModule = classNames.bind(styles);
-ReactModal.setAppElement('#root');
+ReactModal.setAppElement('#app');
 
 function Modal({
   children,
   isOpen,
   onClose,
+  afterOpen,
   contentLabel,
   shouldCloseOnOverlayClick = true,
   hasCloseButton = true,
   position = 'center',
+  oneScreen = false,
+  noScroll
 }) {
   const modalClassName = classNamesModule({
     modalTop: position === 'top',
     modalCenter: position === 'center',
     modalBottom: position === 'bottom',
+    noScroll: noScroll
   });
+
+  const containerClassName = classNamesModule({
+    container: true,
+    oneScreen: oneScreen,
+    oneScreenTop: position === 'top' && oneScreen,
+  });
+
+  const overlayClassName = classNamesModule({
+    overlay: true,
+    noScrollOverlay: noScroll
+  })
 
   return (
     <ReactModal
       isOpen={isOpen}
-      // onAfterOpen={afterOpenModal}
+      onAfterOpen={afterOpen}
       shouldCloseOnEsc={true}
       onRequestClose={onClose}
       className={modalClassName}
       bodyOpenClassName="modal-open"
       htmlOpenClassName="modal-open"
-      overlayClassName={styles.overlay}
+      overlayClassName={overlayClassName}
       contentLabel={contentLabel}
       shouldCloseOnOverlayClick={shouldCloseOnOverlayClick}
       closeTimeoutMS={300}
@@ -44,7 +59,7 @@ function Modal({
           Close modal
         </button>
       )}
-      <div className={styles.container}>{children}</div>
+      <div className={containerClassName}>{children}</div>
     </ReactModal>
   );
 }
@@ -57,6 +72,8 @@ Modal.propTypes = {
   shouldCloseOnOverlayClick: PropTypes.bool,
   hasCloseButton: PropTypes.bool,
   position: PropTypes.oneOf(['top', 'center', 'bottom']),
+  oneScreen: PropTypes.bool,
+  noScroll: PropTypes.bool
 };
 
 export default Modal;

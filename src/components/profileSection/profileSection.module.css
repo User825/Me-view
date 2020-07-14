@@ -1,0 +1,165 @@
+@value tablet-viewport, mobile-viewport, desktop-s-viewport from "../../styles/breakpoints.css";
+
+.container {
+  display: flex;
+  width: 100%;
+  height: calc(100vh - (var(--md-indent) * 3) - var(--header-height) - var(--footer-height));
+  min-height: 650px;
+  max-height: 1050px;
+
+  overflow: hidden;
+}
+
+.posterBox {
+  position: relative;
+  z-index: 2;
+
+  flex: 0 0 500px;
+  height: 100%;
+}
+
+.poster {
+  position: relative;
+
+  height: 100%;
+}
+
+.poster img {
+  display: block;
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+}
+
+.contentBox {
+  flex: 1 1 auto;
+
+  position: relative;
+
+  display: grid;
+  grid-template-rows: 100%;
+  grid-template-columns: 100%;
+}
+
+.contentContainer {
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
+  min-height: 100%;
+}
+
+.contentBox > *{
+  position: static;
+  
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.contentBox::-webkit-scrollbar {
+  width: 0;
+  transition: width var(--transition-props);
+}
+
+.scrolledBox {
+  display: flex;
+  flex-direction: column;
+
+  padding: var(--lg-indent) var(--xl-indent) var(--lg-indent);
+}
+
+.track {
+  top: 5px;
+  bottom: 5px;
+  right: 5px;
+
+  width: 8px !important;
+  
+  border-radius: 10px;
+}
+
+.thumb {
+  background-color: var(--accent-color-light);
+  border-radius: 10px;
+}
+.rating {
+  composes: rating from '../card/cardAnnounce.module.css';
+
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+@media tablet-viewport {
+  .container {
+    height: 650px;
+  }
+
+  .posterBox {
+    flex-basis: 40%;
+    max-height: 850px;
+  }
+
+  .poster {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .contentBox {
+    flex-basis: 60%;
+    height: auto;
+  }
+}
+
+@media mobile-viewport {
+  .container {
+    display: block;
+    height: 100%;
+    max-height: 100%;
+    min-height: 100%;
+  }
+
+  .posterBox {
+    position: relative;
+    padding-right: 0;
+
+    overflow: hidden;
+  }
+
+  .posterBox::before {
+    content: '';
+
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    display: block;
+    width: 100%;
+    height: 100%;
+
+    background-image: var(--poster-image);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    filter: var(--filter-value);
+
+    transform: scale(1.1);
+  }
+
+  .poster {
+    max-width: 500px;
+    height: auto;
+    margin: 0 auto;
+
+    box-shadow: 0px 0px 8px -4px var(--base-color);
+  }
+
+  .scrolledBox {
+    position: static !important;
+    padding: var(--lg-indent);
+  }
+}

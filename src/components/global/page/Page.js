@@ -1,51 +1,68 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames/bind';
 
 import { TopRound } from 'components/icons/';
+import { Scrollbars } from 'react-custom-scrollbars';
 import styles from './page.module.css';
 
 const classNamesModule = classNames.bind(styles);
-function Page({ children }) {
+
+const Page = ({ children }) => {
   const [isBtnVisible, setBtnVisibleState] = useState(false);
-  const page = document.documentElement;
+  const scrollbar = useRef();
   const buttonStyles = classNamesModule({
-    scrollTop: 'icon',
     scrollTopVisible: isBtnVisible,
+    scrollTopHide: !isBtnVisible,
   });
 
-  const onScrollHandler = () => {
-    const viewportHeight = page.clientHeight;
-    const scrollPosition = page.scrollTop;
-    const pages = 1;
+  const scrollHandler = (evt) => {
+    const pages = 1.5;
+    const pageHeight = evt.target.clientHeight;
+    const pageScroll = evt.target.scrollTop;
 
-    if (scrollPosition > viewportHeight * pages) {
+    if(pageScroll > pageHeight * pages) {
       setBtnVisibleState(true);
     } else {
       setBtnVisibleState(false);
     }
   };
 
-  const onTopButtonClick = () => (page.scrollTop = 0);
-
-  useEffect(() => {
-    window.onscroll = () => onScrollHandler();
-  });
+  const onTopButtonClick = () => {
+    scrollbar.current.view.scroll({
+      top: 0,
+      behavior: 'smooth',
+    })
+  };
 
   return (
-    <div className={styles.page}>
-      <button
-        type="button"
-        className={buttonStyles}
-        onClick={onTopButtonClick}
-        aria-label="Scroll to top"
+    <div className={styles.pageWrapper}>
+      <Scrollbars
+        universal
+        hideTracksWhenNotNeeded
+        ref={scrollbar}
+        onScroll={scrollHandler}
+        renderView={(props) => (
+          <div {...props} id={'page-root'} className={styles.scrolledContent} />
+        )}
+        renderTrackVertical={props => <div {...props} className={styles.track}/>}
+        renderThumbVertical={props => <div {...props} className={styles.thumb}/>}
       >
-        <TopRound isSize={false} />
-      </button>
-      {children}
+        <div className={styles.page}>
+          <button
+            type="button"
+            className={buttonStyles}
+            onClick={onTopButtonClick}
+            aria-label="Scroll to top"
+          >
+            <TopRound isSize={false} />
+          </button>
+          {children}
+        </div>
+      </Scrollbars>
     </div>
   );
-}
+};
 
 Page.propTypes = {
   children: PropTypes.node,

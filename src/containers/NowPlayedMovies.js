@@ -2,11 +2,13 @@ import React, { Component } from 'react';
 import { server } from 'server/';
 import { paths } from 'config/';
 
+import { Link } from 'react-router-dom';
+
 import { Section } from 'components/global/section/';
 import Preloader from 'components/preloader';
 import Carousel from 'components/carousel/';
 import { CardAnnounce } from 'components/card';
-import { Link } from 'react-router-dom';
+
 
 const START_PAGE = 1;
 
@@ -91,27 +93,30 @@ class NowPlayedMovies extends Component {
 
   render() {
     return (
-      <Section title="Сейчас в кино" isOneScreen isAnchor gap="sm" verticalGap="sm">
+      <Section
+        title="Сейчас в кино"
+        isOneScreen
+        isAnchor
+      >
         {this.state.isLoading ? (
           <Preloader />
         ) : (
-          <Carousel params={carouselParams} onReachEnd={this.onReachEnd}>
+          <Carousel params={carouselParams} onReachEnd={this.onReachEnd} isRoundedStyle={false}>
             {this.state.movies.map((movie) => (
-              <Link
-                to={{
-                  pathname: `${paths.MOVIE_id}:${movie.id}`,
-                }}
-                key={movie.id}
-              >
-                <CardAnnounce
-                  title={movie.title}
-                  desc={movie.desc}
-                  urlSrcMobile={movie.urlSrcMobile}
-                  urlSrcDesktop={movie.urlSrcDesktop}
-                  date={movie.date}
-                  rating={movie.rating}
-                />
-              </Link>
+                <Link
+                  to={{
+                    pathname: `${paths.MOVIE_id}:${movie.id}`,
+                  }}
+                  key={movie.id}
+                >
+                  <CardAnnounce
+                    title={movie.title}
+                    desc={movie.desc}
+                    imgSrc={movie.imgSrc}
+                    date={movie.date}
+                    rating={movie.rating}
+                  />
+                </Link>
             ))}
           </Carousel>
         )}

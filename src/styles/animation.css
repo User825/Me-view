@@ -38,6 +38,10 @@
   animation-name: body-light;
 }
 
+.body-light-before::before {
+  animation-name: body-light;
+}
+
 .text-transform {
   animation-name: text-transform;
 }
@@ -68,6 +72,10 @@
 
 .bounce-in-up {
   animation-name: bounce-in-up;
+}
+
+.bounce-out-down {
+  animation-name: bounce-out-down;
 }
 
 @keyframes glitch-first {
@@ -232,11 +240,11 @@
 @keyframes move {
   10% {
     transform: translateX(10px);
-    filter: blur(3px);
+    filter: blur(6px);
   }
   20% {
     transform: translateX(4px);
-    filter: blur(0);
+    filter: blur(1px);
   }
   30% {
     transform: translateX(-5px) skew(0deg);
@@ -244,7 +252,7 @@
   }
   40% {
     transform: translateX(7px);
-    filter: blur(0);
+    filter: blur(2px);
   }
   50% {
     transform: translateX(3px);
@@ -255,7 +263,7 @@
   }
   70% {
     transform: translateX(-2px);
-    filter: blur(0);
+    filter: blur(8px);
   }
   80% {
     transform: translateX(3px);
@@ -370,3 +378,17 @@
     transform: translate3d(0, 0, 0);
   }
 }
+
+@keyframes bounce-out-down {
+  20% {
+  transform: translate3d(0, 10px, 0);
+  }
+  40%, 45% {
+  opacity: 1;
+  transform: translate3d(0, -20px, 0);
+  }
+  100% {
+  opacity: 0;
+  transform: translate3d(0, 2000px, 0);
+  }
+  } 

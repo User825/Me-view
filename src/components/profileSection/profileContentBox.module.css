@@ -1,0 +1,38 @@
+@value mobile-viewport from "../../styles/breakpoints.css";
+
+.contentContainer {
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
+  min-height: 100%;
+}
+
+.scrolledBox {
+  display: flex;
+  flex-direction: column;
+
+  padding: var(--lg-indent) var(--xl-indent) var(--lg-indent);
+}
+
+.track {
+  top: 5px;
+  bottom: 5px;
+  right: 5px;
+
+  width: 8px !important;
+  
+  border-radius: 10px;
+}
+
+.thumb {
+  background-color: var(--accent-color-light);
+  border-radius: 10px;
+}
+
+@media mobile-viewport {
+  .scrolledBox {
+    position: static !important;
+    padding: var(--lg-indent);
+  }
+}

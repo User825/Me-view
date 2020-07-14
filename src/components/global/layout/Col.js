@@ -19,6 +19,7 @@ function Col({
   SmOffset,
   className,
   children,
+  center,
   ...props
 }) {
   const colStyles = classNamesModule({
@@ -31,6 +32,7 @@ function Col({
     [`colLgOffset${lgOffset}`]: lgOffset,
     [`colLgOffset${MdOffset}`]: MdOffset,
     [`colLgOffset${SmOffset}`]: SmOffset,
+    colCenter: center,
     [className]: className,
   });
 
@@ -44,8 +46,8 @@ function Col({
 Col.propTypes = {
   tagName: PropTypes.string,
   auto: PropTypes.bool,
-  gap: PropTypes.oneOf(['sm', 'lg', 'md']),
-  verticalGap: PropTypes.oneOf(['sm', 'lg', 'md']),
+  gap: PropTypes.oneOf(['xs', 'sm', 'lg', 'md']),
+  verticalGap: PropTypes.oneOf(['xs', 'sm', 'lg', 'md']),
   lg: PropTypes.oneOf([
     '1',
     '2',

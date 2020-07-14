@@ -2,13 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames/bind';
 
-import styles from './cardList.module.css';
-
 import { Row, Col } from 'components/global/layout';
+
+import styles from './cardList.module.css';
 
 const classNamesModule = classNames.bind(styles);
 
-function SearchResults({ desc, descStyle = 'base', children }) {
+function CardList({ desc, descStyle = 'base', children }) {
   const descStyles = classNamesModule({
     desc: descStyle === 'base',
     accent: descStyle === 'accent',
@@ -28,10 +28,10 @@ function SearchResults({ desc, descStyle = 'base', children }) {
   );
 }
 
-SearchResults.propTypes = {
+CardList.propTypes = {
   desc: PropTypes.string,
   descStyle: PropTypes.oneOf(['base', 'accent']),
   children: PropTypes.node,
 };
 
-export default SearchResults;
+export default CardList;

@@ -1,0 +1,77 @@
+/* Main rules */
+html {
+  text-rendering: optimizeLegibility;
+  text-size-adjust: none;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+  width: 100%;
+
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -moz-tap-highlight-color: rgba(0, 0, 0, 0);
+  -ms-tap-highlight-color: rgba(0, 0, 0, 0);
+
+  -webkit-font-smoothing: antialiased;
+  -moz-font-smoothing: antialiased;
+  -ms-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  overflow: hidden auto;
+  scrollbar-width: none;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+
+  box-sizing: border-box;
+
+  font-family: var(--base-font);
+  font-style: normal;
+  line-height: 1.25;
+  color: var(--base-color);
+
+  width: 100%;
+  min-height: 100vh;
+
+  scroll-behavior: smooth;
+}
+
+#app {
+  min-height: 100vh;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+a {
+  text-decoration: none;
+}
+
+
+/* Global classes */
+.visually-hidden {
+  position: absolute;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  border: 0;
+}
+
+.reset-button {
+  padding: 0;
+
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+
+  background-color: transparent;
+  border: 0;
+  box-shadow: 0;
+  outline: none;
+}

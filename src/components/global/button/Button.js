@@ -18,6 +18,7 @@ function Button({
   isLink = false,
   linkPath = '#!',
   centred = false,
+  autoSize
 }) {
   const iconStyles = classNamesModule({
     icon: 'icon',
@@ -27,6 +28,7 @@ function Button({
   const buttonStyles = classNamesModule({
     [styleType]: styleType,
     centred: centred,
+    autoSize: autoSize
   });
 
   return (
@@ -55,7 +57,7 @@ function Button({
           {iconComponent && (
             <span className={iconStyles}>{iconComponent()}</span>
           )}
-          <span>{text}</span>
+          {text && <span className={styles.text}>{text}</span>}
         </button>
       )}
     </>
@@ -70,10 +72,11 @@ Button.propTypes = {
   disabled: PropTypes.bool,
   width: PropTypes.string,
   type: PropTypes.oneOf(['button', 'reset', 'submit']),
-  styleType: PropTypes.oneOf(['primary', 'default', 'invert']),
+  styleType: PropTypes.oneOf(['primary', 'default', 'invert', 'transparent']),
   isLink: PropTypes.bool,
   linkPath: PropTypes.string,
   centred: PropTypes.bool,
+  autoSize: PropTypes.bool
 };
 
 export default Button;

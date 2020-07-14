@@ -35,7 +35,7 @@ function VideoBox({ id, site, onReady }) {
 
 VideoBox.propTypes = {
   id: PropTypes.string.isRequired,
-  site: PropTypes.string.isRequired,
+  site:PropTypes.oneOf(['YouTube', 'Vimeo']).isRequired,
   onReady: PropTypes.func,
 };
 

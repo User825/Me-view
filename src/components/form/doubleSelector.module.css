@@ -1,0 +1,58 @@
+.container{
+  display: flex;
+  width: 100%;
+
+  border-radius: 6px;
+  overflow: hidden;
+
+  box-shadow: 0px 0px 15px var(--accent-color-dark);
+}
+
+.label{
+  position: relative;
+
+  flex: 0 0 auto;
+  
+  width: 50%;
+  min-width: 70px;
+  height: 40px;
+
+  cursor: pointer;
+}
+
+.input{
+  position: absolute;
+
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+
+  clip: rect(0 0 0 0);
+}
+
+.labelText{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: max-content;
+  max-width: 250px;
+  min-width: 100%;
+  min-height: 100%;
+  padding: 5px var(--sm-indent);
+
+  font-size: var(--sm-text);
+  line-height: inherit;
+  color: var(--contrast-color);
+
+  background-color: var(--accent-color-dark);
+
+  transition: color var(--transition-props), background-color var(--transition-props);
+}
+
+.input:checked + .labelText {
+  color: var(--base-color);
+
+  background-color: var(--accent-color-light);
+}

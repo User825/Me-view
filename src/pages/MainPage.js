@@ -52,6 +52,7 @@ class MainPage extends React.Component {
       block: 'nearest',
       inline: 'center',
       behavior: 'smooth',
+      boundary: document.getElementById('page-root'),
     });
   };
 
@@ -70,12 +71,14 @@ class MainPage extends React.Component {
             </TabList>
             <TabPanel>
               <InfiniteCardList
+                pageRef = {this.props.pageRef}
                 fetchCards={this.getPopularMovies}
                 linkPrefixPath={paths.MOVIE_id}
               />
             </TabPanel>
             <TabPanel>
               <InfiniteCardList
+                pageRef = {this.props.pageRef}
                 fetchCards={this.getPopularShows}
                 linkPrefixPath={paths.TV_SHOW_id}
               />

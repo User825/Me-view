@@ -15,7 +15,7 @@ const getDateString = (date) => {
   return `Дата выхода: ${localeDate}`;
 };
 
-function MovieDetails({ date, genres, productionCountries, children }) {
+function ProfileDetails({ date, genres, productionCountries, children }) {
   const dateString = getDateString(date);
 
   return (
@@ -38,7 +38,7 @@ function MovieDetails({ date, genres, productionCountries, children }) {
         </Typography>
       )}
       {children && (
-        <Typography size="sm" bottomIndent="sm">
+        <Typography tagName="div" size="sm" bottomIndent="sm">
           {children}
         </Typography>
       )}
@@ -46,10 +46,11 @@ function MovieDetails({ date, genres, productionCountries, children }) {
   );
 }
 
-MovieDetails.propTypes = {
+ProfileDetails.propTypes = {
   date: PropTypes.oneOfType([PropTypes.instanceOf(Date), PropTypes.string]),
   genres: PropTypes.string,
   productionCountries: PropTypes.arrayOf(PropTypes.string),
+  children: PropTypes.node,
 };
 
-export default MovieDetails;
+export default ProfileDetails;

@@ -23,9 +23,24 @@
 
   height: 100%;
 
-  background-color: var(--contrast-color);
   border-radius: 6px;
-  overflow: hidden;  
+  overflow: hidden;
+}
+
+.containerDefault {
+  background-color: var(--contrast-color);
+}
+
+.containerDefault .title {
+  color: var(--base-color);
+}
+
+.containerDark {
+  background-color: var(--base-color);
+}
+
+.containerDark .title {
+  color: var(--contrast-color);
 }
 
 .titleBox {
@@ -36,14 +51,6 @@
   flex: 1 0 auto;
 }
 
-.title {
-  margin: 0;
-
-  font-weight: 400;
-  font-size: var(--md-text);
-  line-height: 1.25;
-  color: var(--base-color);
-}
 .anchorBtnBox {
   position: absolute;
   bottom: 0;
