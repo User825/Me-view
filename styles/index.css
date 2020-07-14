@@ -1,13 +1,16 @@
 :root {
   /* Colors */
   --base-color: #212121;
+  --background-color: #16161a;
   --base-color-opacity: rgba(33, 33, 33, 0.3);
   --base-color-light: #757575;
   --contrast-color: #f9f9fc;
+  --contrast-color-medium: #e4e4e4;
   --contrast-color-dark: #bdbdbd;
   --accent-color: #03a9f4;
   --accent-color-dark: #0288d1;
   --accent-color-light: #b3e5fc;
+  --changed-contrast-color: var(--contrast-color);
 
   /* Sizes */
   /*!Breakpoints for media query locate at src/breakpoints.css */
@@ -22,10 +25,13 @@
   --sm-indent: 12px;
   --md-indent: 18px;
   --lg-indent: 24px;
+  --xl-indent: 48px;
+  --xxl-indent: 96px;
 
   /* Fonts */
   --base-font: 'Exo 2', 'Helvetica', 'Arial', sans-serif;
-  --xl-text: 64px;
+  --xxl-text: 64px;
+  --xl-text: 48px;
   --lg-text: 36px;
   --md-text: 28px;
   --sm-text: 18px;
@@ -36,7 +42,9 @@
 
   /* Background */
   --background-image: url('');
-  --background-pattern: url('../img/dark_mosaic_@2X.png');
+  /* --background-pattern: url('../img/dark_mosaic_@2X.png'); */
+  --background-pattern: url('');
+  --backdrop-filter: none;
 
   /* Transition */
   --transition-duration: 0.2s;
@@ -47,9 +55,6 @@
 
 /* Main rules */
 html {
-  overflow-x: hidden;
-  margin-right: calc(-1 * (100vw - 100%));
-
   text-rendering: optimizeLegibility;
   text-size-adjust: none;
   box-sizing: border-box;
@@ -65,8 +70,9 @@ html {
   -moz-osx-font-smoothing: grayscale;
 }
 
+
+
 body {
-  overflow-x: hidden;
   margin: 0;
   padding: 0;
 
@@ -77,13 +83,8 @@ body {
   line-height: 1.25;
   color: var(--base-color);
 
-  background-color: var(--accent-color-light);
-  background-image: var(--background-image), var(--background-pattern);
-  background-size: cover, auto;
-  background-attachment: fixed;
-  background-repeat: no-repeat, repeat;
-  background-blend-mode: hard-light;
-  background-position: center;
+  width: 100%;
+  min-height: 100vh;
 
   scroll-behavior: smooth;
 }
@@ -121,6 +122,21 @@ a {
   width: 0;
   background: transparent;
 }
+
+
+.reset-button {
+  padding: 0;
+
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+
+  background-color: transparent;
+  border: 0;
+  box-shadow: 0;
+  outline: none;
+}
+
 
 @media (max-width: 1023px) {
   :root {
