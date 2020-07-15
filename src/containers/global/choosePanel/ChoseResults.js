@@ -23,9 +23,9 @@ function ChoseResults({ isLoading, noMatches, result, onResultClick }) {
           {!isLoading && !noMatches && (
             <motion.div
               initial={{ x: '0%', opacity: 0 }}
-              animate={{ x: ['-100%', '50%', '0%'], opacity: 1 }}
+              animate={{ x: ['-100%', '0%'], opacity: 1 }}
               transition={{
-                ease: 'easeInOut',
+                ease: 'backInOut',
                 duration: 0.5,
               }}
             >

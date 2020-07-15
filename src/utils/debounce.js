@@ -1,13 +1,14 @@
 function debounce(cb, timeout) {
-  return function (args) {
-    let previousCall = this.lastCall;
-    this.lastCall = Date.now();
+  let isCooldown = false;
 
-    if (previousCall && ((this.lastCall - previousCall) <= timeout)) {
-      clearTimeout(this.lastCallTimer);
-    }
-    
-    this.lastCallTimer = setTimeout(() => cb(args), timeout);
+  return function (args) {
+    if (isCooldown) return;
+
+    cb.apply(this, arguments);
+
+    isCooldown = true;
+
+    setTimeout(() => isCooldown = false, timeout);
   }
 }
 

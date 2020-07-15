@@ -167,12 +167,17 @@
   }
 
   .bigPoster {
-    height: 400px;
+    height: auto;
+    max-height: 405px;
   }
 
   .ratingBox {
     min-width: 20px;
     min-height: 25px;
+  }
+
+  .bigCard {
+    max-width: 270px;
   }
 }
 
@@ -180,9 +185,10 @@
   .poster {
     height: 250px;
   }
-  
+
   .bigPoster {
-    height: 350px;
+    height: auto;
+    max-height: 405px;
   }
 
   .smallContainer .poster {

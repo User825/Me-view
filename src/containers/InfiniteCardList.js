@@ -114,9 +114,7 @@ class infiniteCardList extends React.PureComponent {
               pageStart={START_PAGE}
               loadMore={this.onLoad}
               hasMore={this.state.hasMorePage}
-              threshold={0}
-              useWindow={false}
-              getScrollParent={() => document.getElementById('page-root')}
+              threshold={300}
             >
               <CardList>
                 <Cards

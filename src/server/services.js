@@ -12,7 +12,7 @@ import {
   langURL,
   regionURL,
 } from './paths';
-import { getRandomNumber, preloadImages } from 'utils/';
+import { getRandomNumber, preloadImages, removeDuplicates } from 'utils/';
 
 const fetchDB = async (url, errorMessage, controller) => {
   const options = controller ? { signal: controller.signal } : {};
@@ -568,8 +568,8 @@ const getCredits = async (id, lang = 'ru', isShow = false) => {
     });
 
     return {
-      crew,
-      actors,
+      crew: removeDuplicates(crew, 'id'),
+      actors: removeDuplicates(actors, 'id'),
     };
   });
 

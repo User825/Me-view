@@ -1,15 +1,12 @@
-import React, { useEffect, useRef } from 'react'
-import PropTypes from 'prop-types'
+import React, { useEffect, useRef } from 'react';
+import PropTypes from 'prop-types';
 
-import { Scrollbars } from 'react-custom-scrollbars';
-import { motion, useMotionValue } from 'framer-motion';
+import { motion } from 'framer-motion';
 
-import styles from './profileContentBox.module.css'
+import styles from './profileContentBox.module.css';
 
 const ProfileContentBox = ({ children, isVisible, initialVisible = false }) => {
-  const scrollbar = useRef();
-  const displayStyles = useMotionValue('block');
-
+  const container = useRef();
   const animation = {
     hidden: {
       x: '-100%',
@@ -25,9 +22,12 @@ const ProfileContentBox = ({ children, isVisible, initialVisible = false }) => {
 
   useEffect(() => {
     if (isVisible) {
-      scrollbar.current.scrollToTop();
+      container.current.scrollTo({
+        top: 0,
+        behavior: 'smooth',
+      });
     }
-  }, [scrollbar, isVisible, displayStyles]);
+  }, [isVisible]);
 
   return (
     <motion.div
@@ -36,21 +36,9 @@ const ProfileContentBox = ({ children, isVisible, initialVisible = false }) => {
       variants={animation}
       style={{ height: 'auto' }}
     >
-      <Scrollbars
-        ref={scrollbar}
-        autoHide
-        renderView={(props) => (
-          <div {...props} className={styles.scrolledBox} />
-        )}
-        renderTrackVertical={(props) => (
-          <div {...props} className={styles.track} />
-        )}
-        renderThumbVertical={(props) => (
-          <div {...props} className={styles.thumb} />
-        )}
-      >
-        <div className={styles.contentContainer}>{children}</div>
-      </Scrollbars>
+      <div ref={container} className={styles.container}>
+        <div className={styles.box}>{children}</div>
+      </div>
     </motion.div>
   );
 };
@@ -58,8 +46,7 @@ const ProfileContentBox = ({ children, isVisible, initialVisible = false }) => {
 ProfileContentBox.propTypes = {
   children: PropTypes.node.isRequired,
   isVisible: PropTypes.bool.isRequired,
-  initialVisible: PropTypes.bool
-}
+  initialVisible: PropTypes.bool,
+};
 
 export default ProfileContentBox;
-

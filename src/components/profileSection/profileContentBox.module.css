@@ -1,38 +1,52 @@
 @value mobile-viewport from "../../styles/breakpoints.css";
 
-.contentContainer {
+.container {
+  --scroll-indent: 5px;
+  --scrollbar-size: 8px;
+  --scrollbar-width: thin;
+  --scroll-padding-size: 0;
+
+  --scrollbar-color: transparent;
+
   display: flex;
   flex-direction: column;
 
-  width: 100%;
-  min-height: 100%;
+  width: calc(100% - (var(--scroll-indent) * 2));
+  height: calc(100% - var(--scroll-indent) * 2);
+  margin: var(--scroll-indent);
+
+  overflow: hidden scroll;
+
+  scrollbar-width: var(--scrollbar-width);
+  scrollbar-color: var(--scrollbar-color) var(--scrollbar-track-color);
+
+  transition: scrollbar-color 0.5s var(--transition-timing-function);
 }
 
-.scrolledBox {
-  display: flex;
-  flex-direction: column;
-
-  padding: var(--lg-indent) var(--xl-indent) var(--lg-indent);
+.container::-webkit-scrollbar {
+  height: var(--scrollbar-size);
+  width: var(--scrollbar-size);
 }
 
-.track {
-  top: 5px;
-  bottom: 5px;
-  right: 5px;
-
-  width: 8px !important;
-  
-  border-radius: 10px;
+.container::-webkit-scrollbar-track {
+  background-color: var(--scrollbar-track-color);
+  border-radius: var(--scrollbar-radius);
 }
 
-.thumb {
-  background-color: var(--accent-color-light);
-  border-radius: 10px;
+.container::-webkit-scrollbar-thumb {
+  background-color: var(--scrollbar-color);
+  border-radius: var(--scrollbar-radius);
 }
 
-@media mobile-viewport {
-  .scrolledBox {
-    position: static !important;
-    padding: var(--lg-indent);
-  }
+.container::-webkit-scrollbar-thumb:horizontal {
+  min-width: var(--scrollbar-minlength);
+}
+
+.container:hover {
+  --scrollbar-color: var(--accent-color);
+}
+
+.box {
+  width: calc(100%);
+  padding: var(--md-indent) var(--lg-indent);
 }

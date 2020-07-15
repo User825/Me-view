@@ -56,24 +56,25 @@
 
   background-color: var(--background-color);
 
-  scrollbar-width: thin;
-  scrollbar-color: var(--accent-color) var(--contrast-color);
+  scrollbar-width: auto;
+  scrollbar-color: var(--scrollbar-color) var(--scrollbar-track-color);
 }
 
 .overlay::-webkit-scrollbar {
-  width: 6px;
+  height: var(--scrollbar-size);
+  width: var(--scrollbar-size);
 }
 
 .overlay::-webkit-scrollbar-track {
-  margin: 10px 0;
-  border-radius: 10px;
-  background-color: var(--contrast-color);
+  margin: var(--sm-indent) 0;
+
+  background-color: var(--scrollbar-track-color);
+  border-radius: var(--scrollbar-radius);
 }
 
 .overlay::-webkit-scrollbar-thumb {
-  margin: 10px 0;
-  background-color: var(--accent-color);
-  border-radius: 10px;
+  background-color: var(--scrollbar-color);
+  border-radius: var(--scrollbar-radius);
 }
 
 .noScrollOverlay {
