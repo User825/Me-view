@@ -1,4 +1,4 @@
-@value tablet-viewport,  mobile-viewport from "../../../styles/breakpoints.css";
+@value desktop-s-viewport, tablet-viewport,  mobile-viewport from "../../../styles/breakpoints.css";
 
 .wrapper {
   display: block;
@@ -262,6 +262,105 @@
 }
 .colLgOffset11 {
   margin-left: 91.66666667%;
+}
+
+@media desktop-s-viewport {
+  .colLm1 {
+    -ms-flex-preferred-size: 8.33333333%;
+    flex-basis: 8.33333333%;
+    max-width: 8.33333333%;
+  }
+  .colLm2 {
+    -ms-flex-preferred-size: 16.66666667%;
+    flex-basis: 16.66666667%;
+    max-width: 16.66666667%;
+  }
+  .colLm3 {
+    -ms-flex-preferred-size: 25%;
+    flex-basis: 25%;
+    max-width: 25%;
+  }
+  .colLm4 {
+    -ms-flex-preferred-size: 33.33333333%;
+    flex-basis: 33.33333333%;
+    max-width: 33.33333333%;
+  }
+  .colLm5 {
+    -ms-flex-preferred-size: 41.66666667%;
+    flex-basis: 41.66666667%;
+    max-width: 41.66666667%;
+  }
+  .colLm6 {
+    -ms-flex-preferred-size: 50%;
+    flex-basis: 50%;
+    max-width: 50%;
+  }
+  .colLm7 {
+    -ms-flex-preferred-size: 58.33333333%;
+    flex-basis: 58.33333333%;
+    max-width: 58.33333333%;
+  }
+  .colLm8 {
+    -ms-flex-preferred-size: 66.66666667%;
+    flex-basis: 66.66666667%;
+    max-width: 66.66666667%;
+  }
+  .colLm9 {
+    -ms-flex-preferred-size: 75%;
+    flex-basis: 75%;
+    max-width: 75%;
+  }
+  .colLm10 {
+    -ms-flex-preferred-size: 83.33333333%;
+    flex-basis: 83.33333333%;
+    max-width: 83.33333333%;
+  }
+  .colLm11 {
+    -ms-flex-preferred-size: 91.66666667%;
+    flex-basis: 91.66666667%;
+    max-width: 91.66666667%;
+  }
+  .colLm12 {
+    -ms-flex-preferred-size: 100%;
+    flex-basis: 100%;
+    max-width: 100%;
+  }
+  .colLmOffset0 {
+    margin-left: 0;
+  }
+  .colLmOffset1 {
+    margin-left: 8.33333333%;
+  }
+  .colLmOffset2 {
+    margin-left: 16.66666667%;
+  }
+  .colLmOffset3 {
+    margin-left: 25%;
+  }
+  .colLmOffset4 {
+    margin-left: 33.33333333%;
+  }
+  .colLmOffset5 {
+    margin-left: 41.66666667%;
+  }
+  .colLmOffset6 {
+    margin-left: 50%;
+  }
+  .colLmOffset7 {
+    margin-left: 58.33333333%;
+  }
+  .colLmOffset8 {
+    margin-left: 66.66666667%;
+  }
+  .colLmOffset9 {
+    margin-left: 75%;
+  }
+  .colLmOffset10 {
+    margin-left: 83.33333333%;
+  }
+  .colLmOffset11 {
+    margin-left: 91.66666667%;
+  }
 }
 
 @media tablet-viewport {

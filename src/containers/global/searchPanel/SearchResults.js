@@ -55,7 +55,8 @@ function ItemsResults({ items, onClickHandler }) {
     return (
       <Col
         sm="6"
-        md="3"
+        md="4"
+        lm="3"
         lg="2"
         gap="sm"
         verticalGap="sm"
@@ -112,7 +113,15 @@ function SearchResults({
             <ItemsResults items={items} onClickHandler={onResultClick} />
             {isFetching && <SkeletonResults quantity={12} />}
             {hasMore && (
-              <Col sm="6" md="3" lg="2" gap="sm" verticalGap="sm" tagName="div">
+              <Col
+                sm="6"
+                md="4"
+                lm="3"
+                lg="2"
+                gap="sm"
+                verticalGap="sm"
+                tagName="div"
+              >
                 <Card stylesType="light" onlyContainer height="386px">
                   <Button
                     text="Загрузить еще"

@@ -38,7 +38,8 @@ function Cards({ cards, linkPrefixPath }) {
     return (
       <Col
         sm="6"
-        md="3"
+        md="4"
+        lm="3"
         lg="2"
         gap="sm"
         verticalGap="sm"

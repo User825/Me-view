@@ -15,6 +15,7 @@ const CardAnnounce = ({
       <div className={styles.poster}>
         <img
           className={styles.poster}
+          loading="lazy"
           src={
             imgSrc
               ? imgSrc
