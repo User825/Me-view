@@ -2,13 +2,13 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { server } from 'server/';
 import { constants } from 'config/';
-import { setMetaShareContent } from 'utils/'
 
 import { AnimatePresence } from 'framer-motion';
 
 import Preloader from 'components/preloader/';
 
 import AnimationPageLoad from 'containers/global/AnimationPageLoad';
+import Head from 'containers/global/Head';
 import Movie from 'pages/Movie';
 
 function MovieWrapper({ id, ...props }) {
@@ -42,17 +42,6 @@ function MovieWrapper({ id, ...props }) {
     setIsMovieLoading(true);
 
     server.getMovie(id).then((response) => {
-      const metaOptions = {
-        title: response.title,
-        desc: `${response.title}: описание, актеры, трейлеры`,
-        img: response.posterSrc,
-        imgAlt: response.posterSrc ? `Постер к фильму ${response.title}` : null,
-        url: props.location.pathname
-          ? `%PUBLIC_URL%${props.location.pathname}`
-          : null,
-      };
-
-      setMetaShareContent(metaOptions)
       setMovie(response);
       setIsMovieLoading(false);
     });
@@ -105,16 +94,26 @@ function MovieWrapper({ id, ...props }) {
       {isLoading ? (
         <Preloader />
       ) : (
-        <AnimationPageLoad>
-          <Movie
-            movie={movie}
-            trailers={trailers}
-            backdrop={backdrop}
-            credits={credits}
-            id={id}
-            {...props}
+        <>
+          <Head
+            article
+            title={movie.title}
+            desc={`${movie.title}: описание, актеры, трейлеры`}
+            img={movie.posterSrc}
+            imgAlt={movie.posterSrc ? `Постер к фильму ${movie.title}` : null}
+            url={`https://user825.github.io/Me-view${props.location.pathname}`}
           />
-        </AnimationPageLoad>
+          <AnimationPageLoad>
+            <Movie
+              movie={movie}
+              trailers={trailers}
+              backdrop={backdrop}
+              credits={credits}
+              id={id}
+              {...props}
+            />
+          </AnimationPageLoad>
+        </>
       )}
     </AnimatePresence>
   );

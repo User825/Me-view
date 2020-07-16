@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { server } from 'server/';
-import { setMetaShareContent } from 'utils/';
 
 import { AnimatePresence } from 'framer-motion';
 
 import Preloader from 'components/preloader/';
 
 import AnimationPageLoad from 'containers/global/AnimationPageLoad';
+import Head from 'containers/global/Head';
 import Person from 'pages/Person';
 
 function PersonWrapper({ id, ...props }) {
@@ -22,17 +22,6 @@ function PersonWrapper({ id, ...props }) {
     setIsLoading(true);
 
     server.getPerson(id).then((response) => {
-      const metaOptions = {
-        title: response.person.name,
-        desc: `${response.person.name}: биография и фильмография`,
-        img: response.person.img,
-        imgAlt: response.person.img ? `Фото ${response.person.name}` : null,
-        url: props.location.pathname
-          ? `%PUBLIC_URL%${props.location.pathname}`
-          : null,
-      };
-
-      setMetaShareContent(metaOptions);
       setPersonData(response);
       setIsLoading(false);
     });
@@ -43,9 +32,23 @@ function PersonWrapper({ id, ...props }) {
       {isLoading ? (
         <Preloader />
       ) : (
-        <AnimationPageLoad>
-          <Person personData={personData} {...props} />
-        </AnimationPageLoad>
+        <>
+          <Head
+            article
+            title={personData.person.name}
+            desc={`${personData.person.name}: биография и фильмография`}
+            img={personData.person.img}
+            imgAlt={
+              personData.person.img
+                ? `Постер к фильму ${personData.person.name}`
+                : null
+            }
+            url={`https://user825.github.io/Me-view${props.location.pathname}`}
+          />
+          <AnimationPageLoad>
+            <Person personData={personData} {...props} />
+          </AnimationPageLoad>
+        </>
       )}
     </AnimatePresence>
   );

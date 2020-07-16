@@ -1,5 +1,5 @@
 import React from 'react';
-import { changeColorsSchema, setMetaShareContent } from 'utils/';
+import { changeColorsSchema } from 'utils/';
 import { server } from 'server/';
 import { paths } from 'config/';
 import scrollIntoView from 'smooth-scroll-into-view-if-needed';
@@ -9,6 +9,7 @@ import { Tab, Tabs, TabList, TabPanel } from 'components/tabs/';
 import { Section } from 'components/global/section/';
 import InfiniteCardList from 'containers/InfiniteCardList';
 import NowPlayedMovies from 'containers/NowPlayedMovies';
+import Head from 'containers/global/Head';
 
 const scrollIntoViewSmoothly =
   'scrollBehavior' in document.documentElement.style
@@ -22,7 +23,6 @@ class MainPage extends React.Component {
 
   componentDidMount() {
     changeColorsSchema('');
-    setMetaShareContent({});
   }
 
   getPopularMovies = (page) => {
@@ -59,6 +59,7 @@ class MainPage extends React.Component {
   render() {
     return (
       <>
+        <Head />
         <NowPlayedMovies />
         <Section title="Популярные фильмы и сериалы" isHiddenTitle gap="">
           <Tabs
@@ -71,14 +72,14 @@ class MainPage extends React.Component {
             </TabList>
             <TabPanel>
               <InfiniteCardList
-                pageRef = {this.props.pageRef}
+                pageRef={this.props.pageRef}
                 fetchCards={this.getPopularMovies}
                 linkPrefixPath={paths.MOVIE_id}
               />
             </TabPanel>
             <TabPanel>
               <InfiniteCardList
-                pageRef = {this.props.pageRef}
+                pageRef={this.props.pageRef}
                 fetchCards={this.getPopularShows}
                 linkPrefixPath={paths.TV_SHOW_id}
               />

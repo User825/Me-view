@@ -1,6 +1,6 @@
 {
   "name": "me-view",
-  "version": "0.1.94",
+  "version": "0.1.95",
   "private": true,
   "homepage": "https://user825.github.io/Me-view",
   "dependencies": {
@@ -18,6 +18,7 @@
     "react-dom": "^16.13.1",
     "react-id-swiper": "^3.0.0",
     "react-infinite-scroller": "^1.2.4",
+    "react-meta-tags": "^0.7.4",
     "react-modal": "^3.11.1",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.0",

@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { server } from 'server/';
-import { setMetaShareContent } from 'utils/';
 
 import { AnimatePresence } from 'framer-motion';
 
 import Preloader from 'components/preloader';
 
 import AnimationPageLoad from 'containers/global/AnimationPageLoad';
+import Head from 'containers/global/Head';
 import TVShow from 'pages/TVShow';
 
 function TVShowWrapper({ id, ...props }) {
@@ -37,17 +37,6 @@ function TVShowWrapper({ id, ...props }) {
   const getShowDetails = (id) => {
     setIsShowLoading(true);
     server.getShowAllData(id).then((response) => {
-      const metaOptions = {
-        title: response.title,
-        desc: `${response.title}: описание, актеры, трейлеры`,
-        img: response.posterSrc,
-        imgAlt: response.posterSrc ? `Постер к сериалу ${response.title}` : null,
-        url: props.location.pathname
-          ? `%PUBLIC_URL%${props.location.pathname}`
-          : null,
-      };
-
-      setMetaShareContent(metaOptions);
       setShowData(response);
       setIsShowLoading(false);
     });
@@ -93,16 +82,27 @@ function TVShowWrapper({ id, ...props }) {
       {isLoading ? (
         <Preloader />
       ) : (
-        <AnimationPageLoad>
-          <TVShow
-            showData={showData}
-            trailers={trailers}
-            backdrop={backdrop}
-            credits={credits}
-            id={id}
-            {...props}
+        <>
+          <Head
+            title={showData.title}
+            desc={`${showData.title}: описание, актеры, трейлеры`}
+            img={showData.posterSrc}
+            imgAlt={
+              showData.posterSrc ? `Постер к сериалу ${showData.title}` : null
+            }
+            url={`https://user825.github.io/Me-view${props.location.pathname}`}
           />
-        </AnimationPageLoad>
+          <AnimationPageLoad>
+            <TVShow
+              showData={showData}
+              trailers={trailers}
+              backdrop={backdrop}
+              credits={credits}
+              id={id}
+              {...props}
+            />
+          </AnimationPageLoad>
+        </>
       )}
     </AnimatePresence>
   );
