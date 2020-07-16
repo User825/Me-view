@@ -5,7 +5,8 @@ import changeColorsSchema from './changeColorSchema';
 import setElemHeightInCustomProps from './setElemHeightInCustomProps';
 import removeDuplicates from './removeDuplicates';
 import getRandomNumber from './getRandomNumber';
-import preloadImages from './preloadImages'
+import preloadImages from './preloadImages';
+import setMetaShareContent from './setMetaShareContent';
 
 export {
   debounce,
@@ -15,5 +16,6 @@ export {
   setElemHeightInCustomProps,
   removeDuplicates,
   getRandomNumber,
-  preloadImages
+  preloadImages,
+  setMetaShareContent
 };

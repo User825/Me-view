@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { server } from 'server/';
+import { setMetaShareContent } from 'utils/';
 
 import { AnimatePresence } from 'framer-motion';
 
@@ -36,8 +37,17 @@ function TVShowWrapper({ id, ...props }) {
   const getShowDetails = (id) => {
     setIsShowLoading(true);
     server.getShowAllData(id).then((response) => {
-      document.title = `${response.title}`;
+      const metaOptions = {
+        title: response.title,
+        desc: `${response.title}: описание, актеры, трейлеры`,
+        img: response.posterSrc,
+        imgAlt: response.posterSrc ? `Постер к сериалу ${response.title}` : null,
+        url: props.location.pathname
+          ? `%PUBLIC_URL%${props.location.pathname}`
+          : null,
+      };
 
+      setMetaShareContent(metaOptions);
       setShowData(response);
       setIsShowLoading(false);
     });

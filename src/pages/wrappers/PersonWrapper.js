@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { server } from 'server/';
+import { setMetaShareContent } from 'utils/';
 
 import { AnimatePresence } from 'framer-motion';
 
@@ -21,7 +22,17 @@ function PersonWrapper({ id, ...props }) {
     setIsLoading(true);
 
     server.getPerson(id).then((response) => {
-      document.title = `${response.person.name}`;
+      const metaOptions = {
+        title: response.person.name,
+        desc: `${response.person.name}: биография и фильмография`,
+        img: response.person.img,
+        imgAlt: response.person.img ? `Фото ${response.person.name}` : null,
+        url: props.location.pathname
+          ? `%PUBLIC_URL%${props.location.pathname}`
+          : null,
+      };
+
+      setMetaShareContent(metaOptions);
       setPersonData(response);
       setIsLoading(false);
     });

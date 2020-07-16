@@ -1,5 +1,5 @@
 import React from 'react';
-import { changeColorsSchema } from 'utils/';
+import { changeColorsSchema, setMetaShareContent } from 'utils/';
 import { server } from 'server/';
 import { paths } from 'config/';
 import scrollIntoView from 'smooth-scroll-into-view-if-needed';
@@ -22,7 +22,7 @@ class MainPage extends React.Component {
 
   componentDidMount() {
     changeColorsSchema('');
-    document.title = 'Me view';
+    setMetaShareContent({});
   }
 
   getPopularMovies = (page) => {
