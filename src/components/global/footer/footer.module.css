@@ -16,8 +16,8 @@
   max-width: var(--desktop-m-width);
   min-width: var(--mobile-width);
   margin: 0 auto;
-  padding-left: var(--xl-indent);
-  padding-right: var(--xl-indent);
+  padding-left: var(--md-indent);
+  padding-right: var(--md-indent);
 }
 
 .copyRight {

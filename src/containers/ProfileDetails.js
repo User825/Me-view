@@ -16,13 +16,15 @@ const getDateString = (date) => {
 };
 
 function ProfileDetails({ date, genres, productionCountries, children }) {
-  const dateString = getDateString(date);
+  const dateString = date && getDateString(date);
 
   return (
     <>
-      <Typography size="sm" bottomIndent="sm">
-        {dateString}
-      </Typography>
+      {dateString && (
+        <Typography size="sm" bottomIndent="sm">
+          {dateString}
+        </Typography>
+      )}
       <Typography size="sm" bottomIndent="sm">
         Жанр: {genres}
       </Typography>

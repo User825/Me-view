@@ -17,8 +17,8 @@
   width: 100%;
   max-width: var(--desktop-m-width);
   margin: auto;
-  padding-left: var(--xl-indent);
-  padding-right: var(--xl-indent);
+  padding-left: var(--md-indent);
+  padding-right: var(--md-indent);
 }
 
 .logoBox {

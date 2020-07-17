@@ -53,7 +53,7 @@ function Section({
   };
 
   return (
-    <Wrapper className={wrapperStyles} gap="xl">
+    <Wrapper className={wrapperStyles} gap="md">
       <Container
         className={containerStyles}
         tagName="section"
