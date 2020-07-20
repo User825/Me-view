@@ -1,6 +1,6 @@
 ![Логотип me-view](graphic/logo.gif)
 
-Me-view – простое приложение по поиску фильмов, сериалов и актеров. 
+[Me-view](https://user825.github.io/Me-view/) – простое приложение по поиску фильмов, сериалов и актеров. 
 
 На базе [create-react-app](https://github.com/facebook/create-react-app) и [TMDb](https://www.themoviedb.org/).
 
