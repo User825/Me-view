@@ -29,7 +29,7 @@
     "react-youtube": "^7.11.2",
     "scroll-into-view-if-needed": "^2.2.25",
     "smooth-scroll-into-view-if-needed": "^1.1.28",
-    "swiper": "^5.4.5"
+    "swiper": "^6.5.1"
   },
   "devDependencies": {
     "arkit": "^1.6.4",
